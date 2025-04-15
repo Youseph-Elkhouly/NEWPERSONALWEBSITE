@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Youseph | Portfolio</title>
+  <style>
+    :root {
+      --bg-color: #f5f5dc;
+      --accent-color: #6b4c3b;
+      --text-color: #3b3028;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      scroll-behavior: smooth;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(245, 245, 220, 0.95);
+      display: flex;
+      justify-content: center;
+      padding: 1rem 0;
+      z-index: 1000;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+    }
+    nav a {
+      margin: 0 20px;
+      text-decoration: none;
+      color: var(--accent-color);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #a3724d;
+    }
+    section {
+      height: 100vh;
+      padding: 100px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 1s ease-out forwards;
+    }
+    section:nth-child(2) { animation-delay: 0.3s; }
+    section:nth-child(3) { animation-delay: 0.6s; }
+    section:nth-child(4) { animation-delay: 0.9s; }
+    section:nth-child(5) { animation-delay: 1.2s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #hero {
+      background: linear-gradient(to right, #f8f5e1, #ede0cb);
+      text-align: center;
+    }
+    #hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    #hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+    }
+
+    #about, #projects, #contact {
+      background: var(--bg-color);
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-color);
+    }
+
+    .project-item, .contact-info {
+      max-width: 700px;
+      text-align: center;
+    }
+
+    .project-item {
+      margin-bottom: 2rem;
+    }
+
+    .icon-buttons {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--accent-color);
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+      padding: 6px;
+    }
+
+    .icon-btn:hover {
+      background-color: #a3724d;
+    }
+
+    .icon-btn img {
+      width: 22px;
+      height: 22px;
+      filter: brightness(0) invert(1);
+    }
+
+    .scroll-down {
+      margin-top: 30px;
+      font-size: 2rem;
+      color: var(--accent-color);
+      text-decoration: none;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    .skills-grid {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .skill {
+      width: 50px;
+      height: 50px;
+    }
+
+    .skill img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    @media (max-width: 768px) {
+      nav a {
+        margin: 0 10px;
+      }
+      #hero h1 {
+        font-size: 2.2rem;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+    }
+
+    .experience-education {
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.experience, .education {
+  flex: 1 1 300px;
+  max-width: 500px;
+}
+
+.experience h3, .education h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+  text-align: center;
+}
+
+.experience ul, .education ul {
+  list-style: none;
+  padding: 0;
+}
+
+.experience li, .education li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.experience img, .education img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.experience li div, .education li div {
+  flex: 1;
+}
+
+.date {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.experience h3, .education h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+  text-align: left; /* changed from center to left */
+}
+
+
+
+.scroll-offset-anchor {
+  position: relative;
+  top: -80px; /* Adjust based on your nav height */
+  height: 0;
+  visibility: hidden;
+}
+
+#projects {
+  padding: 100px 20px 40px;
+  background-color: var(--bg-color);
+  text-align: center;
+}
+
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 2rem;
+}
+
+.project-card {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  width: 330px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+.project-content {
+  padding: 16px;
+}
+
+.project-content h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+}
+
+.project-date {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.project-content p {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.tech-tags span {
+  background-color: #f2f2f2;
+  border-radius: 9999px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  color: #333;
+}
+
+.project-buttons .btn {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.project-buttons .btn:hover {
+  background-color: #a3724d;
+}
+
+
+
+    
+  </style>
+</head>
+<body>
+    <nav>
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#experience-education">Experience/Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      
+
+  <section id="hero">
+    <h1>Hey, I'm Youseph</h1>
+    <p>CS undergrad, software engineer</p>
+
+    <div class="icon-buttons">
+      <a href="https://github.com/Youseph-Elkhouly" target="_blank" class="icon-btn" title="GitHub">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
+      </a>
+      <a href="https://www.linkedin.com/in/youseph-el-khouly-49a285219/" target="_blank" class="icon-btn" title="LinkedIn">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" />
+      </a>
+      <a href="Youseph_El_Khouly_Resume (3).pdf" target="_blank" class="icon-btn" title="Resume">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/readthedocs.svg" alt="Resume" />
+      </a>
+    </div>
+
+    <a href="#about" class="scroll-down">↓</a>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p class="contact-info" style="margin-bottom: 2rem;">
+        Hi, I’m Youseph — a Computer Science student at the University of Guelph with a passion for software and building meaningful, impactful projects. I try to become the best version of myself in every aspect of life and most importantly, I love to learn. 
+      </p>
+      
+  
+
+    
+
+    <div class="skills-section">
+       
+      <h3>Languages & Databases</h3>
+      <div class="skills-grid">
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" /></div>
+      </div>
+  
+      <h3 style="margin-top: 2rem;">Frameworks & Tools</h3>
+      <div class="skills-grid">
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="Redux" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask" /></div>
+        <div class="skill"><img src="https://img.icons8.com/color/48/000000/amazon-web-services.png" alt="AWS" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" alt="Jest" /></div>
+        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" /></div>
+        <div class="skill"><img src="https://img.icons8.com/ios-filled/50/000000/settings.png" alt="CI/CD" /></div>
+      </div>
+    </div>
+  </section>
+
+
+  <div id="experience-education" class="scroll-offset-anchor"></div>
+  <div class="experience-education">
+    <div class="experience">
+      <h3>Work Experience</h3>
+      <ul>
+        <li>
+          <img src="stylus.jpeg" />
+          <div>
+            <strong>Stylus Marketing</strong><br />
+            Software Engineer - Full Stack SMB Software Solutions<br />
+            Tech Stack: Python · Typescript · PostgreSQL · AWS · React <br />
+            <span class="date">May 2024</span>
+          </div>
+        </li>
+        
+      </ul>
+    </div>
+  
+    <div class="education">
+      <h3>Education</h3>
+      <ul>
+        <li>
+          <img src="loyola.png" />
+          <div>
+            <strong>Loyola Catholic Secondary School</strong><br />
+            Ontario Secondary School Diploma (OSSD)<br />
+            <span class="date">2019 – 2023</span>
+          </div>
+        </li>
+        <li>
+            <img src="uog.png" />
+            <div>
+              <strong>University of Guelph</strong><br />
+              Bachelor of Computing Honours (BCOMP)<br />
+              <span class="date">2023 – 2026</span>
+            </div>
+          </li>
+      </ul>
+    </div>
+  </div>
+  
+  
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+  
+      <!-- Project Card 1 -->
+      <div class="project-card">
+        <img src="syncwatch.webp" alt="uoguelph.courses" />
+        <div class="project-content">
+          <h3>SyncWatch</h3>
+          <p class="project-date">Current</p>
+          <p>Built a Chrome extension enabling real-time synchronized video playback across platforms like 123Movies, Soap2day, and YouTube. Utilized AWS Lambda, DynamoDB, and WebSockets to manage sessions and user interactions with an intuitive UI.</p>
+          <div class="tech-tags">
+            <span>Python</span>
+            <span>Flask</span>
+            <span>Typescript</span>
+            <span>React</span>
+            <span>AWS</span>
+            <span>Docker</span>
+          </div>
+          <div class="project-buttons">
+            <a href="#" class="btn">Website</a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Project Card 2 -->
+      <div class="project-card">
+        <img src="statisfy.jpg" alt="TenantShield" />
+        <div class="project-content">
+          <h3>Statisfy</h3>
+          <p class="project-date">Current</p>
+          <p>Built a TypeScript + React Chrome extension and full-stack app to autofill job applications, track statuses, and notify users. Integrated web scraping and a Naïve Bayes email classifier to monitor portals like Workday and filter application-related emails via the Gmail API.</p>
+          <div class="tech-tags">
+            <span>TypeScript</span>
+            <span>React</span>
+            <span>Express</span>
+            <span>AWS</span>
+            <span>Docker</span>
+            <span>PostgreSQL</span>
+          </div>
+          <div class="project-buttons">
+            <a href="#" class="btn">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="project-card">
+        <img src="merchant.webp" alt="uoguelph.courses" />
+        <div class="project-content">
+          <h3>Merchant</h3>
+          <p class="project-date"> Current</p>
+          <p>Developed a full-stack platform that aggregates listings from second-hand marketplaces like Kijiji and Facebook Marketplace. Built a BeautifulSoup-powered scraping pipeline and integrated Twilio SMS alerts for real-time listing notifications.</p>
+          <div class="tech-tags">
+            <span>Typescript</span>
+            <span>Python</span>
+            <span>React</span>
+            <span>Flask</span>
+            <span>Docker</span>
+            <span>PostgreSQL</span>
+          </div>
+          <div class="project-buttons">
+            <a href="#" class="btn">Website</a>
+          </div>
+        </div>
+      </div>
+
+      
+      
+  
+    </div>
+  </section>
+  
+
+  <section id="hackathons">
+    <h2>Hackathons</h2>
+    <div class="timeline">
+      
+      <!-- HackCanada -->
+      <div class="timeline-entry">
+        <div class="timeline-date">May 2nd incoming</div>
+        <div class="timeline-content">
+          <h3>Google Developer Student Club Hackathon <span class="badge">Summer 2025</span></h3>
+          <p><strong>Location:</strong> Guelph, Ontario</p>
+          <p>N/A </p>
+          <div class="buttons">
+            <a href="#" class="btn">Devpost</a>
+            <a href="#" class="btn">GitHub</a>
+          </div>
+        </div>
+      </div>
+  
+      
+  
+    </div>
+  </section>
+  
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p class="contact-info"><br>Email me at <a href="mailto:work.youseph@gmail.com">work.youseph@gmail.com</a></p>
+  </section>
+</body>
+</html>
