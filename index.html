@@ -46,7 +46,7 @@
       color: #a3724d;
     }
     section {
-      height: 100vh;
+      min-height: 100vh;
       padding: 100px 20px 40px;
       display: flex;
       flex-direction: column;
@@ -325,6 +325,77 @@
 
 .project-buttons .btn:hover {
   background-color: #a3724d;
+}
+
+
+@media (max-width: 768px) {
+  nav a {
+    margin: 0 10px;
+  }
+
+  #hero h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .experience-education {
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .experience, .education {
+    max-width: 90%;
+    text-align: center;
+  }
+
+  .experience h3, .education h3 {
+    text-align: center;
+  }
+
+  .experience li, .education li {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .experience li img, .education li img {
+    margin-bottom: 10px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .project-card {
+    width: 90%;
+  }
+
+  .tech-tags {
+    justify-content: center;
+  }
+
+  .project-content {
+    padding: 14px;
+  }
+
+  .timeline-content {
+    padding: 1rem;
+  }
+
+  .timeline-date {
+    font-size: 0.8rem;
+  }
+
+  .project-content h3 {
+    font-size: 1rem;
+  }
+
+  .project-content p {
+    font-size: 0.85rem;
+  }
 }
 
 
