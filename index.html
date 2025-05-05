@@ -36,14 +36,19 @@
       backdrop-filter: blur(10px);
     }
     nav a {
-      margin: 0 20px;
+      margin: 0 8px;
       text-decoration: none;
       color: var(--accent-color);
       font-weight: 500;
-      transition: color 0.3s;
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 20px;
+      background-color: rgba(107, 76, 59, 0.1);
     }
     nav a:hover {
-      color: #a3724d;
+      color: #fff;
+      background-color: var(--accent-color);
+      transform: translateY(-2px);
     }
     section {
       min-height: 100vh;
@@ -164,14 +169,99 @@
     }
 
     @media (max-width: 768px) {
-      nav a {
-        margin: 0 10px;
+      nav {
+        padding: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
       }
+      
+      nav a {
+        margin: 4px;
+        font-size: 0.95rem;
+        padding: 8px 15px;
+        flex: 0 1 auto;
+        text-align: center;
+        min-width: max-content;
+      }
+
       #hero h1 {
         font-size: 2.2rem;
       }
+
       h2 {
         font-size: 2rem;
+      }
+
+      .experience-education {
+        flex-direction: column;
+        align-items: center;
+        gap: 60px;
+      }
+
+      .experience, .education {
+        max-width: 90%;
+        text-align: center;
+      }
+
+      .experience h3, .education h3 {
+        text-align: center;
+      }
+
+      .experience li, .education li {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .experience li img, .education li img {
+        margin-bottom: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        padding: 0.8rem;
+        gap: 8px;
+      }
+
+      nav a {
+        margin: 3px;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+        width: auto;
+      }
+
+      section {
+        padding-top: 140px; /* Increase top padding to account for wrapped nav items */
+      }
+
+      .project-card {
+        width: 90%;
+      }
+
+      .tech-tags {
+        justify-content: center;
+      }
+
+      .project-content {
+        padding: 14px;
+      }
+
+      .timeline-content {
+        padding: 1rem;
+      }
+
+      .timeline-date {
+        font-size: 0.8rem;
+      }
+
+      .project-content h3 {
+        font-size: 1rem;
+      }
+
+      .project-content p {
+        font-size: 0.85rem;
       }
     }
 
@@ -398,6 +488,126 @@
   }
 }
 
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px;
+}
+
+#contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#contact h2 {
+  align-self: flex-start;
+  margin-left: calc((100% - 600px) / 2 + 20px);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  #contact h2 {
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container {
+    padding: 0 15px;
+  }
+  
+  #contact h2 {
+    margin-left: 15px;
+  }
+}
+
+.contact-card {
+  width: 100%;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-icon img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.contact-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.contact-value {
+  font-size: 1.1rem;
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .contact-card {
+    padding: 15px;
+  }
+  
+  .contact-value {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-container {
+    padding: 0 15px;
+  }
+  
+  .contact-card {
+    padding: 12px;
+  }
+  
+  .contact-icon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .contact-value {
+    font-size: 0.9rem;
+  }
+}
+
 
 
     
@@ -409,6 +619,7 @@
         <a href="#about">About</a>
         <a href="#experience-education">Experience/Education</a>
         <a href="#projects">Projects</a>
+        <a href="#hackathons">Hackathons</a>
         <a href="#contact">Contact</a>
       </nav>
       
@@ -435,7 +646,7 @@
   <section id="about">
     <h2>About Me</h2>
     <p class="contact-info" style="margin-bottom: 2rem;">
-        Hi, I’m Youseph — a Computer Science student at the University of Guelph with a passion for software and building meaningful, impactful projects. I try to become the best version of myself in every aspect of life and most importantly, I love to learn. 
+        Hi, I'm Youseph — a Computer Science student at the University of Guelph with a passion for software and building meaningful, impactful projects. I try to become the best version of myself in every aspect of life and most importantly, I love to learn. 
       </p>
       
   
@@ -446,27 +657,39 @@
        
       <h3>Languages & Databases</h3>
       <div class="skills-grid">
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" /></div>
       </div>
-  
+    
       <h3 style="margin-top: 2rem;">Frameworks & Tools</h3>
       <div class="skills-grid">
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="Redux" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask" /></div>
-        <div class="skill"><img src="https://img.icons8.com/color/48/000000/amazon-web-services.png" alt="AWS" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" alt="Jest" /></div>
-        <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" /></div>
-        <div class="skill"><img src="https://img.icons8.com/ios-filled/50/000000/settings.png" alt="CI/CD" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="Redux" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask" /></div>
+      <div class="skill"><img src="https://img.icons8.com/color/48/000000/amazon-web-services.png" alt="AWS" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" alt="Jest" /></div>
+      <div class="skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" /></div>
+      <div class="skill"><img src="https://img.icons8.com/ios-filled/50/000000/settings.png" alt="CI/CD" /></div>
+      </div>
+
+      <h3 style="margin-top: 2rem;">API's</h3>
+      <div class="skills-grid">
+      <div class="skill"><img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google API" /></div>
+      <div class="skill"><img src="https://img.icons8.com/color/48/000000/notion.png" alt="Notion Calendar API" /></div>
+      <div class="skill"><img src="https://img.icons8.com/color/48/000000/gmail.png" alt="Gmail API" /></div>
+      <div class="skill"><img src="https://cdn.iconscout.com/icon/free/png-256/free-twilio-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-vol-7-pack-logos-icons-3030259.png?f=webp&w=256" alt="Twilio API" style="width: 48px; height: 48px;" /></div>
+      <!-- <div class="skill"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/OpenAI_Logo.svg" alt="ChatGPT OpenAI API" style="width: 48px; height: 48px;" /></div> -->
+      <div class="skill"><img src="https://static-00.iconduck.com/assets.00/openai-icon-2021x2048-4rpe5x7n.png" alt="OpenAI API" style="width: 48px; height: 48px;" /></div>
+      <div class="skill"><img src="https://brandlogo.org/wp-content/uploads/2024/06/Gemini-Icon-300x300.png.webp" alt="Google Gemini API" /></div>
       </div>
     </div>
   </section>
@@ -766,17 +989,36 @@
 
   <section id="contact">
     <h2>Contact</h2>
-    <div class="contact-info" style="text-align: center; margin-top: 1.5rem;">
-      <a href="mailto:work.youseph@gmail.com" style="display: inline-block; text-decoration: none; color: var(--accent-color); font-size: 1.2rem; font-weight: 500; padding: 10px 20px; border: 2px solid var(--accent-color); border-radius: 25px; transition: all 0.3s ease; margin: 10px;">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" alt="Gmail" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" />
-        <span style="vertical-align: middle;">work.youseph@gmail.com</span>
-      </a>
-      <br />
-      <a href="https://www.linkedin.com/in/youseph-el-khouly-49a285219/" target="_blank" style="display: inline-block; text-decoration: none; color: var(--accent-color); font-size: 1.2rem; font-weight: 500; padding: 10px 20px; border: 2px solid var(--accent-color); border-radius: 25px; transition: all 0.3s ease; margin: 10px;">
-        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" />
-        <span style="vertical-align: middle;">LinkedIn URL</span>
+    <div class="contact-container">
+      <a href="mailto:work.youseph@gmail.com" class="contact-card">
+        <div class="contact-icon">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" alt="Gmail" />
+        </div>
+        <div class="contact-info">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">work.youseph@gmail.com</div>
+        </div>
       </a>
       
+      <a href="https://www.linkedin.com/in/youseph-el-khouly-49a285219/" target="_blank" class="contact-card">
+        <div class="contact-icon">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" />
+        </div>
+        <div class="contact-info">
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">Youseph El-Khouly</div>
+        </div>
+      </a>
+
+      <a href="https://github.com/Youseph-Elkhouly" target="_blank" class="contact-card">
+        <div class="contact-icon">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
+        </div>
+        <div class="contact-info">
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">Youseph-Elkhouly</div>
+        </div>
+      </a>
     </div>
   </section>
 </body>
