@@ -419,75 +419,134 @@
 }
 
 
-@media (max-width: 768px) {
-  nav a {
-    margin: 0 10px;
-  }
+    @media (max-width: 768px) {
+      nav a {
+        margin: 0 10px;
+      }
 
-  #hero h1 {
-    font-size: 2.2rem;
-  }
+      #hero h1 {
+        font-size: 2.2rem;
+      }
 
-  h2 {
-    font-size: 2rem;
-  }
+      h2 {
+        font-size: 2rem;
+      }
 
-  .experience-education {
-    flex-direction: column;
-    align-items: center;
-    gap: 60px;
-  }
+      .experience-education {
+        flex-direction: column;
+        align-items: center;
+        gap: 60px;
+      }
 
-  .experience, .education {
-    max-width: 90%;
-    text-align: center;
-  }
+      .experience, .education {
+        max-width: 90%;
+        text-align: center;
+      }
 
-  .experience h3, .education h3 {
-    text-align: center;
-  }
+      .experience h3, .education h3 {
+        text-align: center;
+      }
 
-  .experience li, .education li {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+      .experience li, .education li {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
 
-  .experience li img, .education li img {
-    margin-bottom: 10px;
-  }
-}
+      .experience li img, .education li img {
+        margin-bottom: 10px;
+      }
+
+      /* Tablet carousel adjustments */
+      .hackathon-carousel {
+        max-width: 90vw;
+      }
+
+      .carousel-btn {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 22px !important;
+        left: -25px !important;
+        right: -25px !important;
+      }
+
+      .carousel-slide iframe {
+        height: 250px !important;
+      }
+    }
 
 
-@media (max-width: 480px) {
-  .project-card {
-    width: 90%;
-  }
+    @media (max-width: 480px) {
+      .project-card {
+        width: 90%;
+      }
 
-  .tech-tags {
-    justify-content: center;
-  }
+      .tech-tags {
+        justify-content: center;
+      }
 
-  .project-content {
-    padding: 14px;
-  }
+      .project-content {
+        padding: 14px;
+      }
 
-  .timeline-content {
-    padding: 1rem;
-  }
+      .timeline-content {
+        padding: 1rem;
+      }
 
-  .timeline-date {
-    font-size: 0.8rem;
-  }
+      .timeline-date {
+        font-size: 0.8rem;
+      }
 
-  .project-content h3 {
-    font-size: 1rem;
-  }
+      .project-content h3 {
+        font-size: 1rem;
+      }
 
-  .project-content p {
-    font-size: 0.85rem;
-  }
-}
+      .project-content p {
+        font-size: 0.85rem;
+      }
+
+      /* Mobile carousel adjustments */
+      .hackathon-carousel {
+        max-width: 95vw;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .carousel-btn {
+        width: 45px !important;
+        height: 45px !important;
+        font-size: 20px !important;
+        left: 10px !important;
+        right: 10px !important;
+        background: rgba(107, 76, 59, 0.9) !important;
+        backdrop-filter: blur(10px);
+      }
+
+      .carousel-btn.prev-btn {
+        left: 10px !important;
+      }
+
+      .carousel-btn.next-btn {
+        right: 10px !important;
+      }
+
+      .carousel-slide {
+        padding: 1rem !important;
+      }
+
+      .carousel-slide iframe {
+        height: 200px !important;
+      }
+
+      .carousel-dots {
+        margin-top: 0.5rem !important;
+      }
+
+      .dot {
+        width: 10px !important;
+        height: 10px !important;
+      }
+    }
 
 .contact-container {
   display: flex;
@@ -964,6 +1023,15 @@
             <span class="date">May 2024</span>
           </div>
         </li>
+        <li>
+          <img src="aiducare.jpeg" alt="Aiducare Logo" />
+          <div>
+            <strong>Aiducare Inc.</strong><br />
+            Mobile App Developer Intern<br />
+            Tech Stack: React · React Native · JavaScript · CSS <br />
+            <span class="date">June – August 2025</span>
+          </div>
+        </li>
         
       </ul>
     </div>
@@ -1204,40 +1272,80 @@
 
   <section id="hackathons">
     <h2>Hackathons</h2>
-    <div class="timeline" style="margin-top: 2rem;">
-      
-      <!-- GDSC Hackathon -->
-      <div class="timeline-entry" style="text-align: center; margin-bottom: 2rem;">
-      <div class="timeline-date" style="margin-bottom: 1rem;">May 2, 2025</div>
-      <div class="timeline-content" style="margin-bottom: 1.5rem;">
-        <h3 style="margin-bottom: 1rem;">GDSC Hacks 2025 – Spark & Prepper <span class="badge"></span></h3>
-        <p style="margin-bottom: 1rem;"><strong>Location:</strong> University of Guelph, Ontario</p>
-        <p style="margin-bottom: 1.5rem;">
-        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-          Built <strong>Spark & Prepper</strong>, an AI-powered study assistant that transforms uploaded course materials into
-          smart study guides, flashcards, cheat sheets, and mock exams, that also has a chatbot using the Google Gemini API. Collaborated with a team during a 48-hour hackathon to design a full-stack solution featuring a dynamic React UI, Firebase storage, and MongoDB User authentication.
-        </div>
-        <p style="margin-bottom: 2.5rem;"></p>
-        </p>
+    <div class="hackathon-carousel" style="margin-top: 2rem; position: relative; max-width: 800px; margin-left: auto; margin-right: auto;">
+      <div class="carousel-container" style="overflow: hidden; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        <div class="carousel-track" style="display: flex; transition: transform 0.5s ease-in-out;">
+          
+          <!-- SpurHacks Hackathon -->
+          <div class="carousel-slide" style="min-width: 100%; text-align: center; padding: 2rem;">
+            <div class="timeline-date" style="margin-bottom: 1rem;">June 22, 2025</div>
+            <div class="timeline-content" style="margin-bottom: 1.5rem;">
+              <h3 style="margin-bottom: 1rem;">SpurHacks 2025 – Jinsa <span class="badge"></span></h3>
+              <p style="margin-bottom: 1rem;"><strong>Location:</strong> Waterloo, Ontario</p>
+              <p style="margin-bottom: 1.5rem;">
+              <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                Participated in <strong>SpurHacks</strong> at Waterloo, which opened my eyes to the startup world and sparked my interest in blockchain technology. This experience led to the creation of <strong>Jinsa</strong>, my blockchain-based product authentication startup. Jinsa is a decentralized platform that protects both brands and buyers by authenticating physical products on the blockchain and tracking ownership over time using smart contracts and wallet-based authentication.
+              </div>
+              <p style="margin-bottom: 2.5rem;"></p>
+              </p>
 
-        <!-- Embedded YouTube Video with Border -->
-        <div style="margin: 20px auto; max-width: 560px; border: 5px solid var(--accent-color); border-radius: 12px; overflow: hidden;">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIt9yvOC6_4?start=63" 
-          title="Spark & Prepper Demo" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
-        </div>
+              <!-- Embedded YouTube Video with Border -->
+              <div style="margin: 20px auto; max-width: 560px; border: 5px solid var(--accent-color); border-radius: 12px; overflow: hidden;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/tceQzYWGibQ" 
+                title="Jinsa Demo" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+              </div>
 
-        <div class="buttons" style="margin-top: 1.5rem;">
-        <a href="https://devpost.com/software/sparkandprepper" class="btn" target="_blank" style="margin-right: 1rem;">Devpost</a>
-        <a href="https://github.com/seifotefa/sparkandprepper" class="btn" target="_blank">GitHub</a>
+              <div class="buttons" style="margin-top: 1.5rem;">
+              <a href="https://devpost.com/software/jinsa?ref_content=my-projects-tab&ref_feature=my_projects" class="btn" target="_blank" style="margin-right: 1rem;">Devpost</a>
+              <a href="https://github.com/Youseph-Elkhouly/jinsa" class="btn" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- GDSC Hackathon -->
+          <div class="carousel-slide" style="min-width: 100%; text-align: center; padding: 2rem;">
+            <div class="timeline-date" style="margin-bottom: 1rem;">May 2, 2025</div>
+            <div class="timeline-content" style="margin-bottom: 1.5rem;">
+              <h3 style="margin-bottom: 1rem;">GDSC Hacks 2025 – Spark & Prepper <span class="badge"></span></h3>
+              <p style="margin-bottom: 1rem;"><strong>Location:</strong> University of Guelph, Ontario</p>
+              <p style="margin-bottom: 1.5rem;">
+              <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                Built <strong>Spark & Prepper</strong>, an AI-powered study assistant that transforms uploaded course materials into
+                smart study guides, flashcards, cheat sheets, and mock exams, that also has a chatbot using the Google Gemini API. Collaborated with a team during a 48-hour hackathon to design a full-stack solution featuring a dynamic React UI, Firebase storage, and MongoDB User authentication.
+              </div>
+              <p style="margin-bottom: 2.5rem;"></p>
+              </p>
+
+              <!-- Embedded YouTube Video with Border -->
+              <div style="margin: 20px auto; max-width: 560px; border: 5px solid var(--accent-color); border-radius: 12px; overflow: hidden;">
+              <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIt9yvOC6_4?start=63" 
+                title="Spark & Prepper Demo" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+              </div>
+
+              <div class="buttons" style="margin-top: 1.5rem;">
+              <a href="https://devpost.com/software/sparkandprepper" class="btn" target="_blank" style="margin-right: 1rem;">Devpost</a>
+              <a href="https://github.com/seifotefa/sparkandprepper" class="btn" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- Navigation Buttons -->
+      <button class="carousel-btn prev-btn" style="position: absolute; left: -60px; top: 50%; transform: translateY(-50%); background: var(--accent-color); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 24px; font-weight: bold; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(107, 76, 59, 0.3); z-index: 10;" onclick="changeSlide(-1)" onmouseover="this.style.background='#a3724d'; this.style.transform='translateY(-50%) scale(1.1)'" onmouseout="this.style.background='var(--accent-color)'; this.style.transform='translateY(-50%) scale(1)'">‹</button>
+      <button class="carousel-btn next-btn" style="position: absolute; right: -60px; top: 50%; transform: translateY(-50%); background: var(--accent-color); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 24px; font-weight: bold; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(107, 76, 59, 0.3); z-index: 10;" onclick="changeSlide(1)" onmouseover="this.style.background='#a3724d'; this.style.transform='translateY(-50%) scale(1.1)'" onmouseout="this.style.background='var(--accent-color)'; this.style.transform='translateY(-50%) scale(1)'">›</button>
+
+      <!-- Dots Indicator -->
+      <div class="carousel-dots" style="display: flex; justify-content: center; margin-top: 1rem; gap: 8px;">
+        <span class="dot active" style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent-color); cursor: pointer; transition: background 0.3s ease;" onclick="goToSlide(0)"></span>
+        <span class="dot" style="width: 12px; height: 12px; border-radius: 50%; background: #ccc; cursor: pointer; transition: background 0.3s ease;" onclick="goToSlide(1)"></span>
       </div>
-    </div>
-      
-  
     </div>
   </section>
   
@@ -1342,6 +1450,34 @@
   </section>
 
   <script>
+  // Carousel functionality
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.dot');
+
+  function changeSlide(direction) {
+    currentSlide += direction;
+    if (currentSlide >= slides.length) currentSlide = 0;
+    if (currentSlide < 0) currentSlide = slides.length - 1;
+    updateCarousel();
+  }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    updateCarousel();
+  }
+
+  function updateCarousel() {
+    const track = document.querySelector('.carousel-track');
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    
+    // Update dots
+    dots.forEach((dot, index) => {
+      dot.style.background = index === currentSlide ? 'var(--accent-color)' : '#ccc';
+      dot.classList.toggle('active', index === currentSlide);
+    });
+  }
+
   // DSA node click handler (for demo, shows alert)
   document.addEventListener('DOMContentLoaded', function() {
     // DSA Problems Data
@@ -1487,7 +1623,6 @@
           const path = document.createElementNS('http://www.w3.org/2000/svg','path');
           path.setAttribute('d', `M${start.x},${start.y} C${start.x+curve},${start.y+dy/2.2} ${end.x-curve},${end.y-dy/2.2} ${end.x},${end.y}`);
           path.setAttribute('stroke', 'var(--accent-color)');
-          path.setAttribute('stroke-width', '3');
           path.setAttribute('fill', 'none');
           path.setAttribute('marker-end', 'url(#arrowhead)');
           svg.appendChild(path);
