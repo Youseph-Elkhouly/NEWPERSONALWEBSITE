@@ -1115,28 +1115,31 @@
         </div>
       </div>
   
-      <!-- Merchant -->
-      <div class="project-card">
-        <img src="maerchantlogo.png" alt="Merchant" />
-        <div class="project-content">
-          <h3>Merchant</h3>
-          <p class="project-date">Current</p>
-          <p>Aggregates listings from Kijiji and Facebook Marketplace. Built with Flask, BeautifulSoup, PostgreSQL, and Twilio SMS alerts.</p>
-          <div class="tech-tags">
-            <span>Typescript</span><span>Python</span><span>React</span><span>Flask</span><span>Docker</span><span>PostgreSQL</span>
-          </div>
-          <div class="project-buttons">
-            <a href="https://github.com/Youseph-Elkhouly/Merchant" class="btn" target="_blank">GitHub</a>
-          </div>
-        </div>
-      </div>
+      <!-- Merchant (remove from ongoing) -->
+
     </div>
   
     <!-- Finished Projects -->
     <h3 style="margin-top: 3rem; color: #6b4c3b;">✅ Finished Projects</h3>
     <div class="projects-grid">
   
-      <!-- Example Finished Project -->
+      <!-- Merchant (move to start of completed) -->
+      <div class="project-card">
+        <img src="maerchantlogo.png" alt="Merchant" />
+        <div class="project-content">
+          <h3>Merchant</h3>
+          <p class="project-date">Completed</p>
+          <p>Aggregates listings from Kijiji and Facebook Marketplace. Built with Flask, BeautifulSoup, PostgreSQL, and Twilio SMS alerts.</p>
+          <div class="tech-tags">
+            <span>Typescript</span><span>Python</span><span>React</span><span>Flask</span><span>Docker</span><span>PostgreSQL</span>
+          </div>
+          <div class="project-buttons">
+            <a href="https://github.com/Youseph-Elkhouly/Merchant" class="btn" target="_blank">GitHub</a>
+            <button class="btn" onclick="openMerchantDemoModal()">Demo Video</button>
+          </div>
+        </div>
+      </div>
+      <!-- Spark and Prepper ( GDSC-2025 Hackathon ) -->
       <div class="project-card">
         <img src="Spark.png" alt="Spark and Prepper (Google Developer Student Club Hackathon 2025)" />
         <div class="project-content">
@@ -1148,6 +1151,7 @@
           </div>
           <div class="project-buttons">
             <a href="https://github.com/seifotefa/sparkandprepper" class="btn" target="_blank">GitHub</a>
+            <button class="btn" onclick="openSparkPrepperDemoModal()">Demo Video</button>
           </div>
         </div>
       </div>
@@ -1163,6 +1167,7 @@
           </div>
           <div class="project-buttons">
             <a href="https://github.com/Youseph-Elkhouly/TypingTest" class="btn" target="_blank">GitHub</a>
+            <button class="btn" onclick="openTypingTestDemoModal()">Demo Video</button>
           </div>
         </div>
       </div>
@@ -1194,6 +1199,7 @@
           </div>
           <div class="project-buttons">
             <a href="https://github.com/Youseph-Elkhouly/Contact-Managment-System" class="btn" target="_blank">GitHub</a>
+            <button class="btn" onclick="openContactManagementDemoModal()">Demo Video</button>
           </div>
         </div>
       </div>
@@ -1258,14 +1264,13 @@
           </div>
           <div class="project-buttons">
             <a href="https://github.com/Youseph-Elkhouly/Car-Managment-System" class="btn" target="_blank">GitHub</a>
+            <button class="btn" onclick="openVehicleManagementDemoModal()">Demo Video</button>
           </div>
         </div>
       </div>
 
-      
-  
-    </div>
-  </section>
+</div>
+</section>
   
   
   
@@ -1656,5 +1661,149 @@
     setTimeout(redrawArrows, 300); // after layout
   });
   </script>
+
+  <!-- Merchant Demo Modal -->
+  <div id="merchant-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
+    <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
+      <button onclick="closeMerchantDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
+      <video id="merchant-demo-video" src="MerchantDemoFInal.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+    </div>
+  </div>
+
+<script>
+function openMerchantDemoModal() {
+  document.getElementById('merchant-demo-modal').style.display = 'flex';
+  var vid = document.getElementById('merchant-demo-video');
+  vid.currentTime = 0;
+  vid.play();
+  document.body.style.overflow = 'hidden';
+}
+function closeMerchantDemoModal() {
+  document.getElementById('merchant-demo-modal').style.display = 'none';
+  var vid = document.getElementById('merchant-demo-video');
+  vid.pause();
+  document.body.style.overflow = '';
+}
+</script>
+
+<!-- Spark & Prepper Demo Modal -->
+<div id="sparkprepper-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
+  <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
+    <button onclick="closeSparkPrepperDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
+    <video id="sparkprepper-demo-video" src="sparkandpepperGDSC25 - Seif (1080p, h264).mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+  </div>
+</div>
+
+<script>
+function openSparkPrepperDemoModal() {
+  document.getElementById('sparkprepper-demo-modal').style.display = 'flex';
+  var vid = document.getElementById('sparkprepper-demo-video');
+  vid.currentTime = 0;
+  vid.play();
+  document.body.style.overflow = 'hidden';
+}
+function closeSparkPrepperDemoModal() {
+  document.getElementById('sparkprepper-demo-modal').style.display = 'none';
+  var vid = document.getElementById('sparkprepper-demo-video');
+  vid.pause();
+  document.body.style.overflow = '';
+}
+</script>
+
+<!-- Typing Test Demo Modal -->
+<div id="typingtest-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
+  <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
+    <button onclick="closeTypingTestDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
+    <video id="typingtest-demo-video" src="Typing Test.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+  </div>
+</div>
+
+<script>
+function openTypingTestDemoModal() {
+  document.getElementById('typingtest-demo-modal').style.display = 'flex';
+  var vid = document.getElementById('typingtest-demo-video');
+  vid.currentTime = 0;
+  vid.play();
+  document.body.style.overflow = 'hidden';
+}
+function closeTypingTestDemoModal() {
+  document.getElementById('typingtest-demo-modal').style.display = 'none';
+  var vid = document.getElementById('typingtest-demo-video');
+  vid.pause();
+  document.body.style.overflow = '';
+}
+</script>
+
+<!-- Contact Management System Demo Modal -->
+<div id="contactmanagement-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
+  <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
+    <button onclick="closeContactManagementDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
+    <video id="contactmanagement-demo-video" src="ContactManagementSystem.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+  </div>
+</div>
+
+<script>
+function openContactManagementDemoModal() {
+  document.getElementById('contactmanagement-demo-modal').style.display = 'flex';
+  var vid = document.getElementById('contactmanagement-demo-video');
+  vid.currentTime = 0;
+  vid.play();
+  document.body.style.overflow = 'hidden';
+}
+function closeContactManagementDemoModal() {
+  document.getElementById('contactmanagement-demo-modal').style.display = 'none';
+  var vid = document.getElementById('contactmanagement-demo-video');
+  vid.pause();
+  document.body.style.overflow = '';
+}
+</script>
+
+<!-- Vehicle Management System Demo Modal -->
+<div id="vehiclemanagement-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
+  <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
+    <button onclick="closeVehicleManagementDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
+    <video id="vehiclemanagement-demo-video" src="VMSYSTEM.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+  </div>
+</div>
+
+<script>
+function openVehicleManagementDemoModal() {
+  document.getElementById('vehiclemanagement-demo-modal').style.display = 'flex';
+  var vid = document.getElementById('vehiclemanagement-demo-video');
+  vid.currentTime = 0;
+  vid.play();
+  document.body.style.overflow = 'hidden';
+}
+function closeVehicleManagementDemoModal() {
+  document.getElementById('vehiclemanagement-demo-modal').style.display = 'none';
+  var vid = document.getElementById('vehiclemanagement-demo-video');
+  vid.pause();
+  document.body.style.overflow = '';
+}
+</script>
+
+<!-- Vehicle Management System Demo Modal -->
+<div id="vehiclemanagement-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
+  <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
+    <button onclick="closeVehicleManagementDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
+    <video id="vehiclemanagement-demo-video" src="VMSYSTEM.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+  </div>
+</div>
+
+<script>
+function openVehicleManagementDemoModal() {
+  document.getElementById('vehiclemanagement-demo-modal').style.display = 'flex';
+  var vid = document.getElementById('vehiclemanagement-demo-video');
+  vid.currentTime = 0;
+  vid.play();
+  document.body.style.overflow = 'hidden';
+}
+function closeVehicleManagementDemoModal() {
+  document.getElementById('vehiclemanagement-demo-modal').style.display = 'none';
+  var vid = document.getElementById('vehiclemanagement-demo-video');
+  vid.pause();
+  document.body.style.overflow = '';
+}
+</script>
 </body>
 </html>
