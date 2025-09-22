@@ -123,12 +123,27 @@
       align-items: center;
       background-color: var(--accent-color);
       border-radius: 50%;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
       padding: 6px;
+      cursor: pointer;
+      border: none;
     }
 
     .icon-btn:hover {
       background-color: #a3724d;
+      transform: translateY(-2px);
+    }
+
+    /* Special hover effect for resume button */
+    .icon-btn[title="Resume"]:hover {
+      background-color: #8b5a3c;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .icon-btn[title="Resume"]:active {
+      transform: translateY(-1px) scale(0.98);
+      background-color: #7a4f35;
     }
 
     .icon-btn img {
@@ -453,90 +468,425 @@
 #projects {
   padding: 100px 20px 40px;
   background-color: var(--bg-color);
+}
+
+#projects .container {
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
 }
 
-.projects-grid {
+.project-section {
+  margin-bottom: 4rem;
+}
+
+.section-title {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 32px;
+  gap: 0.5rem;
+  font-size: 1.8rem;
+  color: var(--accent-color);
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.section-icon {
+  font-size: 1.5rem;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
   margin-top: 2rem;
 }
 
 .project-card {
   background: white;
   border: 1px solid #e5e5e5;
-  border-radius: 12px;
-  width: 330px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
   overflow: hidden;
   text-align: left;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.project-image {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
 }
 
 .project-card img {
   width: 100%;
-  height: 180px;
+  height: 100%;
   object-fit: cover;
-  border-bottom: 1px solid #eee;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.05);
+}
+
+.project-status {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.project-status.ongoing {
+  background: #ff6b35;
+  color: white;
+}
+
+.project-status.completed {
+  background: #4CAF50;
+  color: white;
 }
 
 .project-content {
-  padding: 16px;
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-content h3 {
-  margin: 0;
-  font-size: 1.2rem;
+  margin: 0 0 0.3rem 0;
+  font-size: 1.1rem;
   color: var(--accent-color);
+  font-weight: 600;
 }
 
-.project-date {
+.project-description {
+  margin: 0 0 0.8rem 0;
   font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 0.5rem;
-}
-
-.project-content p {
-  margin: 0.5rem 0 1rem;
-  font-size: 0.95rem;
   line-height: 1.5;
+  color: #666;
+  flex: 1;
 }
 
 .tech-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 4px;
   margin-bottom: 1rem;
 }
 
 .tech-tags span {
-  background-color: #f2f2f2;
-  border-radius: 9999px;
-  padding: 4px 10px;
-  font-size: 0.75rem;
-  color: #333;
-}
-
-.project-buttons .btn {
-  background-color: var(--accent-color);
+  background: var(--accent-color);
   color: white;
-  padding: 6px 14px;
-  font-size: 0.85rem;
-  border-radius: 20px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
 }
 
-.project-buttons .btn:hover {
-  background-color: #a3724d;
+.tech-tags span:hover {
+  background: var(--light-accent);
+}
+
+.project-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.btn {
+  flex: 1;
+  text-align: center;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.btn-primary {
+  background: var(--accent-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--light-accent);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: #f8f9fa;
+  color: var(--accent-color);
+  border: 1px solid #e5e5e5;
+}
+
+.btn-secondary:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+}
+
+/* Center Statisfy project in ongoing section only */
+.project-section:first-of-type .projects-grid .project-card:nth-child(3) {
+  grid-column: 1 / -1;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Typewriter cursor animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Fade in animation for skills */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.skill {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.skill.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skill.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+.skill.floating:nth-child(odd) {
+  animation-delay: 0.5s;
+}
+
+/* Resume Modal Styles */
+.resume-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.3s ease-out;
+  overflow: hidden;
+}
+
+.resume-modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resume-modal-content {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 85vw;
+  max-height: 85vh;
+  width: 800px;
+  height: 1000px;
+  overflow: hidden;
+  position: relative;
+  animation: slideIn 0.3s ease-out;
+  border: 1px solid #e0e0e0;
+  margin: 7.5% auto;
+}
+
+.resume-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #d0d0d0;
+  border-radius: 8px 8px 0 0;
+}
+
+
+.resume-modal-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #555;
+  margin: 0;
+}
+
+.resume-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #888;
+  padding: 6px;
+  border-radius: 3px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-weight: normal;
+  line-height: 1;
+}
+
+.resume-modal-close:hover,
+.resume-modal-close:focus {
+  background: #e0e0e0;
+  color: #333;
+  text-decoration: none;
+}
+
+.resume-modal-body {
+  height: calc(100% - 50px);
+  overflow: auto;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+.resume-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  min-height: 900px;
+  overflow: auto;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.95) translateY(-30px);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .resume-modal-content {
+    width: 95vw;
+    height: 90vh;
+    max-width: 95vw;
+    max-height: 90vh;
+    border-radius: 6px;
+    margin: 5% auto;
+  }
+  
+  .resume-modal {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .resume-modal-header {
+    padding: 12px 16px;
+  }
+  
+  .resume-modal-title {
+    font-size: 1rem;
+  }
+  
+  .resume-modal-body {
+    overflow: auto;
+    scroll-behavior: smooth;
+  }
+  
+  .resume-iframe {
+    min-height: 700px;
+    overflow: auto;
+  }
+}
+
+.skill.floating:nth-child(even) {
+  animation-delay: 1s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(-1deg);
+  }
+}
+
+/* Experience and Education Logo Hover Effects */
+.experience img, .education img {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.experience img:hover, .education img:hover {
+  transform: scale(1.15) translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 10;
+  position: relative;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .project-card {
+    margin: 0 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .project-section:first-of-type .projects-grid .project-card:nth-child(3) {
+    grid-column: 1;
+    max-width: none;
+    margin: 0 1rem;
+  }
 }
 
 
@@ -881,7 +1231,7 @@
   }
   
   .experience li, .education li {
-    text-align: center;
+  text-align: center;
     align-items: center;
   }
   
@@ -896,7 +1246,7 @@
   
   .experience li .date, .education li .date {
     text-align: center !important;
-    display: block;
+  display: block;
     margin-top: 0.3rem;
   }
   
@@ -972,7 +1322,7 @@
   
   .experience li > div, .education li > div {
     text-align: center;
-    width: 100%;
+  width: 100%;
   }
   
   .responsibilities-toggle, .education-toggle {
@@ -1081,9 +1431,9 @@
       <a href="https://www.linkedin.com/in/youseph-el-khouly-49a285219/" target="_blank" class="icon-btn" title="LinkedIn">
         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" />
       </a>
-      <a href="RESUME.pdf" target="_blank" class="icon-btn" title="Resume">
+       <button onclick="openResumeModal()" class="icon-btn" title="Resume">
         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/readthedocs.svg" alt="Resume" />
-      </a>
+       </button>
     </div>
 
     <a href="#about" class="scroll-down">↓</a>
@@ -1091,8 +1441,8 @@
 
   <section id="about">
     <h2>About Me</h2>
-    <p class="contact-info" style="margin-bottom: 2rem;">
-        Hi, I'm Youseph  a Computer Science student at the University of Guelph with a passion for software and building meaningful, impactful projects. I try to become the best version of myself in every aspect of life and most importantly, I love to learn. Some of my hobbies are gym, reading, and chess.  
+        <p id="typewriter-text" class="contact-info" style="margin-bottom: 2rem; font-size: 1.2rem; line-height: 1.4; max-width: 800px; margin-left: auto; margin-right: auto; min-height: 120px;">
+          <span id="typewriter-cursor" style="border-right: 2px solid var(--accent-color); animation: blink 1s infinite;">|</span>
       </p>
       
   
@@ -1145,7 +1495,9 @@
       <h3>Work Experience</h3>
       <ul>
         <li>
-          <img src="jasaratech-removebg-preview.png" alt="Jasara Technology Inc. Logo" />
+          <a href="https://jasaratech.com/" target="_blank" style="text-decoration: none;">
+            <img src="jasaratech-removebg-preview.png" alt="Jasara Technology Inc. Logo" />
+          </a>
           <div>
             <div style="display: flex; align-items: center; margin-bottom: 4px;">
               <strong>Jasara Technology Inc.</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('jasara')" style="margin-left: 0px; display: inline;"><span class="responsibilities-arrow" id="jasara-arrow">▼</span></div>
@@ -1164,7 +1516,9 @@
           </div>
         </li>
         <li>
-          <img src="image-removebg-preview.png" alt="Aiducare Logo" />
+          <a href="https://aiducare.com/" target="_blank" style="text-decoration: none;">
+            <img src="image-removebg-preview.png" alt="Aiducare Logo" />
+          </a>
           <div>
             <div style="display: flex; align-items: center; margin-bottom: 4px;">
               <strong>Aiducare Inc.</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('aiducare')" style="margin-left: 0px; display: inline;"><span class="responsibilities-arrow" id="aiducare-arrow">▼</span></div>
@@ -1182,7 +1536,9 @@
           </div>
         </li>
         <li>
-          <img src="stylus.png" />
+          <a href="https://www.stylusmarketing.ca/" target="_blank" style="text-decoration: none;">
+            <img src="stylus.png" />
+          </a>
           <div>
             <div style="display: flex; align-items: center; margin-bottom: 4px;">
               <strong>Stylus Marketing</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('stylus')" style="margin-left: 0px; display: inline;"><span class="responsibilities-arrow" id="stylus-arrow">▼</span></div>
@@ -1207,8 +1563,10 @@
       <h3>Education</h3>
       <ul>
         <li>
-            <img src="uog.png" />
-            <div>
+            <a href="https://www.uoguelph.ca/programs/computer-science/" target="_blank" style="text-decoration: none;">
+              <img src="uog.png" />
+            </a>
+          <div>
               <div style="display: flex; align-items: center; margin-bottom: 4px;">
                 <strong>University of Guelph</strong><div class="education-toggle" onclick="toggleEducation('uog')" style="margin-left: 0px; display: inline;"><span class="education-arrow" id="uog-arrow">▼</span></div>
               </div>
@@ -1221,11 +1579,13 @@
                   <p><strong>Expected Graduation:</strong> 2027</p>
                 </div>
               </div>
-            </div>
-          </li>
+          </div>
+        </li>
         <li>
-          <img src="loyola.png" />
-          <div>
+          <a href="https://secondary.hcdsb.org/loyola/" target="_blank" style="text-decoration: none;">
+            <img src="loyola.png" />
+          </a>
+            <div>
             <div style="display: flex; align-items: center; margin-bottom: 4px;">
               <strong>Loyola Catholic Secondary School</strong><div class="education-toggle" onclick="toggleEducation('loyola')" style="margin-left: 0px; display: inline;"><span class="education-arrow" id="loyola-arrow">▼</span></div>
             </div>
@@ -1238,8 +1598,8 @@
                 <p><strong>Focus Areas:</strong> Mathematics, Sciences, and Technology courses</p>
               </div>
             </div>
-          </div>
-        </li>
+            </div>
+          </li>
       </ul>
     </div>
   </div>
@@ -1247,55 +1607,74 @@
   
 
   <section id="projects">
+    <div class="container">
     <h2>Projects</h2>
+      <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.1rem;">A collection of my work showcasing different technologies and problem-solving approaches</p>
   
     <!-- Ongoing Projects -->
-    <h3 style="margin-top: 1rem; color: #6b4c3b;">🚧 Ongoing Projects</h3>
+      <div class="project-section">
+        <h3 class="section-title">
+          <span class="section-icon">🚧</span>
+          Ongoing Projects
+        </h3>
     <div class="projects-grid">
   
-      <!-- SyncWatch -->
+          <!-- SyncSyllabus -->
       <div class="project-card">
-        <img src="SYNCSYALLBUS.png" alt="SyncSyallbus" />
+            <div class="project-image">
+              <img src="SYNCSYALLBUS.png" alt="SyncSyllabus" />
+              <div class="project-status ongoing">In Progress</div>
+            </div>
         <div class="project-content">
-          <h3>SyncSyallbus</h3>
-          <p class="project-date">Current</p>
-          <p>Academic tool that extracts deadlines from course outlines and syncs them to your Google/Notion calendar.</p>
+              <h3>SyncSyllabus</h3>
+              <p class="project-description">Academic tool that extracts deadlines from course outlines and syncs them to your Google/Notion calendar.</p>
           <div class="tech-tags">
-            <span>React</span><span>Tailwind CSS</span><span>Python</span><span>File Parsing: 	python-docx, pdfplumber, PyMuPDF</span><span>Date Extraction: spaCy, re, dateparser</span><span>API's: Notion REST API, Google Calander API, FastAPI</span>
+                <span>React</span><span>Tailwind CSS</span><span>Python</span><span>FastAPI</span><span>Notion API</span><span>Google Calendar API</span>
           </div>
           <div class="project-buttons">
-            <a href="https://github.com/Youseph-Elkhouly/SyncSyllabus" class="btn" target="_blank">GitHub</a>
+                <a href="https://github.com/Youseph-Elkhouly/SyncSyllabus" class="btn btn-primary" target="_blank">
+                  <span>🔗</span> GitHub
+                </a>
           </div>
         </div>
       </div>
 
+          <!-- SyncWatch -->
       <div class="project-card">
+            <div class="project-image">
         <img src="syncwatch.webp" alt="SyncWatch" />
+              <div class="project-status ongoing">In Progress</div>
+            </div>
         <div class="project-content">
           <h3>SyncWatch</h3>
-          <p class="project-date">Current</p>
-          <p>Chrome extension for synchronized video playback across 123Movies, Soap2day, and YouTube. Powered by AWS Lambda, WebSockets, and DynamoDB.</p>
+              <p class="project-description">Chrome extension for synchronized video playback across 123Movies, Soap2day, and YouTube. Powered by AWS Lambda, WebSockets, and DynamoDB.</p>
           <div class="tech-tags">
-            <span>Python</span><span>Flask</span><span>Typescript</span><span>React</span><span>AWS</span><span>Docker</span>
+                <span>Python</span><span>Flask</span><span>TypeScript</span><span>React</span><span>AWS</span><span>Docker</span>
           </div>
           <div class="project-buttons">
-            <a href="https://github.com/Youseph-Elkhouly/SyncWatch" class="btn" target="_blank">GitHub</a>
+                <a href="https://github.com/Youseph-Elkhouly/SyncWatch" class="btn btn-primary" target="_blank">
+                  <span>🔗</span> GitHub
+                </a>
           </div>
         </div>
       </div>
   
       <!-- Statisfy -->
       <div class="project-card">
+            <div class="project-image">
         <img src="statisfy.jpg" alt="Statisfy" />
+              <div class="project-status ongoing">In Progress</div>
+            </div>
         <div class="project-content">
           <h3>Statisfy</h3>
-          <p class="project-date">Current</p>
-          <p>Chrome extension that autofills job applications, tracks statuses, and filters emails using Naïve Bayes and the Gmail API.</p>
+              <p class="project-description">Chrome extension that autofills job applications, tracks statuses, and filters emails using Naïve Bayes and the Gmail API.</p>
           <div class="tech-tags">
             <span>TypeScript</span><span>React</span><span>Express</span><span>AWS</span><span>Docker</span><span>PostgreSQL</span>
           </div>
           <div class="project-buttons">
-            <a href="https://github.com/Youseph-Elkhouly/StatisfyProject" class="btn" target="_blank">GitHub</a>
+                <a href="https://github.com/Youseph-Elkhouly/StatisfyProject" class="btn btn-primary" target="_blank">
+                  <span>🔗</span> GitHub
+                </a>
           </div>
         </div>
       </div>
@@ -1304,152 +1683,211 @@
 
     </div>
   
-    <!-- Finished Projects -->
-    <h3 style="margin-top: 3rem; color: #6b4c3b;">✅ Finished Projects</h3>
+        </div>
+      </div>
+
+      <!-- Completed Projects -->
+      <div class="project-section">
+        <h3 class="section-title">
+          <span class="section-icon">✅</span>
+          Completed Projects
+        </h3>
     <div class="projects-grid">
   
-      <!-- Merchant (move to start of completed) -->
+          <!-- Merchant -->
       <div class="project-card">
+            <div class="project-image">
         <img src="maerchantlogo.png" alt="Merchant" />
+              <div class="project-status completed">Completed</div>
+            </div>
         <div class="project-content">
           <h3>Merchant</h3>
-          <p class="project-date">Completed</p>
-          <p>Aggregates listings from Kijiji and Facebook Marketplace. Built with Flask, BeautifulSoup, PostgreSQL, and Twilio SMS alerts.</p>
+              <p class="project-description">Aggregates listings from Kijiji and Facebook Marketplace. Built with Flask, BeautifulSoup, PostgreSQL, and Twilio SMS alerts.</p>
           <div class="tech-tags">
-            <span>Typescript</span><span>Python</span><span>React</span><span>Flask</span><span>Docker</span><span>PostgreSQL</span>
+                <span>TypeScript</span><span>Python</span><span>React</span><span>Flask</span><span>Docker</span><span>PostgreSQL</span>
           </div>
           <div class="project-buttons">
-            <a href="https://github.com/Youseph-Elkhouly/Merchant" class="btn" target="_blank">GitHub</a>
-            <button class="btn" onclick="openMerchantDemoModal()">Demo Video</button>
+                <a href="https://github.com/Youseph-Elkhouly/Merchant" class="btn btn-primary" target="_blank">
+                  <span>🔗</span> GitHub
+                </a>
+                <button class="btn btn-secondary" onclick="openMerchantDemoModal()">
+                  <span>▶️</span> Demo
+                </button>
           </div>
         </div>
       </div>
-      <!-- Spark and Prepper ( GDSC-2025 Hackathon ) -->
+          <!-- Spark and Prepper -->
       <div class="project-card">
-        <img src="Spark.png" alt="Spark and Prepper (Google Developer Student Club Hackathon 2025)" />
+            <div class="project-image">
+              <img src="Spark.png" alt="Spark and Prepper" />
+              <div class="project-status completed">Completed</div>
+            </div>
         <div class="project-content">
-            <h3>Spark and Prepper ( GDSC-2025 Hackathon )</h3>
-          <p class="project-date">Completed</p>
-          <p>Spark & Prepper is an AI-powered study tool that transforms course materials into smart study guides, flashcards, cheat sheets, and mock exams. It helps students prepare more efficiently by automating the exam prep process using Google Gemini.</p>
+              <h3>Spark & Prepper</h3>
+              <p class="project-description">AI-powered study tool that transforms course materials into smart study guides, flashcards, cheat sheets, and mock exams using Google Gemini.</p>
           <div class="tech-tags">
             <span>React</span><span>Tailwind CSS</span><span>Vite</span><span>React Router</span><span>Node.js</span><span>Express.js</span><span>Google Gemini API</span><span>Firebase</span>
           </div>
           <div class="project-buttons">
-            <a href="https://github.com/seifotefa/sparkandprepper" class="btn" target="_blank">GitHub</a>
-            <button class="btn" onclick="openSparkPrepperDemoModal()">Demo Video</button>
+                <a href="https://github.com/seifotefa/sparkandprepper" class="btn btn-primary" target="_blank">
+                  <span>🔗</span> GitHub
+                </a>
+                <button class="btn btn-secondary" onclick="openSparkPrepperDemoModal()">
+                  <span>▶️</span> Demo
+                </button>
           </div>
         </div>
       </div>
 
+          <!-- Typing Test -->
       <div class="project-card">
+            <div class="project-image">
         <img src="typingtest.png" alt="Typing Speed Test Game" />
+              <div class="project-status completed">Completed</div>
+            </div>
         <div class="project-content">
-          <h3>Typing Speed Test Game</h3>
-          <p class="project-date">Completed</p>
-          <p>React + TypeScript app to test and improve typing speed. Features live feedback, adjustable difficulty, and stats tracking.</p>
+              <h3>Typing Speed Test</h3>
+              <p class="project-description">React + TypeScript app to test and improve typing speed. Features live feedback, adjustable difficulty, and stats tracking.</p>
           <div class="tech-tags">
             <span>React</span><span>TypeScript</span><span>CSS</span>
           </div>
           <div class="project-buttons">
-            <a href="https://github.com/Youseph-Elkhouly/TypingTest" class="btn" target="_blank">GitHub</a>
-            <button class="btn" onclick="openTypingTestDemoModal()">Demo Video</button>
+                <a href="https://github.com/Youseph-Elkhouly/TypingTest" class="btn btn-primary" target="_blank">
+                  <span>🔗</span> GitHub
+                </a>
+                <button class="btn btn-secondary" onclick="openTypingTestDemoModal()">
+                  <span>▶️</span> Demo
+                </button>
           </div>
         </div>
       </div>
 
-      <!-- Example Finished Project -->
+          <!-- Zoo ML Project -->
       <div class="project-card">
-        <img src="zoo.jpg" alt="Typing Speed Test Game" />
+            <div class="project-image">
+              <img src="zoo.jpg" alt="Zoo Data Machine Learning Project" />
+              <div class="project-status completed">Completed</div>
+            </div>
         <div class="project-content">
-          <h3>Zoo Data Machine Learning Project</h3>
-          <p class="project-date">Completed</p>
-          <p>This project is an Animal Classification System that reads animal data from a file, analyzes features, and performs various operations like generating statistics, calculating distances (Euclidean, Hamming, Jaccard), and classifying new samples using the K-Nearest Neighbors (KNN) algorithm.</p>
+              <h3>Zoo Data ML Project</h3>
+              <p class="project-description">Animal Classification System that analyzes features and performs operations like generating statistics, calculating distances, and classifying samples using K-Nearest Neighbors (KNN) algorithm.</p>
           <div class="tech-tags">
-            <span>C</span><span>Makefiles</span>
+                <span>C</span><span>Makefiles</span><span>Machine Learning</span>
           </div>
           <div class="project-buttons">
-            <a href="https://github.com/Youseph-Elkhouly/Zoo-Data-Machine-Learning-Project" class="btn" target="_blank">GitHub</a>
+                <a href="https://github.com/Youseph-Elkhouly/Zoo-Data-Machine-Learning-Project" class="btn btn-primary" target="_blank">
+                  <span>🔗</span> GitHub
+                </a>
           </div>
         </div>
       </div>
 
+          <!-- Contact Management System -->
       <div class="project-card">
-        <img src="CMS.png" alt="Typing Speed Test Game" />
+            <div class="project-image">
+              <img src="CMS.png" alt="Contact Management System" />
+              <div class="project-status completed">Completed</div>
+            </div>
         <div class="project-content">
           <h3>Contact Management System</h3>
-          <p class="project-date">Completed</p>
-          <p>This project is a C-based contact management system that allows users to manage, search, and update contacts from a database file using various search criteria. The program is modular, with multiple source files and a makefile for compilation.</p>
+              <p class="project-description">C-based contact management system that allows users to manage, search, and update contacts from a database file using various search criteria.</p>
           <div class="tech-tags">
-            <span>C</span><span>Makefiles</span>
+                <span>C</span><span>Makefiles</span><span>File I/O</span>
           </div>
           <div class="project-buttons">
-            <a href="https://github.com/Youseph-Elkhouly/Contact-Managment-System" class="btn" target="_blank">GitHub</a>
-            <button class="btn" onclick="openContactManagementDemoModal()">Demo Video</button>
+                <a href="https://github.com/Youseph-Elkhouly/Contact-Managment-System" class="btn btn-primary" target="_blank">
+                  <span>🔗</span> GitHub
+                </a>
+                <button class="btn btn-secondary" onclick="openContactManagementDemoModal()">
+                  <span>▶️</span> Demo
+                </button>
           </div>
         </div>
       </div>
 
+          <!-- Exercise Tracker API -->
       <div class="project-card">
+            <div class="project-image">
         <img src="exercise.png" alt="Exercise Tracker API" />
+              <div class="project-status completed">Completed</div>
+            </div>
         <div class="project-content">
           <h3>Exercise Tracker API</h3>
-          <p class="project-date">Completed</p>
-          <p>The Exercise Tracker API allows users to: Create a user profile Log workouts with a description, duration, and date Retrieve their full exercise log Filter exercise logs by date range and limit results</p>
+              <p class="project-description">RESTful API that allows users to create profiles, log workouts with descriptions and dates, and retrieve filtered exercise logs.</p>
           <div class="tech-tags">
             <span>Node.js</span><span>Express</span><span>MongoDB</span><span>Mongoose</span>
           </div>
           <div class="project-buttons">
-            <a href="https://github.com/Youseph-Elkhouly/Exercise-TrackerAPI" class="btn" target="_blank">GitHub</a>
+                <a href="https://github.com/Youseph-Elkhouly/Exercise-TrackerAPI" class="btn btn-primary" target="_blank">
+                  <span>🔗</span> GitHub
+                </a>
           </div>
         </div>
       </div>
 
+          <!-- URL Shortener -->
       <div class="project-card">
-        <img src="shortener.png" alt="Exercise Tracker API" />
+            <div class="project-image">
+              <img src="shortener.png" alt="URL Shortener" />
+              <div class="project-status completed">Completed</div>
+            </div>
         <div class="project-content">
           <h3>URL Shortener</h3>
-          <p class="project-date">Completed</p>
-          <p>A simple URL shortener microservice built with Node.js, Express, and MongoDB. It accepts valid URLs, generates a short URL identifier, and redirects users to the original link.</p>
+              <p class="project-description">URL shortener microservice built with Node.js, Express, and MongoDB. Accepts valid URLs, generates short identifiers, and redirects users to original links.</p>
           <div class="tech-tags">
-            <span>Express.js</span><span>MongoDB–NoSQL</span>
+                <span>Express.js</span><span>MongoDB</span><span>Node.js</span>
           </div>
           <div class="project-buttons">
-            <a href="https://github.com/Youseph-Elkhouly/URL-Shortener" class="btn" target="_blank">GitHub</a>
+                <a href="https://github.com/Youseph-Elkhouly/URL-Shortener" class="btn btn-primary" target="_blank">
+                  <span>🔗</span> GitHub
+                </a>
           </div>
         </div>
       </div>
       
       
 
+          <!-- File Metadata API -->
       <div class="project-card">
-        <img src="metadata.png" alt="Exercise Tracker API" />
+            <div class="project-image">
+              <img src="metadata.png" alt="File Metadata API" />
+              <div class="project-status completed">Completed</div>
+            </div>
         <div class="project-content">
-          <h3>File Metadata API/MicroService</h3>
-          <p class="project-date">Completed</p>
-          <p>Handles file uploads using multer and return metadata (name, type, size) in a JSON response.</p>
+              <h3>File Metadata API</h3>
+              <p class="project-description">Microservice that handles file uploads using multer and returns metadata (name, type, size) in a JSON response.</p>
           <div class="tech-tags">
-            <span>Express</span><span>Mutler</span>
+                <span>Express</span><span>Multer</span><span>Node.js</span>
           </div>
           <div class="project-buttons">
-            <a href="https://github.com/Youseph-Elkhouly/File-Metadata-API" class="btn" target="_blank">GitHub</a>
+                <a href="https://github.com/Youseph-Elkhouly/File-Metadata-API" class="btn btn-primary" target="_blank">
+                  <span>🔗</span> GitHub
+                </a>
           </div>
         </div>
       </div>
 
       
 
+          <!-- Vehicle Management System -->
       <div class="project-card">
-        <img src="CRMS.png" alt="Typing Speed Test Game" />
+            <div class="project-image">
+              <img src="CRMS.png" alt="Vehicle Management System" />
+              <div class="project-status completed">Completed</div>
+            </div>
         <div class="project-content">
           <h3>Vehicle Management System</h3>
-          <p class="project-date">Completed</p>
-          <p>This project implements a car management system using C programming. It allows users to add new cars, search for cars by ID or model type, display all cars, count the total cars, sort cars by ID, and remove cars from the database. The system efficiently manages car data, ensuring that users can handle car inventories with ease and accuracy.</p>
+              <p class="project-description">Car management system using C programming. Allows users to add, search, display, count, sort, and remove cars from the database with efficient data management.</p>
           <div class="tech-tags">
-            <span>C</span><span>Makefiles</span>
+                <span>C</span><span>Makefiles</span><span>Data Structures</span>
           </div>
           <div class="project-buttons">
-            <a href="https://github.com/Youseph-Elkhouly/Car-Managment-System" class="btn" target="_blank">GitHub</a>
-            <button class="btn" onclick="openVehicleManagementDemoModal()">Demo Video</button>
+                <a href="https://github.com/Youseph-Elkhouly/Car-Managment-System" class="btn btn-primary" target="_blank">
+                  <span>🔗</span> GitHub
+                </a>
+                <button class="btn btn-secondary" onclick="openVehicleManagementDemoModal()">
+                  <span>▶️</span> Demo
+                </button>
           </div>
         </div>
       </div>
@@ -1466,8 +1904,8 @@
       
       <!-- Timeline Line -->
       <div class="timeline-line" style="position: absolute; left: 1rem; top: 0; bottom: 0; width: 2px; background: #e0e0e0;"></div>
-      
-      <!-- SpurHacks Hackathon -->
+          
+          <!-- SpurHacks Hackathon -->
       <div class="timeline-item" style="position: relative; margin-bottom: 3rem; padding-left: 3rem;">
         <!-- Timeline Dot -->
         <div class="timeline-dot" style="position: absolute; left: -1.5rem; top: 1rem; width: 1rem; height: 1rem; background: var(--accent-color); border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 3px var(--accent-color);"></div>
@@ -1493,21 +1931,21 @@
           <!-- Video -->
           <div style="margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
             <iframe width="100%" height="250" src="https://www.youtube.com/embed/tceQzYWGibQ" 
-              title="Jinsa Demo" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
-          </div>
-          
+                title="Jinsa Demo" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+              </div>
+
           <!-- Buttons -->
           <div style="display: flex; gap: 0.8rem; margin-top: 1rem;">
             <a href="https://devpost.com/software/jinsa?ref_content=my-projects-tab&ref_feature=my_projects" class="btn" target="_blank" style="background: #333; color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">Devpost</a>
             <a href="https://github.com/Youseph-Elkhouly/jinsa" class="btn" target="_blank" style="background: #333; color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">GitHub</a>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <!-- GDSC Hackathon -->
+          <!-- GDSC Hackathon -->
       <div class="timeline-item" style="position: relative; margin-bottom: 3rem; padding-left: 3rem;">
         <!-- Timeline Dot -->
         <div class="timeline-dot" style="position: absolute; left: -1.5rem; top: 1rem; width: 1rem; height: 1rem; background: #4CAF50; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 3px #4CAF50;"></div>
@@ -1533,12 +1971,12 @@
           <!-- Video -->
           <div style="margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
             <iframe width="100%" height="250" src="https://www.youtube.com/embed/VIt9yvOC6_4?start=63" 
-              title="Spark & Prepper Demo" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
-          </div>
-          
+                title="Spark & Prepper Demo" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+              </div>
+
           <!-- Buttons -->
           <div style="display: flex; gap: 0.8rem; margin-top: 1rem;">
             <a href="https://devpost.com/software/sparkandprepper" class="btn" target="_blank" style="background: #333; color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">Devpost</a>
@@ -1546,7 +1984,7 @@
           </div>
         </div>
       </div>
-      
+
     </div>
   </section>
   
@@ -1600,6 +2038,19 @@
       </a>
     </div>
   </section>
+
+  <!-- Resume Modal -->
+  <div id="resumeModal" class="resume-modal">
+    <div class="resume-modal-content">
+      <div class="resume-modal-header">
+        <h3 class="resume-modal-title">Resume</h3>
+        <button class="resume-modal-close" onclick="closeResumeModal()" title="Close">×</button>
+      </div>
+      <div class="resume-modal-body">
+        <iframe id="resumeIframe" src="Youseph_El_Khouly_Resume.pdf#toolbar=1&navpanes=0&scrollbar=1&view=FitV&zoom=67&pagemode=none&scrollbar=1" class="resume-iframe" title="Resume"></iframe>
+      </div>
+    </div>
+  </div>
 
   <script>
   // Carousel functionality
@@ -1779,6 +2230,156 @@ function closeVehicleManagementDemoModal() {
   vid.pause();
   document.body.style.overflow = '';
 }
+
+// Typewriter effect for About Me section
+function typeWriter() {
+  const text = "Hi, I'm Youseph! I'm a Computer Science student at the University of Guelph with a deep passion for software development and building meaningful, impactful projects that make a difference. I'm constantly striving to become the best version of myself in every aspect of life, and most importantly, I absolutely love to learn and grow. My journey in tech has been driven by curiosity and a desire to solve real-world problems through innovative solutions.";
+  const element = document.getElementById('typewriter-text');
+  let i = 0;
+  
+  function type() {
+    if (i < text.length) {
+      element.innerHTML = text.substring(0, i + 1) + '<span id="typewriter-cursor" style="border-right: 2px solid var(--accent-color); animation: blink 1s infinite;">|</span>';
+      i++;
+      setTimeout(type, 60); // Adjust speed here (lower = faster)
+    }
+  }
+  
+  // Start typing when the about section comes into view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && i === 0) {
+        type();
+      }
+    });
+  });
+  
+  if (element) {
+    observer.observe(element);
+  }
+}
+
+// Initialize typewriter effect when page loads
+document.addEventListener('DOMContentLoaded', typeWriter);
+
+// Skills fade-in animation on scroll
+function initSkillsAnimation() {
+  const skillsSections = document.querySelectorAll('.skills-grid');
+  
+  console.log('Found skills sections:', skillsSections.length); // Debug log
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      console.log('Section intersecting:', entry.isIntersecting); // Debug log
+      if (entry.isIntersecting) {
+        const skills = entry.target.querySelectorAll('.skill');
+        console.log('Found skills:', skills.length); // Debug log
+        skills.forEach((skill, index) => {
+          setTimeout(() => {
+            skill.classList.add('fade-in');
+            // Add floating animation after fade-in completes
+            setTimeout(() => {
+              skill.classList.add('floating');
+            }, 600); // Wait for fade-in transition to complete
+            console.log('Added fade-in to skill', index); // Debug log
+          }, index * 100); // Staggered animation - each skill appears 100ms after the previous
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { 
+    threshold: 0.1, // Lower threshold to trigger earlier
+    rootMargin: '0px 0px -100px 0px' // Start animation when section is closer to view
+  });
+  
+  skillsSections.forEach(section => {
+    console.log('Observing section:', section); // Debug log
+    observer.observe(section);
+  });
+}
+
+// Resume Modal Functions
+function openResumeModal() {
+  const modal = document.getElementById('resumeModal');
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden'; // Prevent background scrolling
+  
+  // Prevent scrolling on the main page
+  document.addEventListener('wheel', preventScroll, { passive: false, capture: true });
+  document.addEventListener('touchmove', preventScroll, { passive: false, capture: true });
+  document.addEventListener('scroll', preventScroll, { passive: false, capture: true });
+  
+  // Force 67% zoom and scroll down after iframe loads
+  setTimeout(() => {
+    const iframe = document.getElementById('resumeIframe');
+    if (iframe && iframe.contentWindow) {
+      // Try to set zoom to 67%
+      iframe.src = iframe.src.replace(/zoom=\d+/, 'zoom=67');
+      // Scroll down and right slightly
+      iframe.contentWindow.scrollTo(20, 50);
+    }
+  }, 1500);
+}
+
+function preventScroll(e) {
+  // Always prevent scrolling on the main page when modal is open
+  e.preventDefault();
+  e.stopPropagation();
+}
+
+function closeResumeModal() {
+  const modal = document.getElementById('resumeModal');
+  modal.classList.remove('show');
+  document.body.style.overflow = 'auto'; // Restore scrolling
+  
+  // Remove scroll prevention listeners
+  document.removeEventListener('wheel', preventScroll, { capture: true });
+  document.removeEventListener('touchmove', preventScroll, { capture: true });
+  document.removeEventListener('scroll', preventScroll, { capture: true });
+}
+
+// Initialize skills animation when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  initSkillsAnimation();
+  
+  // Close modal when clicking outside the content
+  document.getElementById('resumeModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeResumeModal();
+    }
+  });
+
+  // Close modal with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeResumeModal();
+    }
+  });
+  
+  // Prevent background scrolling when modal is open
+  document.getElementById('resumeModal').addEventListener('wheel', function(e) {
+    if (e.target === this) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+  
+  // Fallback: If intersection observer doesn't work, trigger animation after a delay
+  setTimeout(() => {
+    const skills = document.querySelectorAll('.skill');
+    if (skills.length > 0 && !skills[0].classList.contains('fade-in')) {
+      console.log('Fallback: Triggering skills animation manually');
+      skills.forEach((skill, index) => {
+        setTimeout(() => {
+          skill.classList.add('fade-in');
+          // Add floating animation after fade-in completes
+          setTimeout(() => {
+            skill.classList.add('floating');
+          }, 600);
+        }, index * 100);
+      });
+    }
+  }, 2000); // Wait 2 seconds then trigger if not already triggered
+});
 </script>
 </body>
 </html>
