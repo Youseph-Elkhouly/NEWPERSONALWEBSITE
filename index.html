@@ -313,6 +313,127 @@
   color: #777;
 }
 
+/* Key Responsibilities Dropdown Styles */
+.responsibilities-toggle {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 0;
+  margin-left: 0;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  transition: all 0.2s ease;
+  font-size: 0.7rem;
+  color: var(--accent-color);
+  font-weight: 500;
+  width: 12px;
+  height: 12px;
+}
+
+/* Education Dropdown Styles */
+.education-toggle {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 0;
+  margin-left: 0;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  transition: all 0.2s ease;
+  font-size: 0.7rem;
+  color: var(--accent-color);
+  font-weight: 500;
+  width: 12px;
+  height: 12px;
+}
+
+.education-toggle:hover {
+  background-color: transparent;
+  border: none;
+  color: var(--light-accent);
+}
+
+.education-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  margin: 0;
+}
+
+.education-dropdown.active {
+  max-height: 400px;
+  margin: 8px 0 0 0;
+}
+
+.education-content {
+  padding: 12px 0 0 0;
+  border-top: 1px solid rgba(107, 76, 59, 0.1);
+  margin-top: 8px;
+}
+
+.education-content p {
+  margin: 8px 0;
+  color: var(--accent-color);
+  line-height: 1.4;
+}
+
+.education-arrow {
+  transition: transform 0.2s ease;
+}
+
+.education-dropdown.active .education-arrow {
+  transform: rotate(180deg);
+}
+
+.responsibilities-toggle:hover {
+  background-color: transparent;
+  border: none;
+  color: var(--light-accent);
+}
+
+.responsibilities-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  margin: 0;
+}
+
+.responsibilities-dropdown.active {
+  max-height: 400px;
+  margin: 8px 0 0 0;
+}
+
+.responsibilities-content {
+  padding: 12px 0 0 0;
+  border-top: 1px solid rgba(107, 76, 59, 0.1);
+  margin-top: 8px;
+}
+
+.responsibilities-content p {
+  margin-bottom: 6px;
+  line-height: 1.5;
+  color: var(--accent-color);
+  font-size: 0.9rem;
+}
+
+.responsibilities-arrow {
+  transition: transform 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.responsibilities-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+
 .experience h3, .education h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
@@ -549,14 +670,14 @@
     }
 
 .contact-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  max-width: 600px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 900px;
   margin: 0 auto;
   width: 100%;
   padding: 0 20px;
+  justify-items: center;
 }
 
 #contact {
@@ -589,38 +710,71 @@
 
 .contact-card {
   width: 100%;
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(107, 76, 59, 0.1);
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
   text-decoration: none;
   color: var(--text-color);
+  position: relative;
+  overflow: hidden;
 }
 
 .contact-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(107, 76, 59, 0.15);
+  border-color: var(--accent-color);
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-color), var(--light-accent));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.contact-card:hover::before {
+  transform: scaleX(1);
 }
 
 .contact-icon {
-  width: 40px;
-  height: 40px;
-  padding: 8px;
-  border-radius: 50%;
-  background-color: var(--accent-color);
+  width: 50px;
+  height: 50px;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .contact-icon img {
-  width: 24px;
-  height: 24px;
-  filter: brightness(0) invert(1);
+  width: 28px;
+  height: 28px;
+  transition: transform 0.3s ease;
+}
+
+.contact-card:hover .contact-icon {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 1);
+}
+
+.contact-card:hover .contact-icon img {
+  transform: scale(1.1);
 }
 
 .contact-info {
@@ -628,43 +782,65 @@
 }
 
 .contact-label {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #666;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .contact-value {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: var(--accent-color);
-  font-weight: 500;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 @media (max-width: 768px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 15px;
+  }
+  
   .contact-card {
-    padding: 15px;
+    padding: 24px;
   }
   
   .contact-value {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 480px) {
   .contact-container {
     padding: 0 15px;
+    gap: 16px;
   }
   
   .contact-card {
-    padding: 12px;
+    padding: 20px;
+    gap: 16px;
   }
   
   .contact-icon {
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
+    padding: 10px;
+  }
+  
+  .contact-icon img {
+    width: 24px;
+    height: 24px;
   }
   
   .contact-value {
-    font-size: 0.9rem;
+    font-size: 1rem;
+  }
+  
+  .contact-label {
+    font-size: 0.85rem;
   }
 }
 
@@ -759,21 +935,58 @@
       <h3>Work Experience</h3>
       <ul>
         <li>
-          <img src="stylus.jpeg" />
+          <img src="jasaratech-removebg-preview.png" alt="Jasara Technology Inc. Logo" />
           <div>
-            <strong>Stylus Marketing</strong><br />
-            Software Engineer - Full Stack SMB Software Solutions<br />
-            Tech Stack: Python · Typescript · PostgreSQL · AWS · React <br />
-            <span class="date">May 2024</span>
+            <div style="display: flex; align-items: center; margin-bottom: 4px;">
+              <strong>Jasara Technology Inc.</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('jasara')" style="margin-left: 2px; display: inline;"><span class="responsibilities-arrow" id="jasara-arrow">▼</span></div>
+            </div>
+            Software Engineer Intern<br />
+            
+            <span class="date">Sep 2025 - Present</span>
+            <div class="responsibilities-dropdown" id="jasara-dropdown">
+              <div class="responsibilities-content">
+                <p><strong>Tech Stack:</strong> Python (FastAPI) · TypeScript (React) · SQLite/pgvector · Azure OpenAI API</p>
+                <p><strong>Key Responsibilities:</strong></p>
+                <p>• Engineered an AI-powered customer support chatbot using FastAPI and RAG with vector embeddings, implementing async processing and intelligent prompt engineering to automate 65% of common inquiries with real-time WebSocket messaging and conversation persistence.</p>
+                <p>• Implemented comprehensive data protection system with automated PII detection and redaction, coupled with ML confidence scoring for seamless handoff to human agents, achieving 100% secure handling of customer data through modular AI inference layer with Azure OpenAI API.</p>
+              </div>
+            </div>
           </div>
         </li>
         <li>
-          <img src="aiducare.jpeg" alt="Aiducare Logo" />
+          <img src="image-removebg-preview.png" alt="Aiducare Logo" />
           <div>
-            <strong>Aiducare Inc.</strong><br />
+            <div style="display: flex; align-items: center; margin-bottom: 4px;">
+              <strong>Aiducare Inc.</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('aiducare')" style="margin-left: 2px; display: inline;"><span class="responsibilities-arrow" id="aiducare-arrow">▼</span></div>
+            </div>
             Mobile App Developer Intern<br />
-            Tech Stack: React · React Native · JavaScript · CSS <br />
-            <span class="date">June – August 2025</span>
+            <span class="date">June 2025 – August 2025</span>
+            <div class="responsibilities-dropdown" id="aiducare-dropdown">
+              <div class="responsibilities-content">
+                <p><strong>Tech Stack:</strong> React · React Native · JavaScript · CSS</p>
+                <p><strong>Key Responsibilities:</strong></p>
+                <p>• Built an interactive audio playback feature enabling click-to-hear pronunciation for 30+ active learners and designed an intuitive interface for pronunciation practice with ML-generated feedback, improving learning accuracy by 40%.</p>
+                <p>• Reorganized components into shared, reusable React Native modules with consistent styling, reducing code duplication by 30% and improving cross-platform maintainability.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <img src="stylus.png" />
+          <div>
+            <div style="display: flex; align-items: center; margin-bottom: 4px;">
+              <strong>Stylus Marketing</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('stylus')" style="margin-left: 2px; display: inline;"><span class="responsibilities-arrow" id="stylus-arrow">▼</span></div>
+            </div>
+            Software Engineer Intern<br />
+            <span class="date">May 2024 – August 2024</span>
+            <div class="responsibilities-dropdown" id="stylus-dropdown">
+              <div class="responsibilities-content">
+                <p><strong>Tech Stack:</strong> Python · TypeScript · PostgreSQL · AWS · React</p>
+                <p><strong>Key Responsibilities:</strong></p>
+                <p>• Engineered a serverless inventory tracking and management service adopted by 50+ clients, delivering scalable, cost-efficient operations with automated, event-driven Stripe integration for overdue charge recovery, incorporating dynamic retry logic and real-time alerts to boost payment reliability and accelerate resolution times by 75%.</p>
+                <p>• Implemented intuitive dashboards for payment and inventory management, leveraging WebSockets for instant data synchronization and delivering a seamless, user-friendly interface that reduced user onboarding time.</p>
+              </div>
+            </div>
           </div>
         </li>
         
@@ -784,21 +997,39 @@
       <h3>Education</h3>
       <ul>
         <li>
-          <img src="loyola.png" />
-          <div>
-            <strong>Loyola Catholic Secondary School</strong><br />
-            Ontario Secondary School Diploma (OSSD)<br />
-            <span class="date">2019 – 2023</span>
-          </div>
-        </li>
-        <li>
             <img src="uog.png" />
             <div>
-              <strong>University of Guelph</strong><br />
+              <div style="display: flex; align-items: center; margin-bottom: 4px;">
+                <strong>University of Guelph</strong><div class="education-toggle" onclick="toggleEducation('uog')" style="margin-left: 2px; display: inline;"><span class="education-arrow" id="uog-arrow">▼</span></div>
+              </div>
               Bachelor of Computing Honours (BCOMP)<br />
               <span class="date">2023 – 2027</span>
+              <div class="education-dropdown" id="uog-dropdown">
+                <div class="education-content">
+                  <p><strong>Program Details:</strong> Bachelor of Computing Honours with focus on Software Engineering</p>
+                  <p><strong>Relevant Coursework:</strong> Data Structures & Algorithms, Discrete Math, Object-Oriented Programming, Database Systems, Parallel Programming, Operating Systems, Systems Analysis and Design, Software Reliability & Testing, Software Engineering</p>
+                  <p><strong>Expected Graduation:</strong> 2027</p>
+                </div>
+              </div>
             </div>
           </li>
+        <li>
+          <img src="loyola.png" />
+          <div>
+            <div style="display: flex; align-items: center; margin-bottom: 4px;">
+              <strong>Loyola Catholic Secondary School</strong><div class="education-toggle" onclick="toggleEducation('loyola')" style="margin-left: 2px; display: inline;"><span class="education-arrow" id="loyola-arrow">▼</span></div>
+            </div>
+            Ontario Secondary School Diploma (OSSD)<br />
+            <span class="date">2019 – 2023</span>
+            <div class="education-dropdown" id="loyola-dropdown">
+              <div class="education-content">
+                <p><strong>High School Diploma:</strong> Ontario Secondary School Diploma (OSSD)</p>
+                <p><strong>Graduation Year:</strong> 2023</p>
+                <p><strong>Focus Areas:</strong> Mathematics, Sciences, and Technology courses</p>
+              </div>
+            </div>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
@@ -1021,65 +1252,64 @@
 
   <section id="hackathons">
     <h2>Hackathons</h2>
-    <div class="hackathon-carousel" style="margin-top: 2rem; position: relative; max-width: 800px; margin-left: auto; margin-right: auto;">
-      <div class="carousel-container" style="overflow: hidden; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+    <div class="hackathon-carousel" style="margin-top: 2rem; position: relative; max-width: 900px; margin-left: auto; margin-right: auto; padding: 0 60px;">
+      <div class="carousel-container" style="overflow: hidden; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.15); background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);">
         <div class="carousel-track" style="display: flex; transition: transform 0.5s ease-in-out;">
           
           <!-- SpurHacks Hackathon -->
-          <div class="carousel-slide" style="min-width: 100%; text-align: center; padding: 2rem;">
-            <div class="timeline-date" style="margin-bottom: 1rem;">June 22, 2025</div>
-            <div class="timeline-content" style="margin-bottom: 1.5rem;">
-              <h3 style="margin-bottom: 1rem;">SpurHacks 2025 – Jinsa <span class="badge"></span></h3>
-              <p style="margin-bottom: 1rem;"><strong>Location:</strong> Waterloo, Ontario</p>
-              <p style="margin-bottom: 1.5rem;">
-              <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+          <div class="carousel-slide" style="min-width: 100%; padding: 3rem;">
+            <div class="hackathon-header" style="text-align: center; margin-bottom: 2rem;">
+              <div class="timeline-date" style="margin-bottom: 1rem; color: var(--accent-color); font-weight: 600; font-size: 1.1rem;">June 22, 2025</div>
+              <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.8rem;">SpurHacks 2025 – Jinsa</h3>
+              <p style="margin-bottom: 1rem; color: #666; font-size: 1.1rem;"><strong>Location:</strong> Waterloo, Ontario</p>
+            </div>
+            
+            <div class="hackathon-content" style="max-width: 700px; margin: 0 auto;">
+              <div class="hackathon-description" style="margin-bottom: 2rem; line-height: 1.6; color: var(--text-color);">
                 Participated in <strong>SpurHacks</strong> at Waterloo, which opened my eyes to the startup world and sparked my interest in blockchain technology. This experience led to the creation of <strong>Jinsa</strong>, my blockchain-based product authentication startup. Jinsa is a decentralized platform that protects both brands and buyers by authenticating physical products on the blockchain and tracking ownership over time using smart contracts and wallet-based authentication.
               </div>
-              <p style="margin-bottom: 2.5rem;"></p>
-              </p>
 
               <!-- Embedded YouTube Video with Border -->
-              <div style="margin: 20px auto; max-width: 560px; border: 5px solid var(--accent-color); border-radius: 12px; overflow: hidden;">
-              <iframe width="100%" height="315" src="https://www.youtube.com/embed/tceQzYWGibQ" 
-                title="Jinsa Demo" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-              </iframe>
+              <div style="margin: 2rem auto; max-width: 600px; border: 4px solid var(--accent-color); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(107, 76, 59, 0.2);">
+                <iframe width="100%" height="340" src="https://www.youtube.com/embed/tceQzYWGibQ" 
+                  title="Jinsa Demo" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen>
+                </iframe>
               </div>
 
-              <div class="buttons" style="margin-top: 1.5rem;">
-              <a href="https://devpost.com/software/jinsa?ref_content=my-projects-tab&ref_feature=my_projects" class="btn" target="_blank" style="margin-right: 1rem;">Devpost</a>
-              <a href="https://github.com/Youseph-Elkhouly/jinsa" class="btn" target="_blank">GitHub</a>
+              <div class="hackathon-buttons" style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
+                <a href="https://devpost.com/software/jinsa?ref_content=my-projects-tab&ref_feature=my_projects" class="btn" target="_blank">Devpost</a>
+                <a href="https://github.com/Youseph-Elkhouly/jinsa" class="btn" target="_blank">GitHub</a>
               </div>
             </div>
           </div>
 
           <!-- GDSC Hackathon -->
-          <div class="carousel-slide" style="min-width: 100%; text-align: center; padding: 2rem;">
-            <div class="timeline-date" style="margin-bottom: 1rem;">May 2, 2025</div>
-            <div class="timeline-content" style="margin-bottom: 1.5rem;">
-              <h3 style="margin-bottom: 1rem;">GDSC Hacks 2025 – Spark & Prepper <span class="badge"></span></h3>
-              <p style="margin-bottom: 1rem;"><strong>Location:</strong> University of Guelph, Ontario</p>
-              <p style="margin-bottom: 1.5rem;">
-              <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-                Built <strong>Spark & Prepper</strong>, an AI-powered study assistant that transforms uploaded course materials into
-                smart study guides, flashcards, cheat sheets, and mock exams, that also has a chatbot using the Google Gemini API. Collaborated with a team during a 48-hour hackathon to design a full-stack solution featuring a dynamic React UI, Firebase storage, and MongoDB User authentication.
+          <div class="carousel-slide" style="min-width: 100%; padding: 3rem;">
+            <div class="hackathon-header" style="text-align: center; margin-bottom: 2rem;">
+              <div class="timeline-date" style="margin-bottom: 1rem; color: var(--accent-color); font-weight: 600; font-size: 1.1rem;">May 2, 2025</div>
+              <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.8rem;">GDSC Hacks 2025 – Spark & Prepper</h3>
+              <p style="margin-bottom: 1rem; color: #666; font-size: 1.1rem;"><strong>Location:</strong> University of Guelph, Ontario</p>
+            </div>
+            
+            <div class="hackathon-content" style="max-width: 700px; margin: 0 auto;">
+              <div class="hackathon-description" style="margin-bottom: 2rem; line-height: 1.6; color: var(--text-color);">
+                Built <strong>Spark & Prepper</strong>, an AI-powered study assistant that transforms uploaded course materials into smart study guides, flashcards, cheat sheets, and mock exams, that also has a chatbot using the Google Gemini API. Collaborated with a team during a 48-hour hackathon to design a full-stack solution featuring a dynamic React UI, Firebase storage, and MongoDB User authentication.
               </div>
-              <p style="margin-bottom: 2.5rem;"></p>
-              </p>
 
               <!-- Embedded YouTube Video with Border -->
-              <div style="margin: 20px auto; max-width: 560px; border: 5px solid var(--accent-color); border-radius: 12px; overflow: hidden;">
-              <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIt9yvOC6_4?start=63" 
-                title="Spark & Prepper Demo" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-              </iframe>
+              <div style="margin: 2rem auto; max-width: 600px; border: 4px solid var(--accent-color); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 24px rgba(107, 76, 59, 0.2);">
+                <iframe width="100%" height="340" src="https://www.youtube.com/embed/VIt9yvOC6_4?start=63" 
+                  title="Spark & Prepper Demo" frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen>
+                </iframe>
               </div>
 
-              <div class="buttons" style="margin-top: 1.5rem;">
-              <a href="https://devpost.com/software/sparkandprepper" class="btn" target="_blank" style="margin-right: 1rem;">Devpost</a>
-              <a href="https://github.com/seifotefa/sparkandprepper" class="btn" target="_blank">GitHub</a>
+              <div class="hackathon-buttons" style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
+                <a href="https://devpost.com/software/sparkandprepper" class="btn" target="_blank">Devpost</a>
+                <a href="https://github.com/seifotefa/sparkandprepper" class="btn" target="_blank">GitHub</a>
               </div>
             </div>
           </div>
@@ -1087,13 +1317,13 @@
       </div>
 
       <!-- Navigation Buttons -->
-      <button class="carousel-btn prev-btn" style="position: absolute; left: -60px; top: 50%; transform: translateY(-50%); background: var(--accent-color); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 24px; font-weight: bold; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(107, 76, 59, 0.3); z-index: 10;" onclick="changeSlide(-1)" onmouseover="this.style.background='#a3724d'; this.style.transform='translateY(-50%) scale(1.1)'" onmouseout="this.style.background='var(--accent-color)'; this.style.transform='translateY(-50%) scale(1)'">‹</button>
-      <button class="carousel-btn next-btn" style="position: absolute; right: -60px; top: 50%; transform: translateY(-50%); background: var(--accent-color); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 24px; font-weight: bold; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(107, 76, 59, 0.3); z-index: 10;" onclick="changeSlide(1)" onmouseover="this.style.background='#a3724d'; this.style.transform='translateY(-50%) scale(1.1)'" onmouseout="this.style.background='var(--accent-color)'; this.style.transform='translateY(-50%) scale(1)'">›</button>
+      <button class="carousel-btn prev-btn" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: var(--accent-color); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 24px; font-weight: bold; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(107, 76, 59, 0.3); z-index: 10;" onclick="changeSlide(-1)" onmouseover="this.style.background='#a3724d'; this.style.transform='translateY(-50%) scale(1.1)'" onmouseout="this.style.background='var(--accent-color)'; this.style.transform='translateY(-50%) scale(1)'">‹</button>
+      <button class="carousel-btn next-btn" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: var(--accent-color); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 24px; font-weight: bold; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(107, 76, 59, 0.3); z-index: 10;" onclick="changeSlide(1)" onmouseover="this.style.background='#a3724d'; this.style.transform='translateY(-50%) scale(1.1)'" onmouseout="this.style.background='var(--accent-color)'; this.style.transform='translateY(-50%) scale(1)'">›</button>
 
       <!-- Dots Indicator -->
-      <div class="carousel-dots" style="display: flex; justify-content: center; margin-top: 1rem; gap: 8px;">
-        <span class="dot active" style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent-color); cursor: pointer; transition: background 0.3s ease;" onclick="goToSlide(0)"></span>
-        <span class="dot" style="width: 12px; height: 12px; border-radius: 50%; background: #ccc; cursor: pointer; transition: background 0.3s ease;" onclick="goToSlide(1)"></span>
+      <div class="carousel-dots" style="display: flex; justify-content: center; margin-top: 2rem; gap: 12px;">
+        <span class="dot active" style="width: 14px; height: 14px; border-radius: 50%; background: var(--accent-color); cursor: pointer; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(107, 76, 59, 0.3);" onclick="goToSlide(0)" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"></span>
+        <span class="dot" style="width: 14px; height: 14px; border-radius: 50%; background: #ccc; cursor: pointer; transition: all 0.3s ease;" onclick="goToSlide(1)" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'"></span>
       </div>
     </div>
   </section>
@@ -1102,11 +1332,14 @@
   
 
   <section id="contact">
-    <h2>Contact</h2>
+    <h2>Get In Touch</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+      I'm always open to discussing new opportunities, collaborations, or just having a chat about technology and innovation. Feel free to reach out!
+    </p>
     <div class="contact-container">
       <a href="mailto:work.youseph@gmail.com" class="contact-card">
         <div class="contact-icon">
-          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" alt="Gmail" />
+          <img src="https://img.icons8.com/color/48/000000/gmail.png" alt="Gmail" />
         </div>
         <div class="contact-info">
           <div class="contact-label">Email</div>
@@ -1116,7 +1349,7 @@
       
       <a href="https://www.linkedin.com/in/youseph-el-khouly-49a285219/" target="_blank" class="contact-card">
         <div class="contact-icon">
-          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" />
+          <img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn" />
         </div>
         <div class="contact-info">
           <div class="contact-label">LinkedIn</div>
@@ -1126,11 +1359,21 @@
 
       <a href="https://github.com/Youseph-Elkhouly" target="_blank" class="contact-card">
         <div class="contact-icon">
-          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
+          <img src="https://img.icons8.com/color/48/000000/github.png" alt="GitHub" />
         </div>
         <div class="contact-info">
           <div class="contact-label">GitHub</div>
           <div class="contact-value">Youseph-Elkhouly</div>
+        </div>
+      </a>
+
+      <a href="tel:+16475541348" class="contact-card">
+        <div class="contact-icon">
+          <img src="https://img.icons8.com/color/48/000000/phone.png" alt="Phone" />
+        </div>
+        <div class="contact-info">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+1 (647) 554-1348</div>
         </div>
       </a>
     </div>
@@ -1164,6 +1407,35 @@
       dot.classList.toggle('active', index === currentSlide);
     });
   }
+
+  // Key Responsibilities dropdown functionality
+  function toggleResponsibilities(company) {
+    const dropdown = document.getElementById(company + '-dropdown');
+    const arrow = document.getElementById(company + '-arrow');
+    
+    if (dropdown.classList.contains('active')) {
+      dropdown.classList.remove('active');
+      arrow.classList.remove('rotated');
+    } else {
+      dropdown.classList.add('active');
+      arrow.classList.add('rotated');
+    }
+  }
+
+  // Education dropdown functionality
+  function toggleEducation(school) {
+    const dropdown = document.getElementById(school + '-dropdown');
+    const arrow = document.getElementById(school + '-arrow');
+    
+    if (dropdown.classList.contains('active')) {
+      dropdown.classList.remove('active');
+      arrow.classList.remove('rotated');
+    } else {
+      dropdown.classList.add('active');
+      arrow.classList.add('rotated');
+    }
+  }
+
 
   </script>
 
