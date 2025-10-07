@@ -793,12 +793,6 @@
   transform: translateY(-2px);
 }
 
-/* Center Statisfy project in ongoing section only */
-.project-section:first-of-type .projects-grid .project-card:nth-child(3) {
-  grid-column: 1 / -1;
-  max-width: 400px;
-  margin: 0 auto;
-}
 
 /* Typewriter cursor animation */
 @keyframes blink {
@@ -1028,11 +1022,6 @@
     font-size: 1.5rem;
   }
   
-  .project-section:first-of-type .projects-grid .project-card:nth-child(3) {
-    grid-column: 1;
-    max-width: none;
-    margin: 0 1rem;
-  }
 }
 
 
@@ -1763,80 +1752,6 @@
     <h2>Projects</h2>
       <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.1rem;">A collection of my work showcasing different technologies and problem-solving approaches</p>
   
-    <!-- Ongoing Projects -->
-      <div class="project-section">
-        <h3 class="section-title">
-          <span class="section-icon">🚧</span>
-          Ongoing Projects
-        </h3>
-    <div class="projects-grid">
-  
-          <!-- SyncSyllabus -->
-      <div class="project-card">
-            <div class="project-image">
-              <img src="SYNCSYALLBUS.png" alt="SyncSyllabus" />
-              <div class="project-status ongoing">In Progress</div>
-            </div>
-        <div class="project-content">
-              <h3>SyncSyllabus</h3>
-              <p class="project-description">Academic tool that extracts deadlines from course outlines and syncs them to your Google/Notion calendar.</p>
-          <div class="tech-tags">
-                <span>React</span><span>Tailwind CSS</span><span>Python</span><span>FastAPI</span><span>Notion API</span><span>Google Calendar API</span>
-          </div>
-          <div class="project-buttons">
-                <a href="https://github.com/Youseph-Elkhouly/SyncSyllabus" class="btn btn-primary" target="_blank">
-                  <span>🔗</span> GitHub
-                </a>
-          </div>
-        </div>
-      </div>
-
-          <!-- SyncWatch -->
-      <div class="project-card">
-            <div class="project-image">
-        <img src="syncwatch.webp" alt="SyncWatch" />
-              <div class="project-status ongoing">In Progress</div>
-            </div>
-        <div class="project-content">
-          <h3>SyncWatch</h3>
-              <p class="project-description">Chrome extension for synchronized video playback across 123Movies, Soap2day, and YouTube. Powered by AWS Lambda, WebSockets, and DynamoDB.</p>
-          <div class="tech-tags">
-                <span>Python</span><span>Flask</span><span>TypeScript</span><span>React</span><span>AWS</span><span>Docker</span>
-          </div>
-          <div class="project-buttons">
-                <a href="https://github.com/Youseph-Elkhouly/SyncWatch" class="btn btn-primary" target="_blank">
-                  <span>🔗</span> GitHub
-                </a>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Statisfy -->
-      <div class="project-card">
-            <div class="project-image">
-        <img src="statisfy.jpg" alt="Statisfy" />
-              <div class="project-status ongoing">In Progress</div>
-            </div>
-        <div class="project-content">
-          <h3>Statisfy</h3>
-              <p class="project-description">Chrome extension that autofills job applications, tracks statuses, and filters emails using Naïve Bayes and the Gmail API.</p>
-          <div class="tech-tags">
-            <span>TypeScript</span><span>React</span><span>Express</span><span>AWS</span><span>Docker</span><span>PostgreSQL</span>
-          </div>
-          <div class="project-buttons">
-                <a href="https://github.com/Youseph-Elkhouly/StatisfyProject" class="btn btn-primary" target="_blank">
-                  <span>🔗</span> GitHub
-                </a>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Merchant (remove from ongoing) -->
-
-    </div>
-  
-        </div>
-      </div>
 
       <!-- Completed Projects -->
       <div class="project-section">
@@ -2044,7 +1959,9 @@
         </div>
       </div>
 
-</div>
+      </div>
+    </div>
+  </div>
 </section>
   
   
