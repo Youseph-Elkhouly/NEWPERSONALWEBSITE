@@ -320,11 +320,21 @@
       height: 50px;
     }
 
-    .skill img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
+.skill img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.skill img:hover {
+  transform: scale(1.15) translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 10;
+  position: relative;
+}
 
     @media (max-width: 768px) {
       nav {
@@ -457,12 +467,26 @@
   align-items: flex-start;
   gap: 16px;
   margin-bottom: 1.5rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #e5e5e5;
+  transition: all 0.3s ease;
+}
+
+.experience li:hover, .education li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
 }
 
 .experience img, .education img {
   width: 40px;
   height: 40px;
   object-fit: contain;
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 
 .experience li div, .education li div {
@@ -530,7 +554,7 @@
 }
 
 .education-dropdown.active {
-  max-height: 400px;
+  max-height: 600px;
   margin: 8px 0 0 0;
 }
 
@@ -568,7 +592,7 @@
 }
 
 .responsibilities-dropdown.active {
-  max-height: 400px;
+  max-height: 600px;
   margin: 8px 0 0 0;
 }
 
@@ -746,7 +770,8 @@
 }
 
 .tech-tags span:hover {
-  background: var(--light-accent);
+  background: #333;
+  color: white;
 }
 
 .project-buttons {
@@ -778,18 +803,24 @@
 }
 
 .btn-primary:hover {
-  background: var(--light-accent);
+  background: #333;
   transform: translateY(-2px);
 }
 
 .btn-secondary {
-  background: #f8f9fa;
-  color: var(--accent-color);
-  border: 1px solid #e5e5e5;
+  background: var(--accent-color);
+  color: white;
+  border: 1px solid var(--accent-color);
 }
 
 .btn-secondary:hover {
-  background: #e9ecef;
+  background: #333;
+  transform: translateY(-2px);
+}
+
+/* Hackathon Button Hover Effects */
+.hackathon-buttons .btn:hover {
+  background: #333 !important;
   transform: translateY(-2px);
 }
 
@@ -823,13 +854,13 @@
   transform: translateY(0);
 }
 
-.skill.floating {
+/* .skill.floating {
   animation: float 3s ease-in-out infinite;
 }
 
 .skill.floating:nth-child(odd) {
   animation-delay: 0.5s;
-}
+} */
 
 /* Resume Modal Styles */
 .resume-modal {
@@ -974,9 +1005,9 @@
   }
 }
 
-.skill.floating:nth-child(even) {
+/* .skill.floating:nth-child(even) {
   animation-delay: 1s;
-}
+} */
 
 @keyframes float {
   0%, 100% {
@@ -998,13 +1029,67 @@
   transition: all 0.3s ease;
   cursor: pointer;
   border-radius: 8px;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* Tech Stack Tags */
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0f0f0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  width: 120px;
+  height: 36px;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+}
+
+.tech-tag:hover {
+  background: #e8e8e8;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tech-tag img {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.tech-tag span {
+  white-space: nowrap;
+  font-size: 0.85rem;
+}
+
+.tech-stack-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+/* Hackathon Logo Hover Effects */
+.hackathon-logo:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 .experience img:hover, .education img:hover {
   transform: scale(1.15) translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   z-index: 10;
   position: relative;
+  background: transparent;
+  border-radius: 8px;
 }
 
 /* Mobile responsiveness */
@@ -1176,15 +1261,12 @@
 }
 
 #contact h2 {
-  align-self: flex-start;
-  margin-left: calc((100% - 600px) / 2 + 20px);
+  text-align: center;
   margin-bottom: 2rem;
 }
 
 @media (max-width: 768px) {
-  #contact h2 {
-    margin-left: 20px;
-  }
+  /* Contact header remains centered */
 }
 
 @media (max-width: 480px) {
@@ -1192,15 +1274,13 @@
     padding: 0 15px;
   }
   
-  #contact h2 {
-    margin-left: 15px;
-  }
+  /* Contact header remains centered */
 }
 
 .contact-card {
   width: 100%;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  padding: 28px;
+  padding: 20px;
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(107, 76, 59, 0.1);
@@ -1237,9 +1317,9 @@
 }
 
 .contact-icon {
-  width: 50px;
-  height: 50px;
-  padding: 12px;
+  width: 45px;
+  height: 45px;
+  padding: 10px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.9);
   display: flex;
@@ -1564,6 +1644,14 @@
     <p class="hero-subtitle">CS undergrad, software engineer</p>
 
     <div class="icon-buttons">
+      <a href="https://cal.com/youseph-el-khouly-4tskdw" target="_blank" class="icon-btn" title="Book a Meeting">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter: brightness(0) invert(1);">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+          <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+          <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+          <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </a>
       <a href="https://github.com/Youseph-Elkhouly" target="_blank" class="icon-btn" title="GitHub">
         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
       </a>
@@ -1588,7 +1676,244 @@
 
     
 
-    <div class="skills-section">
+    <div id="experience-education" class="scroll-offset-anchor"></div>
+    <div class="experience-education">
+      <div class="experience">
+        <h3>Work Experience</h3>
+        <ul>
+          <li>
+            <a href="https://jasaratech.com/" target="_blank" style="text-decoration: none;">
+              <img src="jasaratech-removebg-preview.png" alt="Jasara Technology Inc. Logo" />
+            </a>
+            <div>
+              <div style="display: flex; align-items: center; margin-bottom: 4px;">
+                <strong>Jasara Technology</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('jasara')" style="margin-left: 0px; display: inline;"><span class="responsibilities-arrow" id="jasara-arrow">▼</span></div>
+              </div>
+              Software Engineer<br />
+              
+              <span class="date">Sep 2025 - Present</span>
+              <div class="responsibilities-dropdown" id="jasara-dropdown">
+                <div class="responsibilities-content">
+                  <p><strong>Tech Stack:</strong></p>
+                  <div class="tech-stack-container">
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+                      <span>Python</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" />
+                      <span>TypeScript</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
+                      <span>React</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" alt="SQLite" />
+                      <span>SQLite</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://img.icons8.com/color/48/000000/azure-1.png" alt="Azure" />
+                      <span>Azure OpenAI</span>
+                    </div>
+                  </div>
+                  <p><strong>Key Responsibilities:</strong></p>
+                  <p>- Engineered an AI-powered customer support chatbot using FastAPI and RAG with vector embeddings, implementing async processing and intelligent prompt engineering to automate 65% of common inquiries with real-time WebSocket messaging and conversation persistence.</p>
+                  <p>- Implemented comprehensive data protection system with automated PII detection and redaction, coupled with ML confidence scoring for seamless handoff to human agents, achieving 100% secure handling of customer data through modular AI inference layer with Azure OpenAI API.</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="https://aiducare.com/" target="_blank" style="text-decoration: none;">
+              <img src="aidu.png" alt="Aiducare Logo" />
+            </a>
+            <div>
+              <div style="display: flex; align-items: center; margin-bottom: 4px;">
+                <strong>Aiducare</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('aiducare')" style="margin-left: 0px; display: inline;"><span class="responsibilities-arrow" id="aiducare-arrow">▼</span></div>
+              </div>
+              Mobile App Developer<br />
+              <span class="date">June 2025 - August 2025</span>
+              <div class="responsibilities-dropdown" id="aiducare-dropdown">
+                <div class="responsibilities-content">
+                  <p><strong>Tech Stack:</strong></p>
+                  <div class="tech-stack-container">
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
+                      <span>React</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Native" />
+                      <span>React Native</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
+                      <span>JavaScript</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" />
+                      <span>CSS</span>
+                    </div>
+                  </div>
+                  <p><strong>Key Responsibilities:</strong></p>
+                  <p>- Built an interactive audio playback feature enabling click-to-hear pronunciation for 30+ active learners and designed an intuitive interface for pronunciation practice with ML-generated feedback, improving learning accuracy by 40%.</p>
+                  <p>- Reorganized components into shared, reusable React Native modules with consistent styling, reducing code duplication by 30% and improving cross-platform maintainability.</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a href="https://www.stylusmarketing.ca/" target="_blank" style="text-decoration: none;">
+              <img src="stylus.png" />
+            </a>
+            <div>
+              <div style="display: flex; align-items: center; margin-bottom: 4px;">
+                <strong>Stylus Marketing</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('stylus')" style="margin-left: 0px; display: inline;"><span class="responsibilities-arrow" id="stylus-arrow">▼</span></div>
+              </div>
+              Software Engineer<br />
+              <span class="date">May 2024 - August 2024</span>
+              <div class="responsibilities-dropdown" id="stylus-dropdown">
+                <div class="responsibilities-content">
+                  <p><strong>Tech Stack:</strong></p>
+                  <div class="tech-stack-container">
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+                      <span>Python</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" />
+                      <span>TypeScript</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" />
+                      <span>PostgreSQL</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://img.icons8.com/color/48/000000/amazon-web-services.png" alt="AWS" />
+                      <span>AWS</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
+                      <span>React</span>
+                    </div>
+                  </div>
+                  <p><strong>Key Responsibilities:</strong></p>
+                  <p>- Engineered a serverless inventory tracking and management service adopted by 50+ clients, delivering scalable, cost-efficient operations with automated, event-driven Stripe integration for overdue charge recovery, incorporating dynamic retry logic and real-time alerts to boost payment reliability and accelerate resolution times by 75%.</p>
+                  <p>- Implemented intuitive dashboards for payment and inventory management, leveraging WebSockets for instant data synchronization and delivering a seamless, user-friendly interface that reduced user onboarding time.</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          
+        </ul>
+        
+        <h3 style="margin-top: 2rem;">Education</h3>
+        <ul>
+          <li>
+              <a href="https://www.uoguelph.ca/programs/computer-science/" target="_blank" style="text-decoration: none;">
+                <img src="uog.png" />
+              </a>
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 4px;">
+                  <strong>University of Guelph</strong><div class="education-toggle" onclick="toggleEducation('uog')" style="margin-left: 0px; display: inline;"><span class="education-arrow" id="uog-arrow">▼</span></div>
+                </div>
+                Bachelor of Computing Honours (BCOMP)<br />
+                <span class="date">2023 - 2027</span>
+                <div class="education-dropdown" id="uog-dropdown">
+                  <div class="education-content">
+                    <p><strong>Program Details:</strong> Bachelor of Computing Honours with focus on Software Engineering</p>
+                    <p><strong>Relevant Coursework:</strong> Data Structures & Algorithms, Discrete Math, Object-Oriented Programming, Database Systems, Parallel Programming, Operating Systems, Systems Analysis and Design, Software Reliability & Testing, Software Engineering</p>
+                    <p><strong>Languages & Tools:</strong></p>
+                    <div class="tech-stack-container">
+                      <div class="tech-tag">
+                        <img src="clogo.png" alt="C" />
+                        <span>C</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R" />
+                        <span>R</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+                        <span>Python</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" />
+                        <span>PostgreSQL</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+                        <span>Java</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="assembly.png" alt="Assembly" />
+                        <span>Assembly</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" />
+                        <span>Docker</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="valgrind.png" alt="Valgrind" />
+                        <span>Valgrind</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" />
+                        <span>Linux</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML/CSS" />
+                        <span>HTML/CSS</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" />
+                        <span>Git</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fortran/fortran-original.svg" alt="Fortran" />
+                        <span>Fortran</span>
+                      </div>
+                    </div>
+                    <p><strong>Expected Graduation:</strong> 2027</p>
+                  </div>
+                </div>
+            </div>
+          </li>
+          <li>
+            <a href="https://secondary.hcdsb.org/loyola/" target="_blank" style="text-decoration: none;">
+              <img src="loyola.png" />
+            </a>
+              <div>
+              <div style="display: flex; align-items: center; margin-bottom: 4px;">
+                <strong>Loyola Catholic Secondary School</strong><div class="education-toggle" onclick="toggleEducation('loyola')" style="margin-left: 0px; display: inline;"><span class="education-arrow" id="loyola-arrow">▼</span></div>
+              </div>
+              Ontario Secondary School Diploma (OSSD)<br />
+              <span class="date">2019 - 2023</span>
+              <div class="education-dropdown" id="loyola-dropdown">
+                <div class="education-content">
+                  <p><strong>High School Diploma:</strong> Ontario Secondary School Diploma (OSSD)</p>
+                  <p><strong>Graduation Year:</strong> 2023</p>
+                  <p><strong>Focus Areas:</strong> Mathematics, Sciences, and Technology courses</p>
+                  <p><strong>Languages & Tools:</strong></p>
+                  <div class="tech-stack-container">
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+                      <span>Java</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+                      <span>Python</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="skills-section" style="margin-top: 5rem;">
        
       <h3>Languages & Databases</h3>
       <div class="skills-grid">
@@ -1630,120 +1955,6 @@
   </section>
 
 
-  <div id="experience-education" class="scroll-offset-anchor"></div>
-  <div class="experience-education">
-    <div class="experience">
-      <h3>Work Experience</h3>
-      <ul>
-        <li>
-          <a href="https://jasaratech.com/" target="_blank" style="text-decoration: none;">
-            <img src="jasaratech-removebg-preview.png" alt="Jasara Technology Inc. Logo" />
-          </a>
-          <div>
-            <div style="display: flex; align-items: center; margin-bottom: 4px;">
-              <strong>Jasara Technology Inc</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('jasara')" style="margin-left: 0px; display: inline;"><span class="responsibilities-arrow" id="jasara-arrow">▼</span></div>
-            </div>
-            Software Engineer Intern<br />
-            
-            <span class="date">Sep 2025 - Present</span>
-            <div class="responsibilities-dropdown" id="jasara-dropdown">
-              <div class="responsibilities-content">
-                <p><strong>Tech Stack:</strong> Python (FastAPI) · TypeScript (React) · SQLite/pgvector · Azure OpenAI API</p>
-                <p><strong>Key Responsibilities:</strong></p>
-                <p>• Engineered an AI-powered customer support chatbot using FastAPI and RAG with vector embeddings, implementing async processing and intelligent prompt engineering to automate 65% of common inquiries with real-time WebSocket messaging and conversation persistence.</p>
-                <p>• Implemented comprehensive data protection system with automated PII detection and redaction, coupled with ML confidence scoring for seamless handoff to human agents, achieving 100% secure handling of customer data through modular AI inference layer with Azure OpenAI API.</p>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <a href="https://aiducare.com/" target="_blank" style="text-decoration: none;">
-            <img src="aiducare.jpeg" alt="Aiducare Logo" />
-          </a>
-          <div>
-            <div style="display: flex; align-items: center; margin-bottom: 4px;">
-              <strong>Aiducare Inc</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('aiducare')" style="margin-left: 0px; display: inline;"><span class="responsibilities-arrow" id="aiducare-arrow">▼</span></div>
-            </div>
-            Mobile App Developer Intern<br />
-            <span class="date">June 2025 – August 2025</span>
-            <div class="responsibilities-dropdown" id="aiducare-dropdown">
-              <div class="responsibilities-content">
-                <p><strong>Tech Stack:</strong> React · React Native · JavaScript · CSS</p>
-                <p><strong>Key Responsibilities:</strong></p>
-                <p>• Built an interactive audio playback feature enabling click-to-hear pronunciation for 30+ active learners and designed an intuitive interface for pronunciation practice with ML-generated feedback, improving learning accuracy by 40%.</p>
-                <p>• Reorganized components into shared, reusable React Native modules with consistent styling, reducing code duplication by 30% and improving cross-platform maintainability.</p>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <a href="https://www.stylusmarketing.ca/" target="_blank" style="text-decoration: none;">
-            <img src="stylus.png" />
-          </a>
-          <div>
-            <div style="display: flex; align-items: center; margin-bottom: 4px;">
-              <strong>Stylus Marketing</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('stylus')" style="margin-left: 0px; display: inline;"><span class="responsibilities-arrow" id="stylus-arrow">▼</span></div>
-            </div>
-            Software Engineer Intern<br />
-            <span class="date">May 2024 – August 2024</span>
-            <div class="responsibilities-dropdown" id="stylus-dropdown">
-              <div class="responsibilities-content">
-                <p><strong>Tech Stack:</strong> Python · TypeScript · PostgreSQL · AWS · React</p>
-                <p><strong>Key Responsibilities:</strong></p>
-                <p>• Engineered a serverless inventory tracking and management service adopted by 50+ clients, delivering scalable, cost-efficient operations with automated, event-driven Stripe integration for overdue charge recovery, incorporating dynamic retry logic and real-time alerts to boost payment reliability and accelerate resolution times by 75%.</p>
-                <p>• Implemented intuitive dashboards for payment and inventory management, leveraging WebSockets for instant data synchronization and delivering a seamless, user-friendly interface that reduced user onboarding time.</p>
-              </div>
-            </div>
-          </div>
-        </li>
-        
-      </ul>
-    </div>
-  
-    <div class="education">
-      <h3>Education</h3>
-      <ul>
-        <li>
-            <a href="https://www.uoguelph.ca/programs/computer-science/" target="_blank" style="text-decoration: none;">
-              <img src="uog.png" />
-            </a>
-          <div>
-              <div style="display: flex; align-items: center; margin-bottom: 4px;">
-                <strong>University of Guelph</strong><div class="education-toggle" onclick="toggleEducation('uog')" style="margin-left: 0px; display: inline;"><span class="education-arrow" id="uog-arrow">▼</span></div>
-              </div>
-              Bachelor of Computing Honours (BCOMP)<br />
-              <span class="date">2023 – 2027</span>
-              <div class="education-dropdown" id="uog-dropdown">
-                <div class="education-content">
-                  <p><strong>Program Details:</strong> Bachelor of Computing Honours with focus on Software Engineering</p>
-                  <p><strong>Relevant Coursework:</strong> Data Structures & Algorithms, Discrete Math, Object-Oriented Programming, Database Systems, Parallel Programming, Operating Systems, Systems Analysis and Design, Software Reliability & Testing, Software Engineering</p>
-                  <p><strong>Expected Graduation:</strong> 2027</p>
-                </div>
-              </div>
-          </div>
-        </li>
-        <li>
-          <a href="https://secondary.hcdsb.org/loyola/" target="_blank" style="text-decoration: none;">
-            <img src="loyola.png" />
-          </a>
-            <div>
-            <div style="display: flex; align-items: center; margin-bottom: 4px;">
-              <strong>Loyola Catholic Secondary School</strong><div class="education-toggle" onclick="toggleEducation('loyola')" style="margin-left: 0px; display: inline;"><span class="education-arrow" id="loyola-arrow">▼</span></div>
-            </div>
-            Ontario Secondary School Diploma (OSSD)<br />
-            <span class="date">2019 – 2023</span>
-            <div class="education-dropdown" id="loyola-dropdown">
-              <div class="education-content">
-                <p><strong>High School Diploma:</strong> Ontario Secondary School Diploma (OSSD)</p>
-                <p><strong>Graduation Year:</strong> 2023</p>
-                <p><strong>Focus Areas:</strong> Mathematics, Sciences, and Technology courses</p>
-              </div>
-            </div>
-            </div>
-          </li>
-      </ul>
-    </div>
-  </div>
   
   
 
@@ -1775,10 +1986,16 @@
           </div>
           <div class="project-buttons">
                 <a href="https://gryphbook.xyz" class="btn btn-primary" target="_blank">
-                  <span>🌐</span> Live Site
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                  </svg>
+                  Live Site
                 </a>
                 <button class="btn btn-secondary" onclick="openGryphBookDemoModal()">
-                  <span>▶️</span> Demo
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  Demo
                 </button>
           </div>
         </div>
@@ -1798,10 +2015,16 @@
           </div>
           <div class="project-buttons">
                 <a href="https://github.com/Youseph-Elkhouly/Merchant" class="btn btn-primary" target="_blank">
-                  <span>🔗</span> GitHub
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin-right: 4px;">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
                 </a>
                 <button class="btn btn-secondary" onclick="openMerchantDemoModal()">
-                  <span>▶️</span> Demo
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  Demo
                 </button>
           </div>
         </div>
@@ -1820,10 +2043,16 @@
           </div>
           <div class="project-buttons">
                 <a href="https://github.com/seifotefa/sparkandprepper" class="btn btn-primary" target="_blank">
-                  <span>🔗</span> GitHub
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin-right: 4px;">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
                 </a>
                 <button class="btn btn-secondary" onclick="openSparkPrepperDemoModal()">
-                  <span>▶️</span> Demo
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  Demo
                 </button>
           </div>
         </div>
@@ -1843,10 +2072,16 @@
           </div>
           <div class="project-buttons">
                 <a href="https://github.com/Youseph-Elkhouly/TypingTest" class="btn btn-primary" target="_blank">
-                  <span>🔗</span> GitHub
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin-right: 4px;">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
                 </a>
                 <button class="btn btn-secondary" onclick="openTypingTestDemoModal()">
-                  <span>▶️</span> Demo
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  Demo
                 </button>
           </div>
         </div>
@@ -1866,10 +2101,16 @@
           </div>
           <div class="project-buttons">
                 <a href="https://github.com/Youseph-Elkhouly/Car-Managment-System" class="btn btn-primary" target="_blank">
-                  <span>🔗</span> GitHub
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin-right: 4px;">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
                 </a>
                 <button class="btn btn-secondary" onclick="openVehicleManagementDemoModal()">
-                  <span>▶️</span> Demo
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  Demo
                 </button>
           </div>
         </div>
@@ -1889,10 +2130,16 @@
           </div>
           <div class="project-buttons">
                 <a href="https://github.com/Youseph-Elkhouly/Contact-Managment-System" class="btn btn-primary" target="_blank">
-                  <span>🔗</span> GitHub
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin-right: 4px;">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
                 </a>
                 <button class="btn btn-secondary" onclick="openContactManagementDemoModal()">
-                  <span>▶️</span> Demo
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  Demo
                 </button>
           </div>
         </div>
@@ -1912,7 +2159,10 @@
           </div>
           <div class="project-buttons">
                 <a href="https://github.com/Youseph-Elkhouly/Zoo-Data-Machine-Learning-Project" class="btn btn-primary" target="_blank">
-                  <span>🔗</span> GitHub
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin-right: 4px;">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
                 </a>
           </div>
         </div>
@@ -1932,7 +2182,10 @@
           </div>
           <div class="project-buttons">
                 <a href="https://github.com/Youseph-Elkhouly/Exercise-TrackerAPI" class="btn btn-primary" target="_blank">
-                  <span>🔗</span> GitHub
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin-right: 4px;">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
                 </a>
           </div>
         </div>
@@ -1949,18 +2202,14 @@
 
   <section id="hackathons">
     <h2>Hackathons</h2>
-    <div class="timeline-container" style="max-width: 800px; margin: 2rem auto; position: relative; padding-left: 2rem;">
+    <div class="timeline-container" style="max-width: 600px; margin: 1rem auto; position: relative; padding-left: 0;">
       
-      <!-- Timeline Line -->
-      <div class="timeline-line" style="position: absolute; left: 1rem; top: 0; bottom: 0; width: 2px; background: #e0e0e0;"></div>
           
           <!-- SpurHacks Hackathon -->
-      <div class="timeline-item" style="position: relative; margin-bottom: 3rem; padding-left: 3rem;">
-        <!-- Timeline Dot -->
-        <div class="timeline-dot" style="position: absolute; left: -1.5rem; top: 1rem; width: 1rem; height: 1rem; background: var(--accent-color); border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 3px var(--accent-color);"></div>
+      <div class="timeline-item" style="position: relative; margin-bottom: 2rem; padding-left: 0;">
         
         <!-- Content -->
-        <div class="timeline-content" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid var(--accent-color);">
+        <div class="timeline-content" style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 3px solid var(--accent-color);">
           <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
             <a href="https://spurhacks.com/" target="_blank" style="text-decoration: none;">
               <div class="hackathon-logo" style="width: 60px; height: 60px; border-radius: 12px; background: #8B4513; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3); transition: transform 0.2s ease;">
@@ -1968,39 +2217,48 @@
               </div>
             </a>
             <div>
-              <div class="timeline-date" style="color: var(--accent-color); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.3rem;">June 22, 2025</div>
-              <h3 style="color: var(--text-color); font-size: 1.4rem; margin-bottom: 0.3rem;">SpurHacks 2025 – Jinsa</h3>
-              <p style="color: #666; font-size: 0.95rem; margin: 0;">Waterloo, Ontario</p>
+              <div class="timeline-date" style="color: var(--accent-color); font-size: 0.8rem; font-weight: 600; margin-bottom: 0.2rem;">June 22, 2025</div>
+              <h3 style="color: var(--text-color); font-size: 1.1rem; margin-bottom: 0.2rem;">SpurHacks 2025 – Jinsa</h3>
+              <p style="color: #666; font-size: 0.85rem; margin: 0;">Waterloo, Ontario</p>
             </div>
           </div>
           <p style="color: var(--text-color); line-height: 1.6; margin-bottom: 1.5rem;">
             Participated in <strong>SpurHacks</strong> at Waterloo, which opened my eyes to the startup world and sparked my interest in blockchain technology. This experience led to the creation of <strong>Jinsa</strong>, my blockchain-based product authentication startup.
           </p>
           
-          <!-- Video -->
-          <div style="margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-            <iframe width="100%" height="250" src="https://www.youtube.com/embed/tceQzYWGibQ" 
-                title="Jinsa Demo" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-              </iframe>
-              </div>
+          <!-- Video Link -->
+          <div class="hackathon-buttons" style="display: flex; gap: 0.8rem; margin-top: 1rem;">
+            <a href="https://www.youtube.com/watch?v=tceQzYWGibQ" class="btn" target="_blank" style="background: var(--accent-color); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              Watch Demo
+            </a>
+          </div>
 
           <!-- Buttons -->
-          <div style="display: flex; gap: 0.8rem; margin-top: 1rem;">
-            <a href="https://devpost.com/software/jinsa?ref_content=my-projects-tab&ref_feature=my_projects" class="btn" target="_blank" style="background: #333; color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">Devpost</a>
-            <a href="https://github.com/Youseph-Elkhouly/jinsa" class="btn" target="_blank" style="background: #333; color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">GitHub</a>
+          <div class="hackathon-buttons" style="display: flex; gap: 0.8rem; margin-top: 1rem;">
+            <a href="https://devpost.com/software/jinsa?ref_content=my-projects-tab&ref_feature=my_projects" class="btn" target="_blank" style="background: var(--accent-color); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+              Devpost
+            </a>
+            <a href="https://github.com/Youseph-Elkhouly/jinsa" class="btn" target="_blank" style="background: var(--accent-color); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin-right: 4px;">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub
+            </a>
               </div>
             </div>
           </div>
 
           <!-- GDSC Hackathon -->
-      <div class="timeline-item" style="position: relative; margin-bottom: 3rem; padding-left: 3rem;">
-        <!-- Timeline Dot -->
-        <div class="timeline-dot" style="position: absolute; left: -1.5rem; top: 1rem; width: 1rem; height: 1rem; background: #4CAF50; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 3px #4CAF50;"></div>
+      <div class="timeline-item" style="position: relative; margin-bottom: 2rem; padding-left: 0;">
         
         <!-- Content -->
-        <div class="timeline-content" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-left: 4px solid #4CAF50;">
+        <div class="timeline-content" style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 3px solid var(--accent-color);">
           <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
             <a href="https://www.gdschacks.com/" target="_blank" style="text-decoration: none;">
               <div class="hackathon-logo" style="width: 60px; height: 60px; border-radius: 12px; background: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;">
@@ -2008,28 +2266,39 @@
               </div>
             </a>
             <div>
-              <div class="timeline-date" style="color: #4CAF50; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.3rem;">May 2, 2025</div>
-              <h3 style="color: var(--text-color); font-size: 1.4rem; margin-bottom: 0.3rem;">GDSC Hacks 2025 – Spark & Prepper</h3>
-              <p style="color: #666; font-size: 0.95rem; margin: 0;">University of Guelph, Ontario</p>
+              <div class="timeline-date" style="color: var(--accent-color); font-size: 0.8rem; font-weight: 600; margin-bottom: 0.2rem;">May 2, 2025</div>
+              <h3 style="color: var(--text-color); font-size: 1.1rem; margin-bottom: 0.2rem;">GDSC Hacks 2025 – Spark & Prepper</h3>
+              <p style="color: #666; font-size: 0.85rem; margin: 0;">University of Guelph, Ontario</p>
             </div>
           </div>
           <p style="color: var(--text-color); line-height: 1.6; margin-bottom: 1.5rem;">
             Built <strong>Spark & Prepper</strong>, an AI-powered study assistant that transforms uploaded course materials into smart study guides, flashcards, cheat sheets, and mock exams using Google Gemini API.
           </p>
           
-          <!-- Video -->
-          <div style="margin: 1.5rem 0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-            <iframe width="100%" height="250" src="https://www.youtube.com/embed/VIt9yvOC6_4?start=63" 
-                title="Spark & Prepper Demo" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-              </iframe>
-              </div>
+          <!-- Video Link -->
+          <div class="hackathon-buttons" style="display: flex; gap: 0.8rem; margin-top: 1rem;">
+            <a href="https://www.youtube.com/watch?v=VIt9yvOC6_4&t=63s" class="btn" target="_blank" style="background: var(--accent-color); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              Watch Demo
+            </a>
+          </div>
 
           <!-- Buttons -->
-          <div style="display: flex; gap: 0.8rem; margin-top: 1rem;">
-            <a href="https://devpost.com/software/sparkandprepper" class="btn" target="_blank" style="background: #333; color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">Devpost</a>
-            <a href="https://github.com/seifotefa/sparkandprepper" class="btn" target="_blank" style="background: #333; color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">GitHub</a>
+          <div class="hackathon-buttons" style="display: flex; gap: 0.8rem; margin-top: 1rem;">
+            <a href="https://devpost.com/software/sparkandprepper" class="btn" target="_blank" style="background: var(--accent-color); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+              Devpost
+            </a>
+            <a href="https://github.com/seifotefa/sparkandprepper" class="btn" target="_blank" style="background: var(--accent-color); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin-right: 4px;">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub
+            </a>
           </div>
         </div>
       </div>
@@ -2042,7 +2311,7 @@
 
   <section id="contact">
     <h2>Get In Touch</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+    <p style="text-align: center; color: #666; margin-bottom: 2rem; font-size: 1rem; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.5;">
       I'm always open to discussing new opportunities, collaborations, or just having a chat about technology and innovation. Feel free to reach out!
     </p>
     <div class="contact-container">
@@ -2083,6 +2352,16 @@
         <div class="contact-info">
           <div class="contact-label">Phone</div>
           <div class="contact-value">+1 (647) 554-1348</div>
+        </div>
+      </a>
+
+      <a href="https://cal.com/youseph-el-khouly-4tskdw" target="_blank" class="contact-card">
+        <div class="contact-icon">
+          <img src="https://img.icons8.com/color/48/000000/calendar.png" alt="Calendar" />
+        </div>
+        <div class="contact-info" style="text-align: center;">
+          <div class="contact-label" style="text-align: center;">Quick Chat</div>
+          <div class="contact-value" style="text-align: center;">Schedule a Meeting</div>
         </div>
       </a>
     </div>
@@ -2397,10 +2676,10 @@ function initSkillsAnimation() {
         skills.forEach((skill, index) => {
           setTimeout(() => {
             skill.classList.add('fade-in');
-            // Add floating animation after fade-in completes
-            setTimeout(() => {
-              skill.classList.add('floating');
-            }, 600); // Wait for fade-in transition to complete
+            // Floating animation disabled
+            // setTimeout(() => {
+            //   skill.classList.add('floating');
+            // }, 600); // Wait for fade-in transition to complete
             console.log('Added fade-in to skill', index); // Debug log
           }, index * 100); // Staggered animation - each skill appears 100ms after the previous
         });
@@ -2491,10 +2770,10 @@ document.addEventListener('DOMContentLoaded', function() {
       skills.forEach((skill, index) => {
         setTimeout(() => {
           skill.classList.add('fade-in');
-          // Add floating animation after fade-in completes
-          setTimeout(() => {
-            skill.classList.add('floating');
-          }, 600);
+          // Floating animation disabled
+          // setTimeout(() => {
+          //   skill.classList.add('floating');
+          // }, 600);
         }, index * 100);
       });
     }
