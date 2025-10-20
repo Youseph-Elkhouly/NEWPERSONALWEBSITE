@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aiducare - Youseph's Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #f5f5dc;
+            --accent-color: #6b4c3b;
+            --text-color: #3b3028;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: #5a4030;
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            line-height: 1.2;
+        }
+        
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .video-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        video {
+            border-radius: 8px;
+            max-width: 100%;
+            height: auto;
+            filter: brightness(0.7);
+            animation-duration: 2s;
+        }
+        
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+        
+        video::-webkit-media-controls-panel {
+            display: none !important;
+        }
+        
+        .content p {
+            margin-bottom: 1.5rem;
+            width: 40%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        
+        .content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+        
+        <h1>Aiducare</h1>
+        
+        <div class="content">
+            <p>Aiducare was my first remote internship experience, communicating was more of a struggle as I had to booking meetings and ensure that my development process was well understood by my team, However it was great, I devlivered and met great people.</p>
+            
+            
+            <p>The onboarding process was simple and they layed out my job and requirements in a simple way</p>
+            
+            <div class="video-container">
+                <img src="aiducare1.webp" width="40%" style="border-radius: 8px;">
+            </div>
+            
+            <p>Not only was I not comfortable with react native, but I had to find a way to demonstrate my work, through expogo testing. These new techonologies I picked up quick and began developing my own features and components using them.</p>
+            
+            <p>The remote work environment at Aiducare wasnt my favorite, so I constantly found ways to work more efficent by going to coffee shops and constantly changing my environment to avoid burnout.</p>
+            
+            <div class="video-container">
+                <img src="aiducare01.webp" width="40%" style="border-radius: 8px;">
+            </div>
+ 
+            <p>In the end I delivered a working product that the aiducare team was happy with and is still working on. So I am happy that I was able to contribute efficently to the team and help them improve their product.</p>
+        </div>
+    </div>
+    
+    
+</body>
+</html>
