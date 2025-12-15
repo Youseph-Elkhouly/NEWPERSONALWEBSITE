@@ -24,6 +24,19 @@
       background-color: var(--bg-color);
       color: var(--text-color);
     }
+    /* Scroll Progress Indicator */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #000000, #333333);
+      z-index: 10000;
+      transition: width 0.1s ease-out;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
     nav {
       position: fixed;
       top: 0;
@@ -36,6 +49,11 @@
       z-index: 1000;
       box-shadow: 0 1px 4px rgba(0,0,0,0.1);
       backdrop-filter: blur(10px);
+      transition: box-shadow 0.3s ease;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
     nav a {
       margin: 0 8px;
@@ -62,6 +80,17 @@
       opacity: 0;
       transform: translateY(50px);
       animation: fadeInUp 1s ease-out forwards;
+      transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Parallax effect for sections */
+    section[data-parallax] {
+      transform: translateY(0);
     }
     section:nth-child(2) { animation-delay: 0.3s; }
     section:nth-child(3) { animation-delay: 0.6s; }
@@ -711,6 +740,14 @@
   flex-direction: column;
   transition: all 0.3s ease;
   position: relative;
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
+}
+
+.project-card.scroll-reveal {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .project-card:hover {
@@ -1711,6 +1748,8 @@
   </style>
 </head>
 <body>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-progress"></div>
     <nav>
         <a href="#hero">Home</a>
         <a href="#about">About</a>
@@ -2955,9 +2994,83 @@ function closeResumeModal() {
   document.removeEventListener('scroll', preventScroll, { capture: true });
 }
 
+// Scroll Progress Indicator
+function initScrollProgress() {
+  const progressBar = document.querySelector('.scroll-progress');
+  if (!progressBar) return;
+
+  function updateProgress() {
+    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = window.scrollY;
+    const progress = (scrolled / windowHeight) * 100;
+    progressBar.style.width = progress + '%';
+  }
+
+  window.addEventListener('scroll', updateProgress);
+  updateProgress(); // Initial call
+}
+
+// Scroll-triggered animations for project cards
+function initScrollReveal() {
+  const projectCards = document.querySelectorAll('.project-card');
+  const sections = document.querySelectorAll('section');
+
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('scroll-reveal');
+        }, index * 100); // Stagger animation
+        cardObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  projectCards.forEach(card => {
+    cardObserver.observe(card);
+  });
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => {
+    sectionObserver.observe(section);
+  });
+}
+
+// Navbar shadow on scroll
+function initNavbarScroll() {
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+
+  function handleScroll() {
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll);
+  handleScroll(); // Initial call
+}
+
 // Initialize skills animation when page loads
 document.addEventListener('DOMContentLoaded', function() {
   initSkillsAnimation();
+  initScrollProgress();
+  initScrollReveal();
+  initNavbarScroll();
   
   // Close modal when clicking outside the content
   document.getElementById('resumeModal').addEventListener('click', function(e) {
