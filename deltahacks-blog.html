@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontline - DeltaHacks12 - Youseph's Blog</title>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --accent-color: #ffffff;
+            --text-color: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .timeline {
+            position: absolute;
+            right: 20%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-color), #cccccc);
+            z-index: 1;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -4px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -4px;
+            width: 10px;
+            height: 10px;
+            background: #cccccc;
+            border-radius: 50%;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: #cccccc;
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            line-height: 1.2;
+            font-weight: 300;
+        }
+        
+        .meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 1rem;
+        }
+        
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .video-container {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        video {
+            border-radius: 8px;
+            max-width: 100%;
+            height: auto;
+            filter: brightness(0.5);
+            animation-duration: 2s;
+        }
+        
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+        
+        video::-webkit-media-controls-panel {
+            display: none !important;
+        }
+        
+        .content p {
+            margin-bottom: 1.5rem;
+            width: 40%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        
+        .content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .highlight {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-left: 4px solid var(--accent-color);
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            .content p {
+                width: 100%;
+                padding: 0 1rem;
+            }
+            .video-container img,
+            .video-container video {
+                width: 100% !important;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+        
+        <h1>Frontline - DeltaHacks12</h1>
+        
+        <div class="content">
+            <p>Coming soon...</p>
+        </div>
+    </div>
+    
+    <script>
+        // Slow down all videos to 0.5x speed and ensure they're muted
+        document.addEventListener('DOMContentLoaded', function() {
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.playbackRate = 1.0; // Normal speed
+                video.muted = true;
+                video.loop = true;
+            });
+        });
+    </script>
+</body>
+</html>
