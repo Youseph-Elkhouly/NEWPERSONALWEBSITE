@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aiducare - Youseph's Portfolio</title>
+    <title>Aiducare Gallery - Youseph's Portfolio</title>
     <style>
         :root {
-            --bg-color: #000000;
+            --bg-color: #1a1a1a;
             --accent-color: #ffffff;
             --text-color: #ffffff;
         }
@@ -29,7 +29,6 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-            position: relative;
         }
         
         .back-link {
@@ -45,53 +44,48 @@
             color: #cccccc;
         }
         
-        h1 {
-            color: var(--accent-color);
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            line-height: 1.2;
-            font-weight: 300;
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
         }
         
-        .content {
-            font-size: 1.1rem;
-            line-height: 1.8;
+        .gallery-item {
+            background: #2a2a2a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #404040;
+            cursor: pointer;
         }
         
-        .video-container {
-            display: flex;
-            justify-content: center;
-            margin: 2rem 0;
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.6);
         }
         
-        video {
-            border-radius: 8px;
-            max-width: 100%;
-            height: auto;
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .gallery-item video {
             filter: brightness(0.7);
-            animation-duration: 2s;
         }
         
-        video::-webkit-media-controls {
-            display: none !important;
-        }
-        
-        video::-webkit-media-controls-panel {
-            display: none !important;
-        }
-        
-        .content p {
-            margin-bottom: 1.5rem;
-            width: 40%;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: left;
-        }
-        
-        .content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
+        .placeholder {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.1rem;
+            height: 250px;
         }
         
         @media (max-width: 768px) {
@@ -99,17 +93,14 @@
                 padding: 1rem;
             }
             
-            h1 {
-                font-size: 2rem;
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
-            .content p {
-                width: 100%;
-                padding: 0 1rem;
-            }
-            .video-container img,
-            .video-container video {
-                width: 100% !important;
-                max-width: 100%;
+            
+            .gallery-item img,
+            .gallery-item video {
+                height: 300px;
             }
         }
     </style>
@@ -118,30 +109,15 @@
     <div class="container">
         <a href="index.html" class="back-link">← Back to Portfolio</a>
         
-        <h1>Aiducare</h1>
-        
-        <div class="content">
-            <p>Aiducare was my first remote internship experience, communicating was more of a struggle as I had to booking meetings and ensure that my development process was well understood by my team, However it was great, I devlivered and met great people.</p>
-            
-            
-            <p>The onboarding process was simple and they layed out my job and requirements in a simple way</p>
-            
-            <div class="video-container">
-                <img src="aiducare1.webp" width="40%" style="border-radius: 8px;">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="aiducare1.webp" alt="Aiducare" />
             </div>
             
-            <p>Not only was I not comfortable with react native, but I had to find a way to demonstrate my work, through expogo testing. These new techonologies I picked up quick and began developing my own features and components using them.</p>
-            
-            <p>The remote work environment at Aiducare wasnt my favorite, so I constantly found ways to work more efficent by going to coffee shops and constantly changing my environment to avoid burnout.</p>
-            
-            <div class="video-container">
-                <img src="aiducare01.webp" width="40%" style="border-radius: 8px;">
+            <div class="gallery-item">
+                <img src="aiducare01.webp" alt="Aiducare" />
             </div>
- 
-            <p>In the end I delivered a working product that the aiducare team was happy with and is still working on. So I am happy that I was able to contribute efficently to the team and help them improve their product.</p>
         </div>
     </div>
-    
-    
 </body>
 </html>

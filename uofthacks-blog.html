@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UofT Hacks 2025 - Youseph's Blog</title>
+    <title>UofT Hacks 2025 Gallery - Youseph's Portfolio</title>
     <style>
         :root {
-            --bg-color: #000000;
+            --bg-color: #1a1a1a;
             --accent-color: #ffffff;
             --text-color: #ffffff;
         }
@@ -29,39 +29,6 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-            position: relative;
-        }
-        
-        .timeline {
-            position: absolute;
-            right: 20%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--accent-color), #cccccc);
-            z-index: 1;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -4px;
-            width: 10px;
-            height: 10px;
-            background: var(--accent-color);
-            border-radius: 50%;
-        }
-        
-        .timeline::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: -4px;
-            width: 10px;
-            height: 10px;
-            background: #cccccc;
-            border-radius: 50%;
         }
         
         .back-link {
@@ -77,50 +44,48 @@
             color: #cccccc;
         }
         
-        h1 {
-            color: var(--accent-color);
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            line-height: 1.2;
-            font-weight: 300;
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
         }
         
-        .meta {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 1rem;
+        .gallery-item {
+            background: #2a2a2a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #404040;
+            cursor: pointer;
         }
         
-        .content {
-            font-size: 1.1rem;
-            line-height: 1.8;
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.6);
         }
         
-        .content p {
-            margin-bottom: 1.5rem;
-            width: 40%;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: left;
-        }
-        
-        .content img {
-            max-width: 20%;
-            height: auto;
-            border-radius: 8px;
-            margin: 1.5rem auto;
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
             display: block;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
-        .highlight {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-left: 4px solid var(--accent-color);
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
+        .gallery-item video {
+            filter: brightness(0.5);
+        }
+        
+        .placeholder {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.1rem;
+            height: 250px;
         }
         
         @media (max-width: 768px) {
@@ -128,16 +93,14 @@
                 padding: 1rem;
             }
             
-            h1 {
-                font-size: 2rem;
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
-            .content p {
-                width: 100%;
-                padding: 0 1rem;
-            }
-            .content img {
-                width: 90%;
-                max-width: 90%;
+            
+            .gallery-item img,
+            .gallery-item video {
+                height: 300px;
             }
         }
     </style>
@@ -146,18 +109,13 @@
     <div class="container">
         <a href="index.html" class="back-link">← Back to Portfolio</a>
         
-        <h1>UofT Hacks 2025</h1>
-        
-        <div class="content">
-            <p>I had the incredible opportunity to serve as a mentor at UofT Hacks 2025, one of Canada's largest hackathons. This experience was both rewarding and inspiring as I got to work with passionate hackers and help bring their innovative ideas to life.</p>
-            
-            <img src="IMG_7503.jpg" alt="UofT Hacks 2025" />
-            
-            <p>Throughout the hackathon, I had the privilege of helping 10+ hackers with their projects.</p>
-            
-            <p>Mentoring at UofT Hacks was an amazing experience that allowed me to give back to the hackathon community while learning from the creative solutions that teams were building. It was inspiring to see the passion and dedication of the participants as they worked through the weekend to bring their ideas to life.</p>
-            
-            <p>The hackathon environment was electric, with teams working around the clock to build innovative projects. Being able to help these hackers overcome technical challenges and see their projects come together was incredibly fulfilling.</p>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="IMG_7503.jpg" alt="UofT Hacks 2025" />
+            </div>
+            <div class="gallery-item">
+                <img src="IMG_7499.jpg" alt="UofT Hacks 2025" />
+            </div>
         </div>
     </div>
 </body>
