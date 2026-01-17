@@ -1321,6 +1321,31 @@
   fill: #000000;
 }
 
+.hackathon-mentor-badge {
+  position: absolute;
+  top: 50px;
+  right: 35px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+  z-index: 10;
+}
+
+.hackathon-mentor-badge svg {
+  width: 16px;
+  height: 16px;
+  fill: #ffffff;
+}
+
 .hackathon-description {
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.95rem;
@@ -1398,7 +1423,8 @@
     margin-bottom: 0.75rem;
   }
   
-  .hackathon-winner-badge {
+  .hackathon-winner-badge,
+  .hackathon-mentor-badge {
     position: static;
     display: inline-flex;
     margin-left: 0.5rem;
@@ -1408,7 +1434,8 @@
     font-size: 0.65rem;
   }
   
-  .hackathon-winner-badge svg {
+  .hackathon-winner-badge svg,
+  .hackathon-mentor-badge svg {
     width: 14px;
     height: 14px;
   }
@@ -2953,6 +2980,39 @@
     <h2>Hackathons</h2>
     <div class="hackathons-grid">
       
+          <!-- UofT Hacks (Mentor) -->
+      <div class="hackathon-card">
+        <div class="hackathon-header">
+            <a href="https://uofthacks.com/" target="_blank" style="text-decoration: none;">
+            <div class="hackathon-logo-wrapper">
+              <img src="uofthackslogo.jpeg" alt="UofT Hacks Logo" />
+              </div>
+            </a>
+          <div class="hackathon-info">
+            <div class="hackathon-date">Saturday, January 17, 2026</div>
+            <h3 class="hackathon-title">UofT Hacks 2026</h3>
+            <span class="hackathon-mentor-badge">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+              Mentor
+            </span>
+            <p class="hackathon-location">University of Toronto, Ontario</p>
+            </div>
+          </div>
+        <p class="hackathon-description">
+          Served as a mentor at UofT Hacks, helping 10+ hackers with their projects throughout the hackathon. Provided technical guidance, debugging assistance, and mentorship to teams working on various innovative projects.
+        </p>
+        <div class="hackathon-buttons">
+          <a href="uofthacks-blog.html" class="btn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+              </svg>
+            Blog
+            </a>
+        </div>
+      </div>
+
           <!-- DeltaHacks12 - Frontline (Winner) -->
       <div class="hackathon-card">
         <div class="hackathon-header">

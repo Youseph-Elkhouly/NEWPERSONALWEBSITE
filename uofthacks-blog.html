@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UofT Hacks 2025 - Youseph's Blog</title>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --accent-color: #ffffff;
+            --text-color: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .timeline {
+            position: absolute;
+            right: 20%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-color), #cccccc);
+            z-index: 1;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -4px;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -4px;
+            width: 10px;
+            height: 10px;
+            background: #cccccc;
+            border-radius: 50%;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: #cccccc;
+        }
+        
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            line-height: 1.2;
+            font-weight: 300;
+        }
+        
+        .meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 1rem;
+        }
+        
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .content p {
+            margin-bottom: 1.5rem;
+            width: 40%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        
+        .content img {
+            max-width: 20%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1.5rem auto;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .highlight {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-left: 4px solid var(--accent-color);
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            .content p {
+                width: 100%;
+                padding: 0 1rem;
+            }
+            .content img {
+                width: 90%;
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+        
+        <h1>UofT Hacks 2025</h1>
+        
+        <div class="content">
+            <p>I had the incredible opportunity to serve as a mentor at UofT Hacks 2025, one of Canada's largest hackathons. This experience was both rewarding and inspiring as I got to work with passionate hackers and help bring their innovative ideas to life.</p>
+            
+            <img src="IMG_7503.jpg" alt="UofT Hacks 2025" />
+            
+            <p>Throughout the hackathon, I had the privilege of helping 10+ hackers with their projects.</p>
+            
+            <p>Mentoring at UofT Hacks was an amazing experience that allowed me to give back to the hackathon community while learning from the creative solutions that teams were building. It was inspiring to see the passion and dedication of the participants as they worked through the weekend to bring their ideas to life.</p>
+            
+            <p>The hackathon environment was electric, with teams working around the clock to build innovative projects. Being able to help these hackers overcome technical challenges and see their projects come together was incredibly fulfilling.</p>
+        </div>
+    </div>
+</body>
+</html>
