@@ -695,28 +695,33 @@
 }
 
 .experience-blog-button {
-  background: var(--accent-color);
-  color: black;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--accent-color);
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 100px;
   font-size: 0.8rem;
-  font-weight: 400;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
-  display: inline-block;
   margin-top: 8px;
   position: absolute;
   right: 16px;
   top: 16px;
+  backdrop-filter: blur(8px);
 }
 
 .experience-blog-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 3px 12px rgba(255, 255, 255, 0.3);
-  background: #e0e0e0;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .experience ul, .education ul {
@@ -739,6 +744,28 @@
   opacity: 0;
   transform: translateY(40px);
   font-weight: 400;
+  min-height: 140px;
+}
+
+/* Same-size logo box for every experience/education item */
+.experience li > a:first-of-type,
+.education li > a:first-of-type {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.experience li > a:first-of-type img,
+.education li > a:first-of-type img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 
 .experience li strong, .education li strong {
@@ -870,16 +897,16 @@
 }
 
 .education-content {
-  padding: 12px 0 0 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  margin-top: 8px;
+  padding: 16px 0 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 12px;
 }
 
 .education-content p {
   margin: 8px 0;
-  color: var(--accent-color);
-  line-height: 1.4;
-  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  font-weight: 300;
 }
 
 .education-arrow {
@@ -909,17 +936,33 @@
 }
 
 .responsibilities-content {
-  padding: 12px 0 0 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  margin-top: 8px;
+  padding: 16px 0 0 0;
+  margin-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .responsibilities-content p {
-  margin-bottom: 6px;
-  line-height: 1.5;
-  color: var(--accent-color);
+  margin-bottom: 8px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 300;
+}
+
+.responsibilities-content .detail-label,
+.education-content .detail-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 10px;
+  margin-top: 16px;
+}
+
+.responsibilities-content .detail-label:first-child,
+.education-content .detail-label:first-child {
+  margin-top: 0;
 }
 
 .responsibilities-arrow {
@@ -999,6 +1042,17 @@
   opacity: 0;
   transform: translateY(30px) scale(0.95);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
+  min-height: 480px;
+}
+
+.project-card .project-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card .project-buttons {
+  margin-top: auto;
 }
 
 .project-card.scroll-reveal {
@@ -1077,18 +1131,25 @@
 .tech-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 8px;
   margin-bottom: 1rem;
 }
 
 .tech-tags span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: #000000;
   color: #ffffff;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 0.7rem;
+  width: 110px;
+  height: 34px;
+  padding: 0 8px;
+  border-radius: 100px;
+  font-size: 0.75rem;
   font-weight: 400;
   transition: background-color 0.2s ease;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .tech-tags span:hover {
@@ -1661,20 +1722,72 @@
   padding: 0;
 }
 
-/* Tech Stack Tags */
+/* Tech Stack – Experience & Education (modern chip style) */
+.tech-stack-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+  align-items: center;
+}
+
+.experience .tech-tag,
+.education .tech-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0 12px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  width: 110px;
+  height: 34px;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  backdrop-filter: blur(8px);
+}
+
+.experience .tech-tag:hover,
+.education .tech-tag:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.experience .tech-tag img,
+.education .tech-tag img {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.95;
+}
+
+.experience .tech-tag span,
+.education .tech-tag span {
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+/* Projects section – same size as experience/education tech tags */
 .tech-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 6px;
   background: #000000;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.9rem;
+  padding: 0 12px;
+  border-radius: 100px;
+  font-size: 0.8rem;
   font-weight: 300;
   color: #ffffff;
-  width: 120px;
-  height: 36px;
-  justify-content: center;
+  width: 110px;
+  height: 34px;
   transition: all 0.2s ease;
   border: 1px solid #000000;
   box-sizing: border-box;
@@ -1696,14 +1809,6 @@
 .tech-tag span {
   white-space: nowrap;
   font-size: 0.85rem;
-}
-
-.tech-stack-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 1rem;
-  align-items: center;
 }
 
 /* Hackathon Logo Hover Effects */
@@ -2114,20 +2219,29 @@
     flex-wrap: wrap;
   }
   
-  .tech-tag {
-    width: 75px !important;
-    height: 24px !important;
+  .experience .tech-tag,
+  .education .tech-tag {
+    width: 100px !important;
+    height: 30px !important;
+    padding: 0 8px !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .experience .tech-tag img,
+  .education .tech-tag img {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  .experience .tech-tag span,
+  .education .tech-tag span {
     font-size: 0.7rem !important;
-    padding: 3px 5px !important;
   }
   
-  .tech-tag img {
-    width: 10px !important;
-    height: 10px !important;
-  }
-  
-  .tech-tag span {
-    font-size: 0.65rem !important;
+  .tech-tags span {
+    width: 100px !important;
+    height: 30px !important;
+    font-size: 0.7rem !important;
   }
   
   /* Hackathons Mobile */
@@ -2207,25 +2321,34 @@
   
   /* Tech stack mobile styling */
   .tech-stack-container {
-    justify-content: center;
+    justify-content: flex-start;
     gap: 6px;
     flex-wrap: wrap;
   }
   
-  .tech-tag {
-    width: 60px !important;
-    height: 20px !important;
-    font-size: 0.6rem !important;
-    padding: 2px 4px !important;
+  .experience .tech-tag,
+  .education .tech-tag {
+    width: 90px !important;
+    height: 28px !important;
+    padding: 0 6px !important;
+    font-size: 0.65rem !important;
   }
   
-  .tech-tag img {
-    width: 8px !important;
-    height: 8px !important;
+  .experience .tech-tag img,
+  .education .tech-tag img {
+    width: 12px !important;
+    height: 12px !important;
   }
   
-  .tech-tag span {
-    font-size: 0.55rem !important;
+  .experience .tech-tag span,
+  .education .tech-tag span {
+    font-size: 0.65rem !important;
+  }
+  
+  .tech-tags span {
+    width: 90px !important;
+    height: 28px !important;
+    font-size: 0.65rem !important;
   }
   
   .responsibilities-toggle, .education-toggle {
@@ -2369,19 +2492,19 @@
         <ul>
           <li>
             <a href="https://prepbusiness.com/" target="_blank" style="text-decoration: none;">
-              <img src="jasaratech-removebg-preview.png" alt="Amazon 3PL Platform (PrepBusiness) Logo" />
+              <img src="prepbusinesslogo.png" alt="PrepBusiness Logo" />
             </a>
             <div>
               <div style="display: flex; align-items: center; margin-bottom: 4px;">
-                <strong>Amazon 3PL Platform</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('jasara')" style="margin-left: 0px; display: inline;"><span class="responsibilities-arrow" id="jasara-arrow">▼</span></div>
+                <strong>PrepBusiness</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('jasara')" style="margin-left: 0px; display: inline;"><span class="responsibilities-arrow" id="jasara-arrow">▼</span></div>
               </div>
               Software Engineer<br />
               <span class="date">Hamilton, Ontario (Hybrid)</span><br />
-              <span class="date">Sep 2025 - Present</span>
+              <span class="date">Sep 2025 - Dec 2025</span>
               <a href="jasara-blog.html" class="experience-blog-button">View Gallery</a>
               <div class="responsibilities-dropdown" id="jasara-dropdown">
                 <div class="responsibilities-content">
-                  <p>Tech Stack:</p>
+                  <p class="detail-label">Tech Stack</p>
                   <div class="tech-stack-container">
                     <div class="tech-tag">
                       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
@@ -2404,7 +2527,7 @@
                       <span>Azure</span>
                     </div>
                   </div>
-                  <p>Key Responsibilities:</p>
+                  <p class="detail-label">Key Responsibilities</p>
                   <p>- Engineered an AI-powered customer support chatbot using FastAPI and RAG with vector embeddings, implementing async processing and intelligent prompt engineering to automate 65% of common inquiries with real-time WebSocket messaging and conversation persistence.</p>
                   <p>- Implemented comprehensive data protection system with automated PII detection and redaction, coupled with ML confidence scoring for seamless handoff to human agents, achieving 100% secure handling of customer data through modular AI inference layer with Azure OpenAI API.</p>
                 </div>
@@ -2425,7 +2548,7 @@
               <a href="aiducare-blog.html" class="experience-blog-button">View Gallery</a>
               <div class="responsibilities-dropdown" id="aiducare-dropdown">
                 <div class="responsibilities-content">
-                  <p>Tech Stack:</p>
+                  <p class="detail-label">Tech Stack</p>
                   <div class="tech-stack-container">
                     <div class="tech-tag">
                       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
@@ -2444,7 +2567,7 @@
                       <span>CSS</span>
                     </div>
                   </div>
-                  <p>Key Responsibilities:</p>
+                  <p class="detail-label">Key Responsibilities</p>
                   <p>- Built an interactive audio playback feature enabling click-to-hear pronunciation for 30+ active learners and designed an intuitive interface for pronunciation practice with ML-generated feedback, improving learning accuracy by 40%.</p>
                   <p>- Reorganized components into shared, reusable React Native modules with consistent styling, reducing code duplication by 30% and improving cross-platform maintainability.</p>
                 </div>
@@ -2465,7 +2588,7 @@
               <a href="stylus-blog.html" class="experience-blog-button">View Gallery</a>
               <div class="responsibilities-dropdown" id="stylus-dropdown">
                 <div class="responsibilities-content">
-                  <p>Tech Stack:</p>
+                  <p class="detail-label">Tech Stack</p>
                   <div class="tech-stack-container">
                     <div class="tech-tag">
                       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
@@ -2488,7 +2611,7 @@
                       <span>React</span>
                     </div>
                   </div>
-                  <p>Key Responsibilities:</p>
+                  <p class="detail-label">Key Responsibilities</p>
                   <p>- Worked on-site five days a week (8 AM – 7 PM), directly collaborating with the development team and management to deliver high-quality full-stack solutions for clients. <p>-Met regularly with clients to gather requirements, understand deadlines, and ensure clear communication between the client and technical teams through thorough meeting notes and documentation.</p> <p>- Engineered a serverless inventory tracking and management system adopted by 50+ clients, enabling scalable and cost-efficient operations with automated, event-driven Stripe integration for overdue charge recovery. Integrated dynamic retry logic and real-time alerts, improving payment reliability and accelerating resolution times by 75%.</p> <p>- Developed and deployed intuitive dashboards for payment and inventory management using WebSockets for instant data synchronization, resulting in a seamless, user-friendly interface that reduced user onboarding time and improved client satisfaction.</p>
                 </div>
               </div>
@@ -2513,7 +2636,7 @@
                   <div class="education-content">
                     <p>Program Details: Bachelor of Computing Honours with focus on Software Engineering</p>
                     <p>Relevant Coursework: Data Structures & Algorithms, Discrete Math, Object-Oriented Programming, Database Systems, Parallel Programming, Operating Systems, Systems Analysis and Design, Software Reliability & Testing, Software Engineering</p>
-                    <p>Languages & Tools:</p>
+                    <p class="detail-label">Languages & Tools</p>
                     <div class="tech-stack-container">
                       <div class="tech-tag">
                         <img src="clogo.png" alt="C" />
@@ -2584,7 +2707,7 @@
                   <p>High School Diploma: Ontario Secondary School Diploma (OSSD)</p>
                   <p>Graduation Year: 2023</p>
                   <p>Focus Areas: Mathematics, Sciences, and Technology courses</p>
-                  <p><strong>Languages & Tools:</strong></p>
+                  <p class="detail-label">Languages & Tools</p>
                   <div class="tech-stack-container">
                     <div class="tech-tag">
                       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
