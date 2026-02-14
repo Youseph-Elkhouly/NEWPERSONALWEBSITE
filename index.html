@@ -1002,31 +1002,13 @@
 
 #projects {
   padding: 100px 20px 40px;
-  background: var(--bg-color);
-  position: relative;
-  overflow: hidden;
-}
-
-#projects::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 100% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 0% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
-  pointer-events: none;
+  background-color: var(--bg-color);
 }
 
 #projects .container {
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
-  position: relative;
-  z-index: 1;
 }
 
 .project-section {
@@ -1042,7 +1024,6 @@
   color: var(--accent-color);
   margin-bottom: 2rem;
   font-weight: 400;
-  letter-spacing: -0.02em;
 }
 
 .section-icon {
@@ -1052,45 +1033,25 @@
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.75rem;
+  gap: 1.5rem;
   margin-top: 2rem;
-  perspective: 1000px;
 }
 
 .project-card {
-  background: linear-gradient(145deg, rgba(42, 42, 42, 0.95) 0%, rgba(30, 30, 30, 0.98) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 20px;
-  box-shadow: 
-    0 4px 24px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  background: #2a2a2a;
+  border: 1px solid #404040;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   overflow: hidden;
   text-align: left;
   display: flex;
   flex-direction: column;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.3s ease;
   position: relative;
   opacity: 0;
-  transform: translateY(40px) scale(0.96);
+  transform: translateY(30px) scale(0.95);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
   min-height: 480px;
-  backdrop-filter: blur(10px);
-}
-
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
-  transition: left 0.6s ease;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.project-card:hover::before {
-  left: 100%;
 }
 
 .project-card .project-content {
@@ -1104,39 +1065,13 @@
 }
 
 .project-card.scroll-reveal {
-  animation: projectCardReveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
-
-@keyframes projectCardReveal {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.projects-grid .project-card.scroll-reveal:nth-child(1) { animation-delay: 0.05s; }
-.projects-grid .project-card.scroll-reveal:nth-child(2) { animation-delay: 0.1s; }
-.projects-grid .project-card.scroll-reveal:nth-child(3) { animation-delay: 0.15s; }
-.projects-grid .project-card.scroll-reveal:nth-child(4) { animation-delay: 0.2s; }
-.projects-grid .project-card.scroll-reveal:nth-child(5) { animation-delay: 0.25s; }
-.projects-grid .project-card.scroll-reveal:nth-child(6) { animation-delay: 0.3s; }
-.projects-grid .project-card.scroll-reveal:nth-child(7) { animation-delay: 0.35s; }
-.projects-grid .project-card.scroll-reveal:nth-child(8) { animation-delay: 0.4s; }
-.projects-grid .project-card.scroll-reveal:nth-child(9) { animation-delay: 0.45s; }
-.projects-grid .project-card.scroll-reveal:nth-child(10) { animation-delay: 0.5s; }
-.projects-grid .project-card.scroll-reveal:nth-child(n+11) { animation-delay: 0.55s; }
 
 .project-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 
-    0 24px 48px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
-    0 0 40px rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
 }
 
 .project-image {
@@ -1146,82 +1081,58 @@
   overflow: hidden;
 }
 
-.project-image::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60%;
-  background: linear-gradient(to top, rgba(26, 26, 26, 0.9) 0%, transparent 100%);
-  pointer-events: none;
-}
-
 .project-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.3s ease;
 }
 
 .project-card:hover img {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 .project-status {
   position: absolute;
   top: 12px;
   right: 12px;
-  padding: 5px 14px;
-  border-radius: 100px;
-  font-size: 0.7rem;
-  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  z-index: 1;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease;
-}
-
-.project-card:hover .project-status {
-  transform: scale(1.05);
+  letter-spacing: 0.5px;
 }
 
 .project-status.ongoing {
-  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  background: #ff6b35;
   color: black;
 }
 
 .project-status.completed {
-  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-  color: white;
+  background: #4CAF50;
+  color: black;
 }
 
 .project-content {
-  padding: 1.25rem;
+  padding: 1rem;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .project-content h3 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.15rem;
+  margin: 0 0 0.3rem 0;
+  font-size: 1.1rem;
   color: #ffffff;
   font-weight: 500;
-  letter-spacing: -0.01em;
-  transition: color 0.2s ease;
-}
-
-.project-card:hover .project-content h3 {
-  color: #ffffff;
 }
 
 .project-description {
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.8rem 0;
   font-size: 0.85rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  color: #ffffff;
   font-weight: 400;
   flex: 1;
 }
@@ -1229,32 +1140,29 @@
 .tech-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 4px;
   margin-bottom: 1rem;
 }
 
 .tech-tags span {
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.95);
-  padding: 4px 10px;
-  border-radius: 8px;
+  background: #000000;
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 12px;
   font-size: 0.7rem;
-  font-weight: 500;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: all 0.25s ease;
+  font-weight: 400;
+  transition: background-color 0.2s ease;
 }
 
 .tech-tags span:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
+  background: #333333;
+  color: #ffffff;
 }
 
 .project-buttons {
   display: flex;
   gap: 8px;
   margin-top: auto;
-  flex-wrap: wrap;
 }
 
 .btn {
@@ -2858,7 +2766,36 @@
       <!-- Completed Projects -->
       <div class="project-section">
     <div class="projects-grid">
-  
+
+          <!-- Sentry - IBM Dev Day AI Demystified -->
+      <div class="project-card">
+            <div class="project-image">
+              <img src="IBM.png" alt="Sentry - IBM Dev Day" />
+              <div class="project-status completed">Hackathon Project</div>
+            </div>
+        <div class="project-content">
+          <h3>Sentry - IBM Dev Day AI Demystified</h3>
+              <p class="project-description">An IDE extension that monitors code in real time to detect and prevent security vulnerabilities, such as exposed API keys. When an issue is found, it locks the workflow, highlights the exact problem line, and recommends secure fixes. With "Fix with Sentry," the vulnerability context is sent to Bob, which automatically generates and applies a secure remediation.</p>
+          <div class="tech-tags">
+                <span>TypeScript</span><span>Node.js</span><span>Fastify</span><span>VSCode</span><span>Webpack</span><span>Turbo</span><span>npm</span>
+          </div>
+          <div class="project-buttons">
+                <a href="https://github.com/Youseph-Elkhouly/Sentry-IBM-" class="btn btn-secondary" target="_blank">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
+                </a>
+                <button class="btn btn-secondary" onclick="openSentryDemoModal()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  Demo
+                </button>
+          </div>
+        </div>
+      </div>
+
           <!-- Frontline - DeltaHacks12 -->
       <div class="project-card">
             <div class="project-image">
@@ -2894,29 +2831,6 @@
         </div>
       </div>
   
-          <!-- Ru'ya - UmmahHacks -->
-      <div class="project-card">
-            <div class="project-image">
-              <img src="ruyaproject.png" alt="Ru'ya - UmmahHacks" />
-              <div class="project-status completed">Hackathon Project</div>
-            </div>
-        <div class="project-content">
-          <h3>Ru'ya (رؤيا) - UmmahHacks</h3>
-              <p class="project-description">An AI-powered Islamic learning platform that transforms authentic Hadith into contextualized cinematic visual stories. Built to help younger generations connect more deeply with Islamic knowledge.</p>
-          <div class="tech-tags">
-                <span>Next.js</span><span>React</span><span>Tailwind CSS</span><span>FastAPI</span><span>Google Gemini</span><span>Google Veo</span><span>ElevenLabs</span><span>FFmpeg</span>
-          </div>
-          <div class="project-buttons">
-                <button class="btn btn-secondary" onclick="openRuyaDemoModal()">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                  Demo
-                </button>
-          </div>
-        </div>
-      </div>
-
           <!-- Spark and Prepper -->
       <div class="project-card">
             <div class="project-image">
@@ -2937,6 +2851,35 @@
                   GitHub
                 </a>
                 <button class="btn btn-secondary" onclick="openSparkPrepperDemoModal()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  Demo
+                </button>
+          </div>
+        </div>
+      </div>
+
+          <!-- Ru'ya - UmmahHacks -->
+      <div class="project-card">
+            <div class="project-image">
+              <img src="ruyaproject.png" alt="Ru'ya - UmmahHacks" />
+              <div class="project-status completed">Hackathon Project</div>
+            </div>
+        <div class="project-content">
+          <h3>Ru'ya (رؤيا) - UmmahHacks</h3>
+              <p class="project-description">An AI-powered Islamic learning platform that transforms authentic Hadith into contextualized cinematic visual stories. Built to help younger generations connect more deeply with Islamic knowledge.</p>
+          <div class="tech-tags">
+                <span>Next.js</span><span>React</span><span>Tailwind CSS</span><span>FastAPI</span><span>Google Gemini</span><span>Google Veo</span><span>ElevenLabs</span><span>FFmpeg</span>
+          </div>
+          <div class="project-buttons">
+                <a href="https://github.com/Youseph-Elkhouly/Ru-yaUmmahHacks" class="btn btn-secondary" target="_blank">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
+                </a>
+                <button class="btn btn-secondary" onclick="openRuyaDemoModal()">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
@@ -3207,7 +3150,40 @@
   <section id="hackathons">
     <h2>Hackathons</h2>
     <div class="hackathons-grid">
-      
+
+          <!-- IBM Dev Day AI Demystified Hackathon - Sentry -->
+      <div class="hackathon-card">
+        <div class="hackathon-header">
+            <a href="https://ibm-devday.bemyapp.com/ai-demystified/" target="_blank" style="text-decoration: none;">
+            <div class="hackathon-logo-wrapper">
+              <img src="IBMLOGO.png" alt="IBM Logo" />
+              </div>
+            </a>
+          <div class="hackathon-info">
+            <div class="hackathon-date">Jan 30 - Feb 1, 2026</div>
+            <h3 class="hackathon-title">IBM Dev Day AI Demystified – Sentry</h3>
+            <p class="hackathon-location">Virtual</p>
+            </div>
+          </div>
+        <p class="hackathon-description">
+          Sentry is an IDE extension that monitors code in real time to detect and prevent security vulnerabilities, such as exposed API keys. When an issue is found, it locks the workflow, highlights the exact problem line, and recommends secure fixes like using environment variables or a secrets manager. With "Fix with Sentry," the vulnerability context is sent to Bob, which automatically generates and applies a secure remediation. The extension also integrates policy PDFs and MP3 recordings so fixes and guidance align with organizational standards and team knowledge.
+        </p>
+        <div class="hackathon-buttons">
+          <a href="https://github.com/Youseph-Elkhouly/Sentry-IBM-" target="_blank" class="btn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            GitHub
+          </a>
+          <a href="#" onclick="event.preventDefault(); openSentryDemoModal(); return false;" class="btn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            Demo
+          </a>
+        </div>
+      </div>
+
           <!-- UmmahHacks - Ru'ya -->
       <div class="hackathon-card">
         <div class="hackathon-header">
@@ -3233,6 +3209,12 @@
           Built Ru'ya (رؤيا), an AI-powered Islamic learning platform that transforms authentic Hadith into contextualized cinematic visual stories. Designed to help younger generations connect more deeply with Islamic knowledge through engaging multimedia experiences.
         </p>
         <div class="hackathon-buttons">
+          <a href="https://github.com/Youseph-Elkhouly/Ru-yaUmmahHacks" target="_blank" class="btn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            GitHub
+          </a>
           <a href="#" onclick="event.preventDefault(); openRuyaDemoModal(); return false;" class="btn">
             <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -3735,6 +3717,30 @@ function closeContactManagementDemoModal() {
     <video id="ruya-demo-video" src="ruyalowqdemo.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
   </div>
 </div>
+
+<!-- Sentry Demo Modal -->
+<div id="sentry-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
+  <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
+    <button onclick="closeSentryDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
+    <video id="sentry-demo-video" src="IBMSENTRYDEMO.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+  </div>
+</div>
+
+<script>
+function openSentryDemoModal() {
+  document.getElementById('sentry-demo-modal').style.display = 'flex';
+  var vid = document.getElementById('sentry-demo-video');
+  vid.currentTime = 0;
+  vid.play();
+  document.body.style.overflow = 'hidden';
+}
+function closeSentryDemoModal() {
+  document.getElementById('sentry-demo-modal').style.display = 'none';
+  var vid = document.getElementById('sentry-demo-video');
+  vid.pause();
+  document.body.style.overflow = '';
+}
+</script>
 
 <script>
 function openRuyaDemoModal() {
