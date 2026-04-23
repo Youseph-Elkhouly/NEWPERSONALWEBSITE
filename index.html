@@ -161,7 +161,7 @@
       border: none;
     }
 
-    /* Animated mesh gradient background */
+    /* Animated mesh gradient background - GPU optimized */
     #hero::before {
       content: '';
       position: absolute;
@@ -176,6 +176,8 @@
       animation: meshMove 20s ease-in-out infinite;
       pointer-events: none;
       z-index: 0;
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     #hero::after {
@@ -193,6 +195,21 @@
       pointer-events: none;
       z-index: 0;
       opacity: 0.4;
+      will-change: background-position;
+    }
+
+    /* Respect user's motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      #hero::before,
+      #hero::after,
+      .hero-orb,
+      .icon-btn,
+      .scroll-down {
+        animation: none !important;
+      }
+      .hero-orb {
+        opacity: 0.3;
+      }
     }
     
     @keyframes meshMove {
@@ -232,8 +249,11 @@
       position: absolute;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(0, 0, 0, 0.06) 0%, transparent 70%);
-      filter: blur(40px);
+      filter: blur(20px);
       animation: orbFloat 25s infinite ease-in-out;
+      will-change: transform, opacity;
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
     
     .hero-orb:nth-child(1) {
@@ -624,13 +644,29 @@
 }
 
     @media (max-width: 768px) {
+      /* Reduce animations on mobile for better performance */
+      #hero::before {
+        animation: none;
+        opacity: 0.5;
+      }
+      #hero::after {
+        animation: none;
+      }
+      .hero-orb {
+        animation-duration: 40s; /* Slower = less CPU */
+        filter: blur(15px); /* Less blur = better performance */
+      }
+      .icon-btn {
+        animation: none; /* Disable floating on mobile */
+      }
+
       nav {
         padding: 1rem;
         flex-wrap: wrap;
         justify-content: center;
         gap: 10px;
       }
-      
+
       nav a {
         margin: 4px;
         font-size: 0.95rem;
@@ -646,7 +682,7 @@
       .hero-title {
         font-size: 2.2rem;
       }
-      
+
       .hero-subtitle {
         font-size: 1.1rem;
       }
@@ -2842,7 +2878,7 @@
           <!-- Sentry - IBM Dev Day AI Demystified -->
       <div class="project-card">
             <div class="project-image">
-              <img src="IBM.png" alt="Sentry - IBM Dev Day" />
+              <img src="IBM.png" alt="Sentry - IBM Dev Day" loading="lazy" decoding="async" />
               <div class="project-status completed">Hackathon Project</div>
             </div>
         <div class="project-content">
@@ -2871,7 +2907,7 @@
           <!-- Frontline - DeltaHacks12 -->
       <div class="project-card">
             <div class="project-image">
-              <img src="Deltawinner.jpg" alt="Frontline - DeltaHacks12" />
+              <img src="Deltawinner.jpg" alt="Frontline - DeltaHacks12" loading="lazy" decoding="async" />
               <div class="project-status completed">Hackathon Winner</div>
             </div>
         <div class="project-content">
@@ -2906,7 +2942,7 @@
           <!-- Spark and Prepper -->
       <div class="project-card">
             <div class="project-image">
-              <img src="Spark.png" alt="Spark and Prepper" />
+              <img src="Spark.png" alt="Spark and Prepper" loading="lazy" decoding="async" />
               <div class="project-status completed">Hackathon Project</div>
             </div>
         <div class="project-content">
@@ -2935,7 +2971,7 @@
           <!-- Ru'ya - UmmahHacks -->
       <div class="project-card">
             <div class="project-image">
-              <img src="ruyaproject.png" alt="Ru'ya - UmmahHacks" />
+              <img src="ruyaproject.png" alt="Ru'ya - UmmahHacks" loading="lazy" decoding="async" />
               <div class="project-status completed">Hackathon Project</div>
             </div>
         <div class="project-content">
@@ -2964,7 +3000,7 @@
           <!-- EduPro -->
       <div class="project-card">
             <div class="project-image">
-              <img src="EDUPRO.png" alt="EduPro" />
+              <img src="EDUPRO.png" alt="EduPro" loading="lazy" decoding="async" />
               <div class="project-status completed">Completed</div>
             </div>
         <div class="project-content">
@@ -2987,7 +3023,7 @@
           <!-- GryphBook -->
       <div class="project-card">
             <div class="project-image">
-              <img src="gryphbook.png" alt="GryphBook" />
+              <img src="gryphbook.png" alt="GryphBook" loading="lazy" decoding="async" />
               <div class="project-status completed">Completed</div>
             </div>
         <div class="project-content">
@@ -3016,7 +3052,7 @@
           <!-- ResuMock -->
       <div class="project-card">
             <div class="project-image">
-              <img src="Redumock.png" alt="ResuMock" />
+              <img src="Redumock.png" alt="ResuMock" loading="lazy" decoding="async" />
               <div class="project-status completed">Completed</div>
             </div>
         <div class="project-content">
@@ -3051,7 +3087,7 @@
           <!-- Merchant -->
       <div class="project-card">
             <div class="project-image">
-        <img src="maerchantlogo.png" alt="Merchant" />
+        <img src="maerchantlogo.png" alt="Merchant" loading="lazy" decoding="async" />
               <div class="project-status completed">Completed</div>
             </div>
         <div class="project-content">
@@ -3080,7 +3116,7 @@
           <!-- Typing Test -->
       <div class="project-card">
             <div class="project-image">
-        <img src="typingtest.png" alt="Typing Speed Test Game" />
+        <img src="typingtest.png" alt="Typing Speed Test Game" loading="lazy" decoding="async" />
               <div class="project-status completed">Completed</div>
             </div>
         <div class="project-content">
@@ -3109,7 +3145,7 @@
           <!-- Vehicle Management System -->
       <div class="project-card">
             <div class="project-image">
-              <img src="CRMS.png" alt="Vehicle Management System" />
+              <img src="CRMS.png" alt="Vehicle Management System" loading="lazy" decoding="async" />
               <div class="project-status completed">Completed</div>
             </div>
         <div class="project-content">
@@ -3138,7 +3174,7 @@
           <!-- Contact Management System -->
       <div class="project-card">
             <div class="project-image">
-              <img src="CMS.png" alt="Contact Management System" />
+              <img src="CMS.png" alt="Contact Management System" loading="lazy" decoding="async" />
               <div class="project-status completed">Completed</div>
             </div>
         <div class="project-content">
@@ -3167,7 +3203,7 @@
           <!-- Zoo ML Project -->
       <div class="project-card">
             <div class="project-image">
-              <img src="zoo.jpg" alt="Zoo Data Machine Learning Project" />
+              <img src="zoo.jpg" alt="Zoo Data Machine Learning Project" loading="lazy" decoding="async" />
               <div class="project-status completed">Completed</div>
             </div>
         <div class="project-content">
@@ -3190,7 +3226,7 @@
           <!-- Exercise Tracker API -->
       <div class="project-card">
             <div class="project-image">
-        <img src="exercise.png" alt="Exercise Tracker API" />
+        <img src="exercise.png" alt="Exercise Tracker API" loading="lazy" decoding="async" />
               <div class="project-status completed">Completed</div>
             </div>
         <div class="project-content">
@@ -3642,7 +3678,7 @@
   <div id="resumock-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
     <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
       <button onclick="closeResuMockDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
-      <video id="resumock-demo-video" src="deltahackslite.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+      <video id="resumock-demo-video" src="deltahackslite.mp4" controls preload="none" style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
     </div>
   </div>
 
@@ -3666,7 +3702,7 @@ function closeResuMockDemoModal() {
   <div id="merchant-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
     <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
       <button onclick="closeMerchantDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
-      <video id="merchant-demo-video" src="MerchantDemoFInal.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+      <video id="merchant-demo-video" src="MerchantDemoFInal.mp4" controls preload="none" style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
     </div>
   </div>
 
@@ -3690,7 +3726,7 @@ function closeMerchantDemoModal() {
 <div id="sparkprepper-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
   <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
     <button onclick="closeSparkPrepperDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
-    <video id="sparkprepper-demo-video" src="sparkandpepperGDSC25 - Seif (1080p, h264).mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+    <video id="sparkprepper-demo-video" src="sparkandpepperGDSC25 - Seif (1080p, h264).mp4" controls preload="none" style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
   </div>
 </div>
 
@@ -3714,7 +3750,7 @@ function closeSparkPrepperDemoModal() {
 <div id="typingtest-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
   <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
     <button onclick="closeTypingTestDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
-    <video id="typingtest-demo-video" src="Typing Test.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+    <video id="typingtest-demo-video" src="Typing Test.mp4" controls preload="none" style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
   </div>
 </div>
 
@@ -3738,7 +3774,7 @@ function closeTypingTestDemoModal() {
 <div id="contactmanagement-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
   <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
     <button onclick="closeContactManagementDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
-    <video id="contactmanagement-demo-video" src="ContactManagementSystem.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+    <video id="contactmanagement-demo-video" src="ContactManagementSystem.mp4" controls preload="none" style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
   </div>
 </div>
 
@@ -3762,7 +3798,7 @@ function closeContactManagementDemoModal() {
 <div id="vehiclemanagement-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
   <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
     <button onclick="closeVehicleManagementDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
-    <video id="vehiclemanagement-demo-video" src="VMSYSTEM.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+    <video id="vehiclemanagement-demo-video" src="VMSYSTEM.mp4" controls preload="none" style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
   </div>
 </div>
 
@@ -3770,7 +3806,7 @@ function closeContactManagementDemoModal() {
 <div id="gryphbook-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
   <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
     <button onclick="closeGryphBookDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
-    <video id="gryphbook-demo-video" src="Untitled video - Made with Clipchamp.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+    <video id="gryphbook-demo-video" src="Untitled video - Made with Clipchamp.mp4" controls preload="none" style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
   </div>
 </div>
 
@@ -3778,7 +3814,7 @@ function closeContactManagementDemoModal() {
 <div id="frontline-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
   <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
     <button onclick="closeFrontlineDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
-    <video id="frontline-demo-video" src="deltafrontline.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+    <video id="frontline-demo-video" src="deltafrontline.mp4" controls preload="none" style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
   </div>
 </div>
 
@@ -3786,7 +3822,7 @@ function closeContactManagementDemoModal() {
 <div id="ruya-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
   <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
     <button onclick="closeRuyaDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
-    <video id="ruya-demo-video" src="ruyalowqdemo.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+    <video id="ruya-demo-video" src="ruyalowqdemo.mp4" controls preload="none" style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
   </div>
 </div>
 
@@ -3794,7 +3830,7 @@ function closeContactManagementDemoModal() {
 <div id="sentry-demo-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:3000; align-items:center; justify-content:center;">
   <div style="position:relative; background:#222; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.4); max-width:90vw; max-height:80vh; padding:0; display:flex; flex-direction:column; align-items:center;">
     <button onclick="closeSentryDemoModal()" style="position:absolute; top:10px; right:18px; background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer; z-index:2;">&times;</button>
-    <video id="sentry-demo-video" src="IBMSENTRYDEMO.mp4" controls style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
+    <video id="sentry-demo-video" src="IBMSENTRYDEMO.mp4" controls preload="none" style="width:100%; height:100%; max-width:700px; max-height:70vh; border-radius:12px; background:#000; object-fit: contain; margin:32px 0 16px 0;"></video>
   </div>
 </div>
 
