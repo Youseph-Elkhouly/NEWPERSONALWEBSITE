@@ -309,28 +309,24 @@
       font-size: 3rem;
       margin-bottom: 1rem;
       opacity: 1;
-      transform: translateY(0) scale(1);
       color: var(--text-color);
       position: relative;
-      transition: opacity 0.3s ease, transform 0.3s ease;
       font-weight: 300;
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       display: inline-block;
-      perspective: 1000px;
       letter-spacing: 0.5px;
     }
 
-    /* Character animation styles */
+    /* Character animation styles - GPU optimized */
     .hero-title .char {
       display: inline-block;
       opacity: 0;
-      transform: translateY(50px) rotateX(-90deg);
-      transform-origin: center bottom;
-      transform-style: preserve-3d;
+      transform: translateY(30px);
+      will-change: transform, opacity;
     }
 
     .hero-title .char.animate {
-      animation: charReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: charReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     .hero-title .char.space {
@@ -340,16 +336,11 @@
     @keyframes charReveal {
       0% {
         opacity: 0;
-        transform: translateY(50px) rotateX(-90deg);
-        filter: blur(8px);
-      }
-      40% {
-        filter: blur(2px);
+        transform: translateY(30px);
       }
       100% {
         opacity: 1;
-        transform: translateY(0) rotateX(0deg);
-        filter: blur(0);
+        transform: translateY(0);
       }
     }
 
@@ -360,38 +351,19 @@
     }
 
 
-    /* Subtle glow effect on completed animation */
-    .hero-title.glow .char {
-      text-shadow: 0 0 30px rgba(102, 126, 234, 0.3),
-                   0 0 60px rgba(118, 75, 162, 0.2);
-    }
-
-    /* Hover enhancement */
-    .hero-title:hover .char {
-      text-shadow: 0 0 25px rgba(102, 126, 234, 0.5),
-                   0 0 50px rgba(118, 75, 162, 0.3);
-      transition: text-shadow 0.3s ease;
-    }
+    /* Glow effects disabled for performance */
 
     /* Legacy animation fallback - only if JS fails */
     html:not(.page-loaded) .hero-title {
       opacity: 0;
-      transform: translateY(50px) scale(0.8);
-      animation: heroTitleEntrance 1.2s ease-out 0.3s forwards;
+      transform: translateY(30px);
+      animation: heroTitleEntrance 0.6s ease-out 0.3s forwards;
     }
 
     @keyframes heroTitleEntrance {
-      0% {
-        opacity: 0;
-        transform: translateY(50px) scale(0.8);
-      }
-      50% {
-        opacity: 0.8;
-        transform: translateY(-10px) scale(1.05);
-      }
-      100% {
+      to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
       }
     }
     
@@ -4073,14 +4045,8 @@ function initHeroAnimation() {
   charElements.forEach((char, index) => {
     setTimeout(() => {
       char.classList.add('animate');
-    }, index * 50);
+    }, index * 40); // Slightly faster stagger
   });
-
-  // After all characters are revealed, add subtle glow
-  const totalAnimationTime = chars.length * 50 + 800;
-  setTimeout(() => {
-    heroTitle.classList.add('glow');
-  }, totalAnimationTime);
 }
 
 // Scroll-triggered animations for project cards
