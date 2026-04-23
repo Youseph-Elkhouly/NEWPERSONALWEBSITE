@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio</title>
+  <!-- Preconnect to external resources for faster loading -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://img.icons8.com" crossorigin />
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+  <link rel="dns-prefetch" href="https://img.icons8.com" />
   <link rel="icon" type="image/gif" href="favicon.png" />
   <script>
     // Prevent flash by marking page as loaded immediately
@@ -113,6 +118,12 @@
       transform: translateY(0);
       transition: transform 0.6s ease-out, opacity 0.6s ease-out;
     }
+
+    /* Defer rendering of below-fold sections for faster initial paint */
+    section:not(#hero) {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 100vh;
+    }
     
     /* Only animate sections that are not initially visible - prevent flash */
     html:not(.page-loaded) section:not(#hero) {
@@ -161,7 +172,7 @@
       border: none;
     }
 
-    /* Animated mesh gradient background - GPU optimized */
+    /* Animated mesh gradient background - GPU optimized, delayed start */
     #hero::before {
       content: '';
       position: absolute;
@@ -174,10 +185,17 @@
         radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.06) 0%, transparent 50%),
         radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.04) 0%, transparent 60%);
       animation: meshMove 20s ease-in-out infinite;
+      animation-delay: 1s;
+      animation-play-state: paused;
       pointer-events: none;
       z-index: 0;
       will-change: transform;
       transform: translateZ(0);
+    }
+
+    /* Start background animations after page loads */
+    html.page-loaded #hero::before {
+      animation-play-state: running;
     }
 
     #hero::after {
@@ -192,10 +210,16 @@
         linear-gradient(-45deg, transparent 30%, rgba(0, 0, 0, 0.02) 50%, transparent 70%);
       background-size: 200px 200px;
       animation: gridMove 30s linear infinite;
+      animation-delay: 1s;
+      animation-play-state: paused;
       pointer-events: none;
       z-index: 0;
       opacity: 0.4;
       will-change: background-position;
+    }
+
+    html.page-loaded #hero::after {
+      animation-play-state: running;
     }
 
     /* Respect user's motion preferences */
@@ -251,9 +275,15 @@
       background: radial-gradient(circle, rgba(0, 0, 0, 0.06) 0%, transparent 70%);
       filter: blur(20px);
       animation: orbFloat 25s infinite ease-in-out;
+      animation-play-state: paused;
       will-change: transform, opacity;
       transform: translateZ(0);
       backface-visibility: hidden;
+      opacity: 0.3;
+    }
+
+    html.page-loaded .hero-orb {
+      animation-play-state: running;
     }
     
     .hero-orb:nth-child(1) {
@@ -451,6 +481,12 @@
       position: relative;
       overflow: hidden;
       animation: iconFloat 8s ease-in-out infinite;
+      animation-play-state: paused;
+      animation-delay: 2s;
+    }
+
+    html.page-loaded .icon-btn {
+      animation-play-state: running;
     }
 
     .icon-btn:nth-child(1) {
@@ -4194,20 +4230,26 @@ let isInitialized = false;
 document.addEventListener('DOMContentLoaded', function() {
   if (isInitialized) return; // Prevent double initialization
   isInitialized = true;
-  
+
   // Ensure html has loaded class (already set in head script, but ensure it's there)
   document.documentElement.classList.add('page-loaded');
-  
-  // Use requestAnimationFrame to ensure smooth initialization and prevent double render
+
+  // Double RAF trick - wait for browser to complete first paint before starting animations
   requestAnimationFrame(function() {
-    initHeroAnimation();
-    initScrollFade();
-    // initCustomCursor(); // Disabled to prevent lag
-  initSkillsAnimation();
-    initScrollProgress();
-    initScrollReveal();
-    initNavbarScroll();
-    initExperienceAnimations();
+    requestAnimationFrame(function() {
+      // Delay hero animation slightly for smoother initial render
+      setTimeout(function() {
+        initHeroAnimation();
+      }, 100);
+
+      // Initialize non-critical features
+      initScrollFade();
+      initSkillsAnimation();
+      initScrollProgress();
+      initScrollReveal();
+      initNavbarScroll();
+      initExperienceAnimations();
+    });
   });
   
   // Close modal when clicking outside the content
