@@ -3731,6 +3731,44 @@
     .one-page .experience li > a:first-of-type:hover img,
     .one-page .education li > a:first-of-type:hover img { filter: none !important; transform: none; }
     .one-page img[src="BBlogo.jpg"]:hover { transform: scale(1.4) !important; }
+
+    /* ===== Mobile layout ===== */
+    @media (max-width: 700px) {
+      html, body { overflow-x: hidden !important; }
+
+      /* Hide desktop-only decorations that dont fit on phones */
+      .signature-deco, .signature-deco-right, .read-more-img, .exp-tooltip { display: none !important; }
+
+      /* Header full-width, name/tagline stack */
+      .site-header {
+        position: static !important;
+        max-width: none !important; width: 100% !important;
+        margin: 0 !important;
+        padding: 30px 20px 0 !important;
+      }
+      .site-header-top { flex-wrap: wrap !important; align-items: baseline !important; gap: 4px 10px !important; }
+      .site-brand { font-size: 1.35rem !important; }
+      .site-tagline { font-size: 0.9rem !important; }
+
+      /* Content full-width single column */
+      .one-page {
+        position: static !important;
+        max-width: none !important; width: 100% !important;
+        margin: 0 !important;
+        padding: 24px 20px 92px !important;
+      }
+      .one-page > section { margin-bottom: 30px !important; width: 100% !important; }
+      .one-page #hackathons .hackathon-buttons { margin-left: 62px !important; }
+
+      /* Social icons: smaller, pinned bottom-center */
+      .icon-buttons { bottom: 1rem !important; gap: 9px !important; }
+      .icon-btn { width: 40px !important; height: 40px !important; }
+
+      /* Webring: move to top-right so it clears the bottom icons */
+      .webring { top: 1.1rem !important; bottom: auto !important; right: 1rem !important; gap: 8px !important; }
+      .webring-logo img { width: 38px !important; }
+      .webring-arrow { font-size: 20px !important; }
+    }
 </style>
 </head>
 <body>
