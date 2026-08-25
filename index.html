@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <!-- Preconnect to external resources for faster loading -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="preconnect" href="https://img.icons8.com" crossorigin />
@@ -70,6 +74,48 @@
       z-index: 10000;
       transition: width 0.1s ease-out;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Top-left name + tagline + vertical social icons */
+    .site-header {
+      position: fixed;
+      top: 1.75rem;
+      left: 2rem;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+    .site-header-top {
+      display: flex;
+      align-items: baseline;
+      gap: 0.9rem;
+    }
+    .site-brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #000000;
+      text-decoration: none;
+    }
+    .site-tagline {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: #555555;
+      white-space: nowrap;
+    }
+    .site-header .icon-buttons {
+      margin-top: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 12px;
+    }
+    @media (max-width: 600px) {
+      .site-header { top: 1.25rem; left: 1.25rem; gap: 0.9rem; }
+      .site-brand { font-size: 1.05rem; }
+      .site-tagline { display: none; }
     }
 
     nav {
@@ -444,17 +490,25 @@
     
     /* Enhanced icon buttons animation */
     .icon-buttons {
-      margin-top: 1.5rem;
+      position: fixed;
+      left: 50%;
+      bottom: 1.75rem;
+      transform: translateX(-50%);
+      z-index: 1000;
       display: flex;
-      gap: 16px;
+      flex-direction: row;
+      gap: 14px;
       justify-content: center;
       align-items: center;
-      flex-wrap: wrap;
       opacity: 0;
-      transform: translateY(20px);
-      animation: iconButtonsEntrance 1s ease-out 1.2s forwards;
+      animation: iconButtonsEntranceBottom 1s ease-out 1.2s forwards;
     }
-    
+
+    @keyframes iconButtonsEntranceBottom {
+      0% { opacity: 0; transform: translate(-50%, 16px); }
+      100% { opacity: 1; transform: translate(-50%, 0); }
+    }
+
     @keyframes iconButtonsEntrance {
       0% {
         opacity: 0;
@@ -467,8 +521,8 @@
     }
     
     .icon-btn {
-      width: 40px;
-      height: 40px;
+      width: 56px;
+      height: 56px;
       display: inline-flex;
       justify-content: center;
       align-items: center;
@@ -476,7 +530,7 @@
       border: 1px solid #cccccc;
       border-radius: 50%;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      padding: 6px;
+      padding: 9px;
       cursor: pointer;
       position: relative;
       overflow: hidden;
@@ -2522,32 +2576,1166 @@
 
 
 
-  </style>
+  
+    /* ===== One section per page (scroll-snap) ===== */
+    html { scroll-snap-type: y proximity; }
+    #hero, .page, #projects, #hackathons {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    /* ===== Everything on one screen, no scrolling ===== */
+    html, body { height: 100%; overflow: hidden; }
+    #hero, .section-divider { display: none !important; }
+
+    .one-page {
+      position: fixed;
+      inset: 0;
+      box-sizing: border-box;
+      padding: 74px 36px 96px;
+      display: grid;
+      grid-template-columns: 1.1fr 1.15fr 0.95fr 1.05fr;
+      gap: 6px 34px;
+      align-content: start;
+      overflow: hidden;
+    }
+    .one-page > section {
+      min-height: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: block !important;
+    }
+    .one-page .container { padding: 0 !important; max-width: none !important; }
+
+    /* Section headings -> compact labels */
+    .one-page h2,
+    .one-page .experience h3,
+    .one-page .skills-section h3 {
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #999 !important;
+      text-align: left !important;
+      margin: 0 0 6px !important;
+    }
+    .one-page .skills-section h3 { margin-top: 10px !important; }
+    .one-page p { display: none !important; } /* section blurbs */
+    .one-page .project-description,
+    .one-page .hackathon-description { display: none !important; }
+
+    /* Work Experience / Education -> one line each */
+    .one-page .experience ul { display: block !important; margin: 0 !important; }
+    .one-page .experience li {
+      display: block !important;
+      background: none !important;
+      border: none !important;
+      border-bottom: 1px solid #eee !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 4px 0 !important;
+      margin: 0 !important;
+      min-height: 0 !important;
+      opacity: 1 !important;
+      transform: none !important;
+      font-size: 12px !important;
+      line-height: 1.35 !important;
+    }
+    .one-page .experience li > a:first-of-type,
+    .one-page .experience li img,
+    .one-page .responsibilities-dropdown,
+    .one-page .responsibilities-toggle,
+    .one-page .education-toggle,
+    .one-page .responsibilities-arrow { display: none !important; }
+    .one-page .experience li br { display: none !important; }
+    .one-page .experience li strong { font-size: 12px !important; }
+    .one-page .experience li .date { font-size: 11px !important; color: #888 !important; }
+    .one-page .experience li .date::before { content: " · "; color: #ccc; }
+
+    /* Projects -> title-only rows */
+    .one-page .projects-grid { display: block !important; }
+    .one-page .project-section { margin: 0 !important; }
+    .one-page .project-card {
+      display: block !important;
+      background: none !important;
+      border: none !important;
+      border-bottom: 1px solid #eee !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 3px 0 !important;
+      margin: 0 !important;
+      min-height: 0 !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .one-page .project-image,
+    .one-page .tech-tags,
+    .one-page .project-status { display: none !important; }
+    .one-page .project-content { padding: 0 !important; }
+    .one-page .project-content h3 { font-size: 12px !important; font-weight: 400 !important; margin: 0 !important; }
+
+    /* Hackathons -> title + date rows */
+    .one-page .hackathons-grid { display: block !important; }
+    .one-page .hackathon-card {
+      display: flex !important;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      background: none !important;
+      border: none !important;
+      border-bottom: 1px solid #eee !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 4px 0 !important;
+      margin: 0 !important;
+      min-height: 0 !important;
+    }
+    .one-page .hackathon-logo-wrapper,
+    .one-page .hackathon-location,
+    .one-page .hackathon-participants { display: none !important; }
+    .one-page .hackathon-header { display: block !important; padding: 0 !important; }
+    .one-page .hackathon-title { font-size: 12px !important; font-weight: 400 !important; margin: 0 !important; }
+    .one-page .hackathon-date { font-size: 11px !important; color: #888 !important; white-space: nowrap; }
+
+    /* Skills -> small icons */
+    .one-page .skills-section { margin: 0 !important; }
+    .one-page .skills-grid { gap: 7px !important; }
+    .one-page .skill img { width: 20px !important; height: 20px !important; }
+
+    /* ===== Compact inline links (Demo/Devpost/GitHub/Gallery) + polish ===== */
+    .one-page .project-content { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .one-page .project-content h3 { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .one-page .project-buttons { display: flex !important; flex-wrap: nowrap; gap: 9px; margin: 0 !important; justify-content: flex-end; flex: 0 0 auto; }
+    .one-page .hackathon-info { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+    .one-page .hackathon-title { flex: 1 1 auto; }
+    .one-page .hackathon-buttons { display: flex !important; flex-wrap: wrap; gap: 9px; margin: 0 !important; }
+    .one-page .btn,
+    .one-page .experience-blog-button {
+      all: unset;
+      box-sizing: border-box;
+      cursor: pointer;
+      font-size: 9.5px !important;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #999 !important;
+      white-space: nowrap;
+      transition: color .18s ease;
+    }
+    .one-page .btn:hover,
+    .one-page .experience-blog-button:hover { color: #000 !important; }
+    .one-page .btn svg, .one-page .btn img { display: none !important; }
+    .one-page .experience-blog-button { display: inline !important; margin-left: 8px; }
+
+    /* Polish: labels, rows, columns */
+    .one-page { gap: 4px 40px; padding-top: 78px; }
+    .one-page h2,
+    .one-page .experience h3 {
+      border-bottom: 1px solid #e5e5e5;
+      padding-bottom: 6px !important;
+      margin-bottom: 8px !important;
+    }
+    .one-page .project-card,
+    .one-page .hackathon-card,
+    .one-page .experience li {
+      border-bottom: 1px solid #f2f2f2 !important;
+      padding: 5px 2px !important;
+      transition: background .15s ease;
+      border-radius: 4px;
+    }
+    .one-page .project-card:hover,
+    .one-page .hackathon-card:hover,
+    .one-page .experience li:hover { background: #fafafa; }
+    .one-page .hackathon-date { color: #aaa !important; }
+
+    /* Remove galleries */
+    .one-page .experience-blog-button,
+    .one-page a[href$="-blog.html"] { display: none !important; }
+
+    /* ===== Inter font + zoom + all-black text ===== */
+    .one-page, .one-page *,
+    .site-header, .site-brand, .site-tagline {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif !important;
+    }
+    .one-page, .one-page * { color: #000 !important; }
+    .site-tagline { color: #000 !important; }
+
+    /* Section headers (Work Experience, Projects, Education, Hackathons) */
+    .one-page h2,
+    .one-page .experience h3 {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.1em;
+      color: #000 !important;
+    }
+
+    /* Zoom in a little */
+    .one-page .project-content h3,
+    .one-page .hackathon-title,
+    .one-page .experience li,
+    .one-page .experience li strong { font-size: 14px !important; }
+    .one-page .hackathon-date,
+    .one-page .experience li .date { font-size: 12.5px !important; }
+    .one-page .btn,
+    .one-page .experience-blog-button { font-size: 11px !important; }
+
+    /* ===== Header dropdowns: hide content until header clicked ===== */
+    .one-page .acc-header { cursor: pointer; user-select: none; }
+    .one-page .acc-header::after {
+      content: " +";
+      font-weight: 400;
+      color: #000;
+    }
+    .one-page section.open .acc-header::after { content: " \2013"; }
+    .one-page .acc-panel { display: none; }
+    .one-page section.open .acc-panel { display: block; }
+
+    /* ===== Clean hackathon rows ===== */
+    .one-page #hackathons .hackathon-card {
+      display: block !important;
+      padding: 7px 2px !important;
+      border-bottom: 1px solid #f0f0f0 !important;
+      overflow: visible;
+    }
+    .one-page .hackathon-header,
+    .one-page .hackathon-logo-wrapper,
+    .one-page .hackathon-location,
+    .one-page .hackathon-description,
+    .one-page .hackathon-participants,
+    .one-page .hackathon-winner-badge,
+    .one-page .hackathon-mentor-badge { display: none !important; }
+    .one-page .hackathon-info { display: block !important; padding: 0 !important; }
+    .one-page .hackathon-date {
+      display: block !important;
+      font-size: 11px !important;
+      color: #888 !important;
+      margin: 0 0 1px !important;
+    }
+    .one-page .hackathon-title {
+      display: block !important;
+      font-size: 13px !important;
+      font-weight: 400 !important;
+      margin: 0 !important;
+      line-height: 1.3 !important;
+    }
+    .one-page .hackathon-buttons {
+      display: flex !important;
+      flex-wrap: wrap;
+      gap: 10px !important;
+      margin-top: 3px !important;
+    }
+
+    /* Square (box) social icons instead of circles */
+    .icon-btn { border-radius: 10px !important; }
+
+    /* ===== Fix: show hackathon date + title (they live inside .hackathon-header) ===== */
+    .one-page .hackathon-header { display: block !important; padding: 0 !important; }
+    .one-page .hackathon-header > a { display: none !important; }   /* logo link only */
+    .one-page .hackathon-info { display: block !important; padding: 0 !important; }
+    .one-page .hackathon-date { display: block !important; font-size: 11px !important; color: #888 !important; margin: 0 0 1px !important; }
+    .one-page .hackathon-title { display: block !important; font-size: 13px !important; font-weight: 400 !important; margin: 0 !important; line-height: 1.3 !important; }
+    .one-page .hackathon-location,
+    .one-page .hackathon-participants,
+    .one-page .hackathon-description,
+    .one-page .hackathon-logo-wrapper,
+    .one-page .hackathon-winner-badge,
+    .one-page .hackathon-mentor-badge { display: none !important; }
+
+    /* ===== Tighten hackathon rows into clean grouped entries ===== */
+    .one-page #hackathons .hackathons-grid { display: block !important; }
+    .one-page #hackathons .hackathon-card {
+      padding: 0 !important;
+      margin: 0 0 13px !important;
+      border: none !important;
+      background: none !important;
+    }
+    .one-page #hackathons .hackathon-card:hover { background: none !important; }
+    .one-page .hackathon-date { margin: 0 !important; font-size: 11px !important; color: #999 !important; line-height: 1.2 !important; }
+    .one-page .hackathon-title { margin: 1px 0 3px !important; font-size: 13px !important; font-weight: 400 !important; line-height: 1.25 !important; }
+    .one-page .hackathon-buttons { margin: 0 !important; gap: 12px !important; }
+
+    /* ===== Make Hackathons match the tight, divided Projects column ===== */
+    .one-page #hackathons .hackathon-card {
+      padding: 5px 2px 6px !important;
+      margin: 0 !important;
+      border: none !important;
+      border-bottom: 1px solid #f2f2f2 !important;
+      border-radius: 0 !important;
+    }
+    .one-page #hackathons .hackathon-card:hover { background: #fafafa; }
+    .one-page .hackathon-date { margin: 0 !important; font-size: 11px !important; color: #999 !important; line-height: 1.2 !important; }
+    .one-page .hackathon-title { margin: 1px 0 2px !important; font-size: 13px !important; font-weight: 400 !important; line-height: 1.25 !important; }
+    .one-page .hackathon-buttons { margin: 0 !important; gap: 12px !important; }
+
+    /* ===== Hackathon: bold name first, date below it ===== */
+    .one-page .hackathon-info { display: flex !important; flex-direction: column !important; }
+    .one-page .hackathon-title { order: 1; font-weight: 600 !important; margin: 0 0 1px !important; }
+    .one-page .hackathon-date { order: 2; margin: 0 !important; font-size: 11px !important; color: #999 !important; }
+
+    /* ===== Stack all sections in one column (under Work Experience) ===== */
+    .one-page {
+      grid-template-columns: 1fr !important;
+      max-width: 640px !important;
+      row-gap: 16px !important;
+      align-content: start !important;
+    }
+
+    /* ===== Open sections lay out side-by-side as columns across the page ===== */
+    .one-page {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      align-items: flex-start !important;
+      align-content: flex-start !important;
+      max-width: none !important;
+      column-gap: 44px !important;
+      row-gap: 14px !important;
+    }
+    /* Closed = full-width stacked header; open = flexible column, pulled to the top row */
+    .one-page > section { flex: 1 1 100% !important; order: 2; min-width: 0; }
+    .one-page > section.open { flex: 1 1 0 !important; order: 1; }
+
+    /* ===== Fix open-column width + long-list overflow ===== */
+    /* Content fills its column (removes the big empty gap) */
+    .one-page .experience,
+    .one-page .container { max-width: none !important; width: 100% !important; }
+    /* Give open columns a sensible min width so they read as columns */
+    .one-page > section.open { flex: 1 1 320px !important; }
+    /* A long open list scrolls inside its own column instead of clipping off-screen */
+    .one-page > section.open .acc-panel {
+      max-height: calc(100vh - 210px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 6px;
+    }
+
+    /* ===== Each section is its own column (side by side) ===== */
+    .one-page > section,
+    .one-page > section.open {
+      flex: 1 1 0 !important;
+      order: 0 !important;
+      min-width: 0;
+    }
+
+    /* ===== Minimalist refinement ===== */
+    .one-page { padding: 72px 40px 96px 40px !important; column-gap: 52px !important; }
+
+    /* Header row: label left, +/- indicator right, hairline rule */
+    .one-page .acc-header {
+      display: flex !important;
+      align-items: baseline !important;
+      justify-content: space-between !important;
+      gap: 12px !important;
+      border-bottom: 1px solid #e2e2e2 !important;
+      padding: 0 0 10px !important;
+      margin: 0 0 16px !important;
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif !important;
+      font-size: 10.5px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.22em !important;
+      text-transform: uppercase !important;
+      color: #111 !important;
+    }
+    .one-page .acc-header::after {
+      content: "+" !important;
+      font-size: 13px !important;
+      font-weight: 400 !important;
+      line-height: 1 !important;
+      color: #bdbdbd !important;
+      transition: color .2s ease !important;
+    }
+    .one-page section.open .acc-header::after { content: "\2013" !important; color: #111 !important; }
+    .one-page .acc-header:hover::after { color: #111 !important; }
+
+    /* Name + tagline: calmer, refined */
+    .site-brand { font-size: 1.15rem !important; font-weight: 600 !important; letter-spacing: -0.01em !important; }
+    .site-tagline { color: #9a9a9a !important; font-size: 0.9rem !important; }
+
+    /* Minimal social icons */
+    .icon-btn {
+      width: 42px !important;
+      height: 42px !important;
+      border: 1px solid #e6e6e6 !important;
+      border-radius: 9px !important;
+      box-shadow: none !important;
+      background: #fff !important;
+    }
+    .icon-btn:hover { border-color: #111 !important; transform: translateY(-2px); }
+
+    /* Slightly airier rows */
+    .one-page .project-card,
+    .one-page .experience li { padding: 6px 2px !important; }
+
+    /* ===== Remove +/- indicators, enlarge text to fill the screen ===== */
+    .one-page .acc-header::after,
+    .one-page section.open .acc-header::after { content: "" !important; display: none !important; }
+
+    .one-page .acc-header {
+      font-size: 16px !important;
+      letter-spacing: 0.16em !important;
+      padding-bottom: 12px !important;
+      margin-bottom: 18px !important;
+    }
+    /* Content scaled up */
+    .one-page .project-content h3,
+    .one-page .hackathon-title,
+    .one-page .experience li,
+    .one-page .experience li strong,
+    .one-page .education li,
+    .one-page .education li strong { font-size: 16px !important; }
+    .one-page .hackathon-date,
+    .one-page .experience li .date,
+    .one-page .education li .date { font-size: 13px !important; }
+    .one-page .btn { font-size: 12px !important; }
+    .site-brand { font-size: 1.3rem !important; }
+    .site-tagline { font-size: 1rem !important; }
+
+    /* ===== Force all four section headers to identical size ===== */
+    .one-page .experience h3.acc-header,
+    .one-page #projects h2.acc-header,
+    .one-page #hackathons h2.acc-header {
+      font-size: 16px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.16em !important;
+      line-height: 1.2 !important;
+    }
+
+    /* ===== Always show content (no click-to-reveal) ===== */
+    .one-page .acc-panel {
+      display: block !important;
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .one-page .acc-header { cursor: default !important; }
+
+    /* ===== Projects & Hackathons: no scroll, shrink text to fit ===== */
+    .one-page #projects .acc-panel,
+    .one-page #hackathons .acc-panel { max-height: none !important; overflow: visible !important; }
+
+    /* Projects: 14 items fit without scrolling */
+    .one-page #projects .project-content h3 { font-size: 12.5px !important; }
+    .one-page #projects .btn { font-size: 9px !important; }
+    .one-page #projects .project-card { padding: 2px 2px !important; }
+    .one-page #projects .project-content { gap: 8px; }
+
+    /* Hackathons: 8 items fit without scrolling */
+    .one-page #hackathons .hackathon-title { font-size: 12.5px !important; }
+    .one-page #hackathons .hackathon-date { font-size: 10px !important; }
+    .one-page #hackathons .btn { font-size: 9px !important; }
+    .one-page #hackathons .hackathon-card { margin: 0 0 6px !important; padding: 2px 2px !important; }
+
+    /* Remove hover on hackathon cards (match projects) */
+    .one-page .hackathon-card:hover,
+    .one-page #hackathons .hackathon-card:hover { background: none !important; }
+
+    /* ===== Projects: show 3, rest behind View More ===== */
+    .one-page #projects .project-card.proj-extra { display: none !important; }
+    .one-page #projects.show-all .project-card.proj-extra { display: block !important; }
+    .one-page #projects.show-all .acc-panel { max-height: calc(100vh - 200px); overflow-y: auto; }
+    .proj-viewmore {
+      margin-top: 8px;
+      background: none; border: none; cursor: pointer;
+      font-family: "Inter","Helvetica Neue",Arial,sans-serif;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+      color: #888; padding: 4px 0;
+    }
+    .proj-viewmore:hover { color: #000; }
+
+    /* Kill the hackathon card ::before hover overlay */
+    .one-page .hackathon-card::before,
+    .one-page .hackathon-card::after,
+    .one-page .hackathon-card:hover::before,
+    .one-page .hackathon-card:hover::after { display: none !important; opacity: 0 !important; content: none !important; }
+    .one-page .hackathon-card, .one-page .hackathon-card:hover { transform: none !important; box-shadow: none !important; }
+
+    /* Tighten space between hackathon date and its links */
+    .one-page .hackathon-header { margin: 0 !important; padding: 0 !important; }
+    .one-page .hackathon-info { margin: 0 !important; padding: 0 !important; }
+    .one-page .hackathon-date { margin: 0 !important; line-height: 1.2 !important; }
+    .one-page .hackathon-buttons { margin: 2px 0 0 !important; }
+
+    /* Tighten space between hackathon name (header) and date */
+    .one-page .hackathon-title { margin: 0 0 1px !important; line-height: 1.2 !important; }
+
+    /* Un-bold hackathon names */
+    .one-page .hackathon-title { font-weight: 400 !important; }
+
+    /* Match Work Experience + Education text size to Projects */
+    .one-page .experience li,
+    .one-page .experience li strong,
+    .one-page .education li,
+    .one-page .education li strong { font-size: 12.5px !important; }
+    .one-page .experience li .date,
+    .one-page .education li .date { font-size: 10px !important; }
+
+    /* Show small logos for Work Experience + Education */
+    .one-page .experience li,
+    .one-page .education li {
+      display: flex !important;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .one-page .experience li > a:first-of-type,
+    .one-page .education li > a:first-of-type {
+      display: block !important;
+      flex: 0 0 auto;
+    }
+    .one-page .experience li > a:first-of-type img,
+    .one-page .education li > a:first-of-type img {
+      display: block !important;
+      width: 26px !important;
+      height: 26px !important;
+      object-fit: contain;
+      margin: 2px 0 0 !important;
+    }
+
+    /* Bigger, uniform logo tiles for Work Experience + Education */
+    .one-page .experience li,
+    .one-page .education li {
+      display: flex !important;
+      align-items: center !important;
+      gap: 13px !important;
+      padding: 8px 2px !important;
+    }
+    .one-page .experience li > a:first-of-type,
+    .one-page .education li > a:first-of-type {
+      width: 42px !important;
+      height: 42px !important;
+      flex: 0 0 42px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: #f4f3f0 !important;
+      border: 1px solid #ececec !important;
+      border-radius: 10px !important;
+      overflow: hidden !important;
+      padding: 7px !important;
+      box-sizing: border-box !important;
+    }
+    .one-page .experience li > a:first-of-type img,
+    .one-page .education li > a:first-of-type img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important;
+      margin: 0 !important;
+    }
+    .one-page .experience li strong,
+    .one-page .education li strong { font-size: 13px !important; }
+
+    /* Logos for hackathons (matching the experience tiles) */
+    .one-page #hackathons .hackathon-header {
+      display: flex !important;
+      align-items: center !important;
+      gap: 12px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    .one-page #hackathons .hackathon-header > a {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 42px !important;
+      height: 42px !important;
+      flex: 0 0 42px !important;
+      background: #f4f3f0 !important;
+      border: 1px solid #ececec !important;
+      border-radius: 10px !important;
+      overflow: hidden !important;
+      padding: 6px !important;
+      box-sizing: border-box !important;
+    }
+    .one-page #hackathons .hackathon-logo-wrapper {
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      background: none !important;
+    }
+    .one-page #hackathons .hackathon-logo-wrapper img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important;
+    }
+    .one-page #hackathons .hackathon-info { flex: 1 1 auto !important; }
+    .one-page #hackathons .hackathon-buttons { margin-left: 54px !important; }
+
+    /* Bigger logo tiles, uniform white background */
+    .one-page .experience li > a:first-of-type,
+    .one-page .education li > a:first-of-type,
+    .one-page #hackathons .hackathon-header > a {
+      width: 50px !important;
+      height: 50px !important;
+      flex: 0 0 50px !important;
+      background: #ffffff !important;
+      border: 1px solid #eaeaea !important;
+      border-radius: 11px !important;
+      padding: 7px !important;
+    }
+    .one-page #hackathons .hackathon-buttons { margin-left: 62px !important; }
+
+    /* Work Experience: role on one line, location + date on the next line */
+    .one-page #page-work .experience li br { display: none !important; }
+    .one-page #page-work .experience li br:first-of-type { display: inline !important; }
+    .one-page #page-work .experience li .date { display: inline !important; }
+    .one-page #page-work .experience li .date::before { content: " \00B7 " !important; color: #ccc !important; }
+    .one-page #page-work .experience li .date:first-of-type::before { content: "" !important; }
+
+    /* Hackathons: show 3, rest behind View More */
+    .one-page #hackathons .hackathon-card.hack-extra { display: none !important; }
+    .one-page #hackathons.show-all .hackathon-card.hack-extra { display: block !important; }
+    .one-page #hackathons.show-all .acc-panel { max-height: calc(100vh - 200px); overflow-y: auto; }
+    .win-tag { font-size: 10px !important; font-weight: 600 !important; color: #c8860a !important; margin-left: 6px; white-space: nowrap; letter-spacing: 0.02em; }
+
+    /* ===== Stack everything in one column (scrollable) ===== */
+    html, body { overflow: auto !important; height: auto !important; }
+    .one-page {
+      position: static !important;
+      inset: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      flex-wrap: nowrap !important;
+      max-width: 760px !important;
+      margin: 0 auto !important;
+      padding: 96px 24px 130px !important;
+      row-gap: 30px !important;
+    }
+    .one-page > section,
+    .one-page > section.open { flex: 0 0 auto !important; width: 100% !important; }
+    /* No internal panel scroll when the page itself scrolls */
+    .one-page .acc-panel,
+    .one-page #projects.show-all .acc-panel,
+    .one-page #hackathons.show-all .acc-panel { max-height: none !important; overflow: visible !important; }
+
+    /* ===== Centered, one screen, no scroll ===== */
+    html, body { overflow: hidden !important; height: 100% !important; }
+    .one-page {
+      position: fixed !important;
+      inset: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      flex-wrap: nowrap !important;
+      justify-content: center !important;
+      align-items: center !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 40px 24px 90px !important;
+      row-gap: 20px !important;
+      overflow: hidden !important;
+    }
+    .one-page > section,
+    .one-page > section.open {
+      flex: 0 0 auto !important;
+      width: 100% !important;
+      max-width: 640px !important;
+    }
+    .one-page .acc-panel { max-height: none !important; overflow: visible !important; }
+
+    /* Education: show only University of Guelph, Loyola behind View More */
+    .one-page #page-education .experience li.edu-extra { display: none !important; }
+    .one-page #page-education.show-all .experience li.edu-extra { display: flex !important; }
+
+    /* ===== Clean centered single column with generous spacing ===== */
+    html, body { overflow: auto !important; height: auto !important; }
+
+    .site-header {
+      position: static !important;
+      max-width: 720px !important;
+      margin: 0 auto !important;
+      padding: 64px 24px 0 !important;
+      display: block !important;
+    }
+    .site-header-top { display: flex !important; align-items: baseline !important; gap: 12px !important; flex-wrap: wrap; }
+    .site-brand { font-size: 1.7rem !important; font-weight: 700 !important; }
+    .site-tagline { font-size: 1rem !important; color: #8a8a8a !important; }
+
+    .icon-buttons {
+      position: static !important;
+      transform: none !important;
+      animation: none !important;
+      opacity: 1 !important;
+      flex-direction: row !important;
+      justify-content: flex-start !important;
+      align-items: center !important;
+      gap: 10px !important;
+      max-width: 720px !important;
+      margin: 20px auto 0 !important;
+      padding: 0 24px !important;
+    }
+    .icon-btn { width: 40px !important; height: 40px !important; }
+
+    .one-page {
+      position: static !important;
+      inset: auto !important;
+      display: block !important;
+      max-width: 720px !important;
+      margin: 0 auto !important;
+      padding: 48px 24px 96px !important;
+      overflow: visible !important;
+    }
+    .one-page > section {
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 0 46px !important;
+      display: block !important;
+    }
+    .one-page > section:last-child { margin-bottom: 0 !important; }
+    .one-page .acc-header { margin-bottom: 22px !important; }
+
+    /* ===== Tighten white space ===== */
+    .site-header { padding: 40px 24px 0 !important; }
+    .icon-buttons { margin-top: 14px !important; }
+    .one-page { padding: 28px 24px 48px !important; max-width: 760px !important; }
+    .one-page > section { margin: 0 0 26px !important; }
+    .one-page .acc-header { margin-bottom: 14px !important; padding-bottom: 8px !important; }
+    .one-page .experience li,
+    .one-page #hackathons .hackathon-card { padding: 5px 2px !important; }
+    .one-page #hackathons .hackathon-card { margin: 0 0 8px !important; }
+    .one-page .project-card { padding: 3px 2px !important; }
+    .proj-viewmore { margin-top: 6px !important; }
+
+    /* ===== Center everything ===== */
+    .site-header { text-align: center !important; }
+    .site-header-top { justify-content: center !important; }
+    .icon-buttons { justify-content: center !important; }
+
+    .one-page,
+    .one-page .acc-header,
+    .one-page .project-content,
+    .one-page .hackathon-info,
+    .one-page .experience li > div,
+    .one-page .education li > div { text-align: center !important; }
+
+    .one-page .acc-header { justify-content: center !important; }
+    .one-page .experience li,
+    .one-page .education li,
+    .one-page #hackathons .hackathon-card,
+    .one-page #hackathons .hackathon-header { justify-content: center !important; }
+    .one-page .project-content,
+    .one-page .project-buttons,
+    .one-page .hackathon-buttons { justify-content: center !important; }
+    .one-page #hackathons .hackathon-buttons { margin-left: 0 !important; }
+    .proj-viewmore { display: block !important; margin-left: auto !important; margin-right: auto !important; }
+
+    /* ===== Left-align everything ===== */
+    .site-header { text-align: left !important; }
+    .site-header-top { justify-content: flex-start !important; }
+    .icon-buttons { justify-content: flex-start !important; }
+
+    .one-page,
+    .one-page .acc-header,
+    .one-page .project-content,
+    .one-page .hackathon-info,
+    .one-page .experience li > div,
+    .one-page .education li > div { text-align: left !important; }
+
+    .one-page .acc-header { justify-content: flex-start !important; }
+    .one-page .experience li,
+    .one-page .education li,
+    .one-page #hackathons .hackathon-card,
+    .one-page #hackathons .hackathon-header { justify-content: flex-start !important; }
+    .one-page .project-content,
+    .one-page .project-buttons,
+    .one-page .hackathon-buttons { justify-content: flex-start !important; }
+    .one-page #hackathons .hackathon-buttons { margin-left: 62px !important; }
+    .proj-viewmore { display: block !important; margin-left: 0 !important; margin-right: auto !important; }
+
+    /* ===== Unify widths + truly center the column ===== */
+    .site-header,
+    .icon-buttons,
+    .one-page {
+      max-width: 600px !important;
+      width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Remove gap between Projects header and first project */
+    .one-page #projects .acc-header { margin-bottom: 4px !important; }
+    .one-page #projects .acc-panel,
+    .one-page #projects .project-section,
+    .one-page #projects .projects-grid { margin-top: 0 !important; padding-top: 0 !important; }
+    .one-page #projects .project-card:first-child { margin-top: 0 !important; padding-top: 0 !important; }
+
+    /* Hover dropdown for each work experience */
+    .one-page #page-work .experience li { position: relative; }
+    .exp-tooltip {
+      display: none;
+      position: absolute;
+      left: 62px;
+      top: calc(100% - 4px);
+      z-index: 200;
+      width: max-content;
+      max-width: 340px;
+      background: #141414;
+      color: #f2f2f2;
+      font-size: 11.5px;
+      line-height: 1.45;
+      text-align: left;
+      padding: 9px 12px;
+      border-radius: 9px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+    .one-page #page-work .experience li:hover .exp-tooltip { display: block; }
+
+    /* Left-align hackathons like projects + experience */
+    .one-page #hackathons,
+    .one-page #hackathons .hackathons-grid,
+    .one-page #hackathons .hackathon-card,
+    .one-page #hackathons .hackathon-info,
+    .one-page #hackathons .hackathon-title,
+    .one-page #hackathons .hackathon-date { text-align: left !important; }
+    .one-page #hackathons .hackathon-card { display: block !important; }
+    .one-page #hackathons .hackathon-header { display: flex !important; justify-content: flex-start !important; align-items: center !important; }
+    .one-page #hackathons .hackathon-info { display: flex !important; flex-direction: column !important; align-items: flex-start !important; }
+    .one-page #hackathons .hackathon-buttons { display: flex !important; justify-content: flex-start !important; margin-left: 62px !important; }
+
+    /* Cleaner hover popover for work experience */
+    .exp-tooltip {
+      left: 0 !important;
+      right: 0 !important;
+      width: auto !important;
+      max-width: none !important;
+      top: calc(100% - 2px) !important;
+      z-index: 400 !important;
+      background: #ffffff !important;
+      color: #333 !important;
+      font-size: 12px !important;
+      line-height: 1.5 !important;
+      padding: 11px 14px !important;
+      border: 1px solid #e6e6e6 !important;
+      border-radius: 10px !important;
+      box-shadow: 0 12px 34px rgba(0,0,0,0.14) !important;
+    }
+
+    /* Align hackathon logo with the title (top) */
+    .one-page #hackathons .hackathon-header { align-items: flex-start !important; }
+    .one-page #hackathons .hackathon-header > a { margin-top: 0 !important; }
+    .one-page #hackathons .hackathon-title { margin-top: 0 !important; }
+
+    /* Experience popover: appear to the right in the empty space */
+    .exp-tooltip {
+      left: calc(100% + 24px) !important;
+      right: auto !important;
+      top: 0 !important;
+      width: 300px !important;
+      max-width: 300px !important;
+    }
+
+    /* Let the right-side popover escape the column */
+    .one-page,
+    .one-page > section,
+    .one-page #page-work,
+    .one-page #page-work .experience,
+    .one-page #page-work .acc-panel,
+    .one-page #page-work .experience ul,
+    .one-page #page-work .experience li { overflow: visible !important; }
+
+    /* Work Experience: show only Backboard.io, rest behind View More */
+    .one-page #page-work .experience li.work-extra { display: none !important; }
+    .one-page #page-work.show-all .experience li.work-extra { display: flex !important; }
+
+    /* Remove the boxy tile around logos */
+    .one-page .experience li > a:first-of-type,
+    .one-page .education li > a:first-of-type,
+    .one-page #hackathons .hackathon-header > a {
+      background: none !important;
+      border: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* Social icons: fixed vertical bar, centered on the right side */
+    .icon-buttons {
+      position: fixed !important;
+      right: 2.5rem !important;
+      left: auto !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      width: auto !important;
+      max-width: none !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 12px !important;
+      opacity: 1 !important;
+      animation: none !important;
+      z-index: 1000 !important;
+    }
+
+    /* Social icons: fixed horizontal bar at the bottom center */
+    .icon-buttons {
+      position: fixed !important;
+      left: 50% !important;
+      right: auto !important;
+      top: auto !important;
+      bottom: 1.75rem !important;
+      transform: translateX(-50%) !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      width: auto !important;
+      max-width: none !important;
+      flex-direction: row !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 12px !important;
+      opacity: 1 !important;
+      animation: none !important;
+      z-index: 1000 !important;
+    }
+
+    /* Signature decoration on the left side */
+    .signature-deco {
+      position: fixed;
+      left: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: center center;
+      width: 300px;
+      height: auto;
+      opacity: 0.9;
+      z-index: 40;
+      pointer-events: none;
+      user-select: none;
+    }
+    @media (max-width: 1100px) { .signature-deco { display: none; } }
+
+    /* Flip signature the other way */
+    .signature-deco { transform: translateY(-50%) rotate(90deg) !important; }
+
+    /* Keep signature horizontal */
+    .signature-deco { transform: translateY(-50%) !important; width: 240px !important; }
+
+    /* Signature: nudge right, bigger, slight tilt */
+    .signature-deco {
+      left: 3.5rem !important;
+      width: 330px !important;
+      transform: translateY(-50%) rotate(-8deg) !important;
+    }
+
+    /* Signature: move further right */
+    .signature-deco { left: 9rem !important; }
+
+    /* Second signature on the right, matching the left one */
+    .signature-deco-right {
+      position: fixed;
+      right: 9rem;
+      left: auto;
+      top: 50%;
+      transform: translateY(-50%) rotate(-8deg);
+      width: 330px;
+      height: auto;
+      opacity: 0.9;
+      z-index: 40;
+      pointer-events: none;
+      user-select: none;
+    }
+    @media (max-width: 1100px) { .signature-deco-right { display: none; } }
+
+    /* Tilt right signature further to the right (clockwise) */
+    .signature-deco-right { transform: translateY(-50%) rotate(10deg) !important; }
+
+    /* Bigger right signature */
+    .signature-deco-right { width: 450px !important; right: 5rem !important; }
+
+    /* Move right signature further left */
+    .signature-deco-right { right: 11rem !important; }
+
+    /* Youseph (left) down, Elkhouly (right) up */
+    .signature-deco { top: 63% !important; }
+    .signature-deco-right { top: 37% !important; }
+
+    /* Stack Elkhouly under Youseph (both on the left) */
+    .signature-deco-right {
+      left: 12rem !important;
+      right: auto !important;
+      top: 74% !important;
+      width: 340px !important;
+      transform: translateY(-50%) rotate(-8deg) !important;
+    }
+
+    /* Elkhouly: tilt right more + bigger */
+    .signature-deco-right { transform: translateY(-50%) rotate(8deg) !important; width: 430px !important; }
+
+    /* Elkhouly: down more + left more */
+    .signature-deco-right { top: 82% !important; left: 7rem !important; }
+
+    /* Youseph: move down more */
+    .signature-deco { top: 75% !important; }
+
+    /* Youseph: up a little */
+    .signature-deco { top: 70% !important; }
+
+    /* Elkhouly: vertical */
+    .signature-deco-right { transform: translateY(-50%) rotate(90deg) !important; }
+
+    /* Elkhouly: move up toward vertical center */
+    .signature-deco-right { top: 44% !important; }
+
+    /* Elkhouly: flip vertical direction */
+    .signature-deco-right { transform: translateY(-50%) rotate(-90deg) !important; }
+
+    /* Elkhouly: slight left tilt from vertical */
+    .signature-deco-right { transform: translateY(-50%) rotate(-98deg) !important; }
+
+    /* Elkhouly: slight right tilt from vertical */
+    .signature-deco-right { transform: translateY(-50%) rotate(-82deg) !important; }
+
+    /* Scale up the Backboard logo icon a bit */
+    .one-page img[src="BBlogo.jpg"] { transform: scale(1.4) !important; }
+
+    /* Fix Backboard icon hover: no clipping, tooltip non-blocking */
+    .one-page #page-work .experience li > a:first-of-type { overflow: visible !important; }
+    .one-page img[src="BBlogo.jpg"] { transform: scale(1.4) !important; transform-origin: center center !important; }
+    .exp-tooltip { pointer-events: none !important; }
+
+    /* Hand-drawn "Read More" cue to the right of Work Experience */
+    .one-page #page-work { position: relative; }
+    .read-more-cue {
+      position: absolute;
+      right: -215px;
+      bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      pointer-events: none;
+      color: #1a1a1a;
+    }
+    .read-more-cue span {
+      font-family: "Caveat", cursive;
+      font-size: 27px;
+      line-height: 1;
+      transform: rotate(-4deg);
+    }
+    .read-more-cue svg { width: 110px; height: auto; }
+    @media (max-width: 1250px) { .read-more-cue { display: none; } }
+
+    /* Read More cue: reposition + enlarge + show on more screens */
+    .one-page #page-work { position: relative !important; overflow: visible !important; }
+    .read-more-cue {
+      right: -215px !important;
+      bottom: auto !important;
+      top: 34px !important;
+      z-index: 60 !important;
+    }
+    .read-more-cue span { font-size: 32px !important; }
+    .read-more-cue svg { width: 130px !important; }
+    @media (max-width: 900px) { .read-more-cue { display: none !important; } }
+    @media (min-width: 901px) { .read-more-cue { display: flex !important; } }
+
+    /* Social icons: consistent inverse hover (black box, white icon) */
+    .icon-btn { transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease !important; }
+    .icon-btn:hover {
+      background: #111 !important;
+      border-color: #111 !important;
+      transform: translateY(-2px) !important;
+    }
+    .icon-btn:hover img { filter: invert(1) brightness(2) !important; }
+    .icon-btn:hover svg { stroke: #ffffff !important; color: #ffffff !important; fill: none !important; }
+
+    /* Read More cue: big + centered in the middle of the screen */
+    .read-more-cue {
+      position: fixed !important;
+      left: 50% !important;
+      top: 50% !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: translate(-50%, -50%) !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 6px !important;
+      z-index: 60 !important;
+      pointer-events: none !important;
+    }
+    .read-more-cue span { font-size: 68px !important; }
+    .read-more-cue svg { width: 260px !important; }
+
+    .read-more-cue { display: none !important; }
+
+    /* Hand-drawn Read More arrow pinned to the right side */
+    .read-more-img {
+      position: fixed;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 340px;
+      height: auto;
+      z-index: 40;
+      pointer-events: none;
+      user-select: none;
+      mix-blend-mode: multiply;
+    }
+    @media (max-width: 1250px) { .read-more-img { display: none; } }
+
+    /* Read More arrow: much bigger */
+    .read-more-img {
+      width: 720px !important;
+      right: 0.5rem !important;
+      mix-blend-mode: normal !important;
+    }
+    @media (max-width: 1400px) { .read-more-img { width: 520px !important; } }
+    @media (max-width: 1050px) { .read-more-img { display: none !important; } }
+
+    /* Read More arrow: move up */
+    .read-more-img { top: 34% !important; }
+
+    /* Read More arrow: up a little more */
+    .read-more-img { top: 26% !important; }
+
+    /* Make the Read More arrow a clickable link */
+    .read-more-img { pointer-events: auto !important; cursor: pointer; }
+    .read-more-link { pointer-events: auto; }
+    .read-more-img:hover { opacity: 0.75; transition: opacity 0.2s ease; }
+
+    /* U of Guelph webring, bottom-right */
+    .webring {
+      position: fixed;
+      right: 1.6rem;
+      bottom: 1.4rem;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .webring-arrow {
+      font-size: 24px;
+      line-height: 1;
+      color: #888;
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .webring-arrow:hover { color: #111; transform: scale(1.15); }
+    .webring-logo img {
+      width: 48px;
+      height: auto;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+    .webring-logo:hover img { transform: scale(1.1); }
+    @media (max-width: 700px) { .webring { right: 1rem; bottom: 1rem; } .webring-logo img { width: 40px; } }
+</style>
 </head>
 <body>
+  <div class="webring">
+    <a class="webring-arrow" href="https://www.yousufahmedkhan.com/" target="_blank" rel="noreferrer" aria-label="Previous site">&#8592;</a>
+    <a class="webring-logo" href="https://www.uguelph.network/" target="_blank" rel="noreferrer" aria-label="U of Guelph webring"><img src="gryphon.png" alt="U of Guelph webring" /></a>
+    <a class="webring-arrow" href="https://pasanishere.github.io/" target="_blank" rel="noreferrer" aria-label="Next site">&#8594;</a>
+  </div>
+  <img src="signature2.png" class="signature-deco-right" alt="Youseph signature" />
+  <a href="blog.html" class="read-more-link" aria-label="Read the blog"><img src="readmore.png" class="read-more-img" alt="Read more" /></a>
   <!-- Custom Cursor - Disabled -->
   
   <!-- Scroll Progress Indicator -->
   <div class="scroll-progress"></div>
-    <nav>
-        <a href="#hero">Home</a>
-        <a href="#experience-education">Experience/Education</a>
-        <a href="#projects">Projects</a>
-        <a href="#hackathons">Hackathons</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      
 
-  <section id="hero">
-    <div class="hero-orbs">
-      <div class="hero-orb"></div>
-      <div class="hero-orb"></div>
-      <div class="hero-orb"></div>
+  <div class="site-header">
+    <div class="site-header-top">
+      <a href="#hero" class="site-brand">Youseph Elkhouly</a>
+      <span class="site-tagline">CS undergrad, software engineer</span>
     </div>
-    <div class="hero-title-wrapper">
-      <h1 class="hero-title">Hey, I'm Youseph</h1>
-    </div>
-    <p class="hero-subtitle">CS undergrad, software engineer</p>
+  </div>
 
     <div class="icon-buttons">
       <a href="https://x.com/ElkhoulyYouseph" target="_blank" class="icon-btn" title="X (Twitter)">
@@ -2572,13 +3760,13 @@
        </button>
     </div>
 
-  </section>
+  <section id="hero"></section>
 
   <hr class="section-divider" />
 
-    <div id="experience-education" class="scroll-offset-anchor"></div>
-    <div class="experience-education">
-      <div class="experience">
+  <div class="one-page">
+  <section id="page-work" class="page">
+    <div class="experience">
         <h3>Work Experience</h3>
         <ul>
           <li>
@@ -2639,46 +3827,6 @@
             </div>
           </li>
           <li>
-            <a href="https://aiducare.com/" target="_blank" style="text-decoration: none;">
-              <img src="image (3).png" alt="Aiducare Logo" />
-            </a>
-            <div>
-              <div style="display: flex; align-items: center; margin-bottom: 4px;">
-                <strong>Aiducare</strong><div class="responsibilities-toggle" onclick="toggleResponsibilities('aiducare')" style="margin-left: 0px; display: inline;"><span class="responsibilities-arrow" id="aiducare-arrow">▼</span></div>
-              </div>
-              Mobile App Developer<br />
-              <span class="date">Montreal, Quebec (Remote)</span><br />
-              <span class="date">June 2025 - August 2025</span>
-              <a href="aiducare-blog.html" class="experience-blog-button">View Gallery</a>
-              <div class="responsibilities-dropdown" id="aiducare-dropdown">
-                <div class="responsibilities-content">
-                  <p class="detail-label">Tech Stack</p>
-                  <div class="tech-stack-container">
-                    <div class="tech-tag">
-                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" />
-                      <span>React</span>
-                    </div>
-                    <div class="tech-tag">
-                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Native" />
-                      <span>React Native</span>
-                    </div>
-                    <div class="tech-tag">
-                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" />
-                      <span>JavaScript</span>
-                    </div>
-                    <div class="tech-tag">
-                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" />
-                      <span>CSS</span>
-                    </div>
-                  </div>
-                  <p class="detail-label">Key Responsibilities</p>
-                  <p>- Built an interactive audio playback feature enabling click-to-hear pronunciation for 30+ active learners and designed an intuitive interface for pronunciation practice with ML-generated feedback, improving learning accuracy by 40%.</p>
-                  <p>- Reorganized components into shared, reusable React Native modules with consistent styling, reducing code duplication by 30% and improving cross-platform maintainability.</p>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
             <a href="https://www.stylusmarketing.ca/" target="_blank" style="text-decoration: none;">
               <img src="stylus.png" />
             </a>
@@ -2723,156 +3871,8 @@
           </li>
           
         </ul>
-        
-        <h3 style="margin-top: 2rem;">Education</h3>
-        <ul>
-          <li>
-              <a href="https://www.uoguelph.ca/programs/computer-science/" target="_blank" style="text-decoration: none;">
-                <img src="uoglogo.jpg" />
-              </a>
-            <div>
-                <div style="display: flex; align-items: center; margin-bottom: 4px;">
-                  <strong>University of Guelph</strong><div class="education-toggle" onclick="toggleEducation('uog')" style="margin-left: 0px; display: inline;"><span class="education-arrow" id="uog-arrow">▼</span></div>
-                </div>
-                Bachelor of Computing Honours (BCOMP)<br />
-                <span class="date">2023 - 2027</span>
-                <div class="education-dropdown" id="uog-dropdown">
-                  <div class="education-content">
-                    <p>Program Details: Bachelor of Computing Honours with focus on Software Engineering</p>
-                    <p>Relevant Coursework: Data Structures & Algorithms, Discrete Math, Object-Oriented Programming, Database Systems, Parallel Programming, Operating Systems, Systems Analysis and Design, Software Reliability & Testing, Software Engineering</p>
-                    <p class="detail-label">Languages & Tools</p>
-                    <div class="tech-stack-container">
-                      <div class="tech-tag">
-                        <img src="clogo.png" alt="C" />
-                        <span>C</span>
-                      </div>
-                      <div class="tech-tag">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R" />
-                        <span>R</span>
-                      </div>
-                      <div class="tech-tag">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
-                        <span>Python</span>
-                      </div>
-                      <div class="tech-tag">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" />
-                        <span>PostgreSQL</span>
-                      </div>
-                      <div class="tech-tag">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
-                        <span>Java</span>
-                      </div>
-                      <div class="tech-tag">
-                        <img src="assembly.png" alt="Assembly" />
-                        <span>Assembly</span>
-                      </div>
-                      <div class="tech-tag">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" />
-                        <span>Docker</span>
-                      </div>
-                      <div class="tech-tag">
-                        <img src="valgrind.png" alt="Valgrind" />
-                        <span>Valgrind</span>
-                      </div>
-                      <div class="tech-tag">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" />
-                        <span>Linux</span>
-                      </div>
-                      <div class="tech-tag">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML/CSS" />
-                        <span>HTML/CSS</span>
-                      </div>
-                      <div class="tech-tag">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" />
-                        <span>Git</span>
-                      </div>
-                      <div class="tech-tag">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fortran/fortran-original.svg" alt="Fortran" />
-                        <span>Fortran</span>
-                      </div>
-                    </div>
-                    <p>Expected Graduation: 2027</p>
-                  </div>
-                </div>
-            </div>
-          </li>
-          <li>
-            <a href="https://secondary.hcdsb.org/loyola/" target="_blank" style="text-decoration: none;">
-              <img src="loyola.png" />
-            </a>
-              <div>
-              <div style="display: flex; align-items: center; margin-bottom: 4px;">
-                <strong>Loyola Catholic Secondary School</strong><div class="education-toggle" onclick="toggleEducation('loyola')" style="margin-left: 0px; display: inline;"><span class="education-arrow" id="loyola-arrow">▼</span></div>
-              </div>
-              Ontario Secondary School Diploma (OSSD)<br />
-              <span class="date">2019 - 2023</span>
-              <div class="education-dropdown" id="loyola-dropdown">
-                <div class="education-content">
-                  <p>High School Diploma: Ontario Secondary School Diploma (OSSD)</p>
-                  <p>Graduation Year: 2023</p>
-                  <p>Focus Areas: Mathematics, Sciences, and Technology courses</p>
-                  <p class="detail-label">Languages & Tools</p>
-                  <div class="tech-stack-container">
-                    <div class="tech-tag">
-                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
-                      <span>Java</span>
-                    </div>
-                    <div class="tech-tag">
-                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
-                      <span>Python</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </div>
-            </li>
-        </ul>
-      </div>
     </div>
-    
-    <div class="skills-section" style="margin-top: 5rem;">
-       
-      <h3 style="text-align: left;">Languages & Databases</h3>
-      <div class="skills-grid">
-      <div class="skill"><a href="https://python.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" /></a></div>
-      <div class="skill"><a href="https://java.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" /></a></div>
-      <div class="skill"><a href="https://javascript.info/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" /></a></div>
-      <div class="skill"><a href="https://typescriptlang.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" /></a></div>
-      <div class="skill"><a href="https://postgresql.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" /></a></div>
-      <div class="skill"><a href="https://mongodb.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" /></a></div>
-      <div class="skill"><a href="https://mysql.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" /></a></div>
-      <div class="skill"><a href="https://firebase.google.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase" /></a></div>
-      </div>
-    
-      <h3 style="margin-top: 2rem; text-align: left;">Frameworks & Tools</h3>
-      <div class="skills-grid">
-      <div class="skill"><a href="https://reactjs.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" /></a></div>
-      <div class="skill"><a href="https://redux.js.org/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" alt="Redux" /></a></div>
-      <div class="skill"><a href="https://expressjs.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express" /></a></div>
-      <div class="skill"><a href="https://spring.io/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring" /></a></div>
-      <div class="skill"><a href="https://flask.palletsprojects.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt="Flask" /></a></div>
-      <div class="skill"><a href="https://aws.amazon.com/" target="_blank"><img src="https://img.icons8.com/color/48/000000/amazon-web-services.png" alt="AWS" /></a></div>
-      <div class="skill"><a href="https://docker.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" /></a></div>
-      <div class="skill"><a href="https://jestjs.io/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" alt="Jest" /></a></div>
-      <div class="skill"><a href="https://git-scm.com/" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" /></a></div>
-      <div class="skill"><a href="https://github.com/features/actions" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/githubactions.svg" alt="CI/CD" /></a></div>
-      <div class="skill"><a href="https://n8n.io/" target="_blank"><img src="n8n-color.svg" alt="n8n" style="width: 48px; height: 48px;" /></a></div>
-      </div>
-
-      <h3 style="margin-top: 2rem; text-align: left;">API's</h3>
-      <div class="skills-grid">
-      <div class="skill"><a href="https://developers.google.com/" target="_blank"><img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google API" /></a></div>
-      <div class="skill"><a href="https://developers.notion.com/" target="_blank"><img src="https://img.icons8.com/color/48/000000/notion.png" alt="Notion Calendar API" /></a></div>
-      <div class="skill"><a href="https://developers.google.com/gmail/api" target="_blank"><img src="https://img.icons8.com/color/48/000000/gmail.png" alt="Gmail API" /></a></div>
-      <div class="skill"><a href="https://twilio.com/" target="_blank"><img src="https://cdn.iconscout.com/icon/free/png-256/free-twilio-logo-icon-download-in-svg-png-gif-file-formats--technology-social-media-vol-7-pack-logos-icons-3030259.png?f=webp&w=256" alt="Twilio API" style="width: 48px; height: 48px;" /></a></div>
-      <div class="skill"><a href="https://ai.google.dev/gemini-api/docs" target="_blank"><img src="https://brandlogo.org/wp-content/uploads/2024/06/Gemini-Icon-300x300.png.webp" alt="Google Gemini API" /></a></div>
-      <div class="skill"><a href="https://openai.com/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="OpenAI API" style="width: 48px; height: 48px;" /></a></div>
-      </div>
-    </div>
-
-
-  
-  
+  </section>
 
   <section id="projects">
     <div class="container">
@@ -3018,7 +4018,7 @@
               <div class="project-status completed">Hackathon Project</div>
             </div>
         <div class="project-content">
-          <h3>Ru'ya (رؤيا) - UmmahHacks</h3>
+          <h3>Ru'ya - UmmahHacks</h3>
               <p class="project-description">An AI-powered Islamic learning platform that transforms authentic Hadith into contextualized cinematic visual stories. Built to help younger generations connect more deeply with Islamic knowledge.</p>
           <div class="tech-tags">
                 <span>Next.js</span><span>React</span><span>Tailwind CSS</span><span>FastAPI</span><span>Google Gemini</span><span>Google Veo</span><span>ElevenLabs</span><span>FFmpeg</span>
@@ -3040,28 +4040,6 @@
         </div>
       </div>
 
-          <!-- EduPro -->
-      <div class="project-card">
-            <div class="project-image">
-              <img src="EDUPRO.png" alt="EduPro" loading="lazy" decoding="async" />
-              <div class="project-status completed">Completed</div>
-            </div>
-        <div class="project-content">
-          <h3>EduPro</h3>
-              <p class="project-description">EduPro is an Intelligent Tutoring System for grades 1–4 that provides personalized math practice with AI-generated hints, adaptive difficulty, and progress tracking for students, teachers, and parents. Built for CIS 3750 (third-year CS) in 2 weeks by a group of 6, it adapts to each student's skill level and provides real-time feedback to support learning.</p>
-          <div class="tech-tags">
-                <span>JavaScript</span><span>TypeScript</span><span>Python</span><span>Next.js</span><span>Flask</span><span>scikit-learn</span><span>NumPy</span><span>Machine Learning</span>
-          </div>
-          <div class="project-buttons">
-                <a href="https://github.com/Youseph-Elkhouly/EduPro3750" class="btn btn-primary" target="_blank">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                  </svg>
-                  GitHub
-                </a>
-          </div>
-        </div>
-      </div>
 
           <!-- GryphBook -->
       <div class="project-card">
@@ -3092,40 +4070,6 @@
         </div>
       </div>
 
-          <!-- ResuMock -->
-      <div class="project-card">
-            <div class="project-image">
-              <img src="Redumock.png" alt="ResuMock" loading="lazy" decoding="async" />
-              <div class="project-status completed">Completed</div>
-            </div>
-        <div class="project-content">
-          <h3>ResuMock</h3>
-              <p class="project-description">A full-stack web app that allows users to simulate a behavioral interview, with questions generated directly from their experience and resume, built in under 2 hours.</p>
-          <div class="tech-tags">
-                <span>JavaScript</span><span>React</span><span>Node.js</span><span>Express.js</span><span>Tailwind CSS</span><span>Gemini API</span>
-          </div>
-          <div class="project-buttons">
-                <a href="https://devpost.com/software/resumock?ref_content=user-portfolio&ref_feature=in_progress" class="btn btn-primary" target="_blank">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                  </svg>
-                  Devpost
-                </a>
-                <a href="https://github.com/seifotefa/deltahackslite" class="btn btn-secondary" target="_blank">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                  </svg>
-                  GitHub
-                </a>
-                <button class="btn btn-secondary" onclick="openResuMockDemoModal()">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                  Demo
-                </button>
-          </div>
-        </div>
-      </div>
 
           <!-- Merchant -->
       <div class="project-card">
@@ -3266,28 +4210,6 @@
         </div>
       </div>
 
-          <!-- Exercise Tracker API -->
-      <div class="project-card">
-            <div class="project-image">
-        <img src="exercise.png" alt="Exercise Tracker API" loading="lazy" decoding="async" />
-              <div class="project-status completed">Completed</div>
-            </div>
-        <div class="project-content">
-          <h3>Exercise Tracker API</h3>
-              <p class="project-description">RESTful API that allows users to create profiles, log workouts with descriptions and dates, and retrieve filtered exercise logs.</p>
-          <div class="tech-tags">
-            <span>Node.js</span><span>Express</span><span>MongoDB</span><span>Mongoose</span>
-          </div>
-          <div class="project-buttons">
-                <a href="https://github.com/Youseph-Elkhouly/Exercise-TrackerAPI" class="btn btn-primary" target="_blank">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                  </svg>
-                  GitHub
-                </a>
-          </div>
-        </div>
-      </div>
 
 
       </div>
@@ -3297,6 +4219,114 @@
   
   
   
+
+  <section id="page-education" class="page">
+    <div class="experience">
+        <h3 style="margin-top: 2rem;">Education</h3>
+        <ul>
+          <li>
+              <a href="https://www.uoguelph.ca/programs/computer-science/" target="_blank" style="text-decoration: none;">
+                <img src="uoglogo.jpg" />
+              </a>
+            <div>
+                <div style="display: flex; align-items: center; margin-bottom: 4px;">
+                  <strong>University of Guelph</strong><div class="education-toggle" onclick="toggleEducation('uog')" style="margin-left: 0px; display: inline;"><span class="education-arrow" id="uog-arrow">▼</span></div>
+                </div>
+                Bachelor of Computing Honours (BCOMP)<br />
+                <span class="date">2023 - 2027</span>
+                <div class="education-dropdown" id="uog-dropdown">
+                  <div class="education-content">
+                    <p>Program Details: Bachelor of Computing Honours with focus on Software Engineering</p>
+                    <p>Relevant Coursework: Data Structures & Algorithms, Discrete Math, Object-Oriented Programming, Database Systems, Parallel Programming, Operating Systems, Systems Analysis and Design, Software Reliability & Testing, Software Engineering</p>
+                    <p class="detail-label">Languages & Tools</p>
+                    <div class="tech-stack-container">
+                      <div class="tech-tag">
+                        <img src="clogo.png" alt="C" />
+                        <span>C</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R" />
+                        <span>R</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+                        <span>Python</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" />
+                        <span>PostgreSQL</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+                        <span>Java</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="assembly.png" alt="Assembly" />
+                        <span>Assembly</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" />
+                        <span>Docker</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="valgrind.png" alt="Valgrind" />
+                        <span>Valgrind</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" />
+                        <span>Linux</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML/CSS" />
+                        <span>HTML/CSS</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" />
+                        <span>Git</span>
+                      </div>
+                      <div class="tech-tag">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fortran/fortran-original.svg" alt="Fortran" />
+                        <span>Fortran</span>
+                      </div>
+                    </div>
+                    <p>Expected Graduation: 2027</p>
+                  </div>
+                </div>
+            </div>
+          </li>
+          <li>
+            <a href="https://secondary.hcdsb.org/loyola/" target="_blank" style="text-decoration: none;">
+              <img src="loyola.png" />
+            </a>
+              <div>
+              <div style="display: flex; align-items: center; margin-bottom: 4px;">
+                <strong>Loyola Catholic Secondary School</strong><div class="education-toggle" onclick="toggleEducation('loyola')" style="margin-left: 0px; display: inline;"><span class="education-arrow" id="loyola-arrow">▼</span></div>
+              </div>
+              Ontario Secondary School Diploma (OSSD)<br />
+              <span class="date">2019 - 2023</span>
+              <div class="education-dropdown" id="loyola-dropdown">
+                <div class="education-content">
+                  <p>High School Diploma: Ontario Secondary School Diploma (OSSD)</p>
+                  <p>Graduation Year: 2023</p>
+                  <p>Focus Areas: Mathematics, Sciences, and Technology courses</p>
+                  <p class="detail-label">Languages & Tools</p>
+                  <div class="tech-stack-container">
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" />
+                      <span>Java</span>
+                    </div>
+                    <div class="tech-tag">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" />
+                      <span>Python</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </li>
+        </ul>
+    </div>
+  </section>
 
   <section id="hackathons">
     <h2>Hackathons</h2>
@@ -3458,7 +4488,7 @@
             </a>
           <div class="hackathon-info">
             <div class="hackathon-date">January 10, 2026</div>
-            <h3 class="hackathon-title">DeltaHacks12 – Frontline</h3>
+            <h3 class="hackathon-title">DeltaHacks12 – Frontline <span class="win-tag">🏆 Winner</span></h3>
             <span class="hackathon-winner-badge">
               <svg viewBox="0 0 24 24" fill="currentColor">
                 <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C18.08 12.63 20 10.55 20 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
@@ -3539,7 +4569,7 @@
         <div class="hackathon-header">
             <a href="https://spurhacks.com/" target="_blank" style="text-decoration: none;">
             <div class="hackathon-logo-wrapper">
-              <img src="Youseph _ Portfolio_files/spur.svg" alt="SpurHacks Logo" />
+              <img src="spurnewlogo.jpeg" alt="SpurHacks Logo" />
               </div>
             </a>
           <div class="hackathon-info">
@@ -3626,63 +4656,8 @@
   
   
 
-  <section id="contact">
-    <h2>Get In Touch</h2>
-    <p style="text-align: center; color: #000000; margin-bottom: 2rem; font-size: 1rem; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.5;">
-      I'm always open to discussing new opportunities, collaborations, or just having a chat about technology and innovation. Feel free to reach out!
-    </p>
-    <div class="contact-container">
-      <a href="mailto:work.youseph@gmail.com" class="contact-card">
-        <div class="contact-icon">
-          <img src="https://img.icons8.com/color/48/000000/gmail.png" alt="Gmail" />
-        </div>
-        <div class="contact-info">
-          <div class="contact-label">Email</div>
-          <div class="contact-value">work.youseph@gmail.com</div>
-        </div>
-      </a>
-      
-      <a href="https://www.linkedin.com/in/yousephe/" target="_blank" class="contact-card">
-        <div class="contact-icon">
-          <img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn" />
-        </div>
-        <div class="contact-info">
-          <div class="contact-label">LinkedIn</div>
-          <div class="contact-value">Youseph El-Khouly</div>
-        </div>
-      </a>
 
-      <a href="https://github.com/Youseph-Elkhouly" target="_blank" class="contact-card">
-        <div class="contact-icon">
-          <img src="https://img.icons8.com/color/48/000000/github.png" alt="GitHub" />
-        </div>
-        <div class="contact-info">
-          <div class="contact-label">GitHub</div>
-          <div class="contact-value">Youseph-Elkhouly</div>
-        </div>
-      </a>
-
-      <a href="tel:+16475541348" class="contact-card">
-        <div class="contact-icon">
-          <img src="https://img.icons8.com/color/48/000000/phone.png" alt="Phone" />
-        </div>
-        <div class="contact-info">
-          <div class="contact-label">Phone</div>
-          <div class="contact-value">+1 (647) 554-1348</div>
-        </div>
-      </a>
-
-      <a href="https://cal.com/youseph-el-khouly-4tskdw" target="_blank" class="contact-card">
-        <div class="contact-icon">
-          <img src="https://img.icons8.com/color/48/000000/calendar.png" alt="Calendar" />
-        </div>
-        <div class="contact-info" style="text-align: center;">
-          <div class="contact-label" style="text-align: center;">Quick Chat</div>
-          <div class="contact-value" style="text-align: center;">Schedule a Meeting</div>
-        </div>
-      </a>
-    </div>
-  </section>
+  </div>
 
   <!-- Resume Modal -->
   <div id="resumeModal" class="resume-modal">
@@ -4368,6 +5343,205 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, 2000); // Wait 2 seconds then trigger if not already triggered
 });
+</script>
+
+<script>
+(function () {
+  function initSectionDropdowns() {
+    document.querySelectorAll(".one-page > section").forEach(function (sec) {
+      var header = sec.querySelector("h2, h3");
+      if (!header) return;
+      var panel = document.createElement("div");
+      panel.className = "acc-panel";
+      var sib = header.nextElementSibling;
+      while (sib) { var n = sib.nextElementSibling; panel.appendChild(sib); sib = n; }
+      header.parentNode.appendChild(panel);
+      header.classList.add("acc-header");
+      header.setAttribute("role", "button");
+      header.setAttribute("tabindex", "0");
+      header.addEventListener("click", function () { sec.classList.toggle("open"); });
+      header.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sec.classList.toggle("open"); }
+      });
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initSectionDropdowns);
+  else initSectionDropdowns();
+})();
+</script>
+
+<script>
+(function () {
+  function initProjView() {
+    var proj = document.querySelector(".one-page #projects");
+    if (!proj) return;
+    var keep = /frontline|spark\s*&?\s*prepper|gryphbook/i;
+    var cards = proj.querySelectorAll(".project-card");
+    var hidden = 0;
+    cards.forEach(function (c) {
+      var el = c.querySelector("h3");
+      var t = el ? el.textContent : "";
+      if (!keep.test(t)) { c.classList.add("proj-extra"); hidden++; }
+    });
+    if (hidden === 0) return;
+    var btn = document.createElement("button");
+    btn.className = "proj-viewmore";
+    btn.textContent = "View More";
+    btn.addEventListener("click", function () {
+      var open = proj.classList.toggle("show-all");
+      btn.textContent = open ? "View Less" : "View More";
+    });
+    var container = proj.querySelector(".acc-panel") || proj.querySelector(".container") || proj;
+    container.appendChild(btn);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initProjView);
+  else initProjView();
+})();
+</script>
+
+<script>
+(function () {
+  function initHackView() {
+    var hack = document.querySelector(".one-page #hackathons");
+    if (!hack) return;
+    var keep = /deltahacks12/i;
+    var cards = hack.querySelectorAll(".hackathon-card");
+    var hidden = 0;
+    cards.forEach(function (c) {
+      var el = c.querySelector(".hackathon-title");
+      var t = el ? el.textContent : "";
+      if (!keep.test(t)) { c.classList.add("hack-extra"); hidden++; }
+    });
+    if (hidden === 0) return;
+    var btn = document.createElement("button");
+    btn.className = "proj-viewmore";
+    btn.textContent = "View More";
+    btn.addEventListener("click", function () {
+      var open = hack.classList.toggle("show-all");
+      btn.textContent = open ? "View Less" : "View More";
+    });
+    var container = hack.querySelector(".acc-panel") || hack;
+    container.appendChild(btn);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initHackView);
+  else initHackView();
+})();
+</script>
+
+<script>
+(function () {
+  function initEduView() {
+    var edu = document.querySelector(".one-page #page-education");
+    if (!edu) return;
+    var items = edu.querySelectorAll(".experience li");
+    var hidden = 0;
+    items.forEach(function (li) {
+      var t = li.textContent || "";
+      if (!/guelph/i.test(t)) { li.classList.add("edu-extra"); hidden++; }
+    });
+    if (hidden === 0) return;
+    var btn = document.createElement("button");
+    btn.className = "proj-viewmore";
+    btn.textContent = "View More";
+    btn.addEventListener("click", function () {
+      var open = edu.classList.toggle("show-all");
+      btn.textContent = open ? "View Less" : "View More";
+    });
+    var container = edu.querySelector(".acc-panel") || edu.querySelector(".experience") || edu;
+    container.appendChild(btn);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initEduView);
+  else initEduView();
+})();
+</script>
+
+<script>
+(function () {
+  var descs = {
+    "Backboard.io": "Incoming software engineer intern building AI systems — production LLM features and full-stack infrastructure. Shipping quickly on a small, high-velocity team.",
+    "PrepBusiness": "Built an AI customer-support chatbot with FastAPI and RAG that automates 65% of common inquiries. Added automated PII detection and redaction with ML confidence scoring for secure handoff to human agents.",
+    "Stylus Marketing": "Engineered a serverless inventory and payment system adopted by 50+ clients, with event-driven Stripe retry logic for overdue charges. Built real-time WebSocket dashboards that cut resolution times by 75%."
+  };
+  function initExpTooltips() {
+    document.querySelectorAll(".one-page #page-work .experience li").forEach(function (li) {
+      var strong = li.querySelector("strong");
+      var org = strong ? strong.textContent.trim() : "";
+      var d = descs[org];
+      if (!d) return;
+      var tip = document.createElement("div");
+      tip.className = "exp-tooltip";
+      tip.textContent = d;
+      li.appendChild(tip);
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initExpTooltips);
+  else initExpTooltips();
+})();
+</script>
+
+<script>
+(function () {
+  function initWorkView() {
+    var work = document.querySelector(".one-page #page-work");
+    if (!work) return;
+    var items = work.querySelectorAll(".experience li");
+    var hidden = 0;
+    items.forEach(function (li) {
+      var strong = li.querySelector("strong");
+      var org = strong ? strong.textContent.trim() : "";
+      if (!/backboard/i.test(org)) { li.classList.add("work-extra"); hidden++; }
+    });
+    if (hidden === 0) return;
+    var btn = document.createElement("button");
+    btn.className = "proj-viewmore";
+    btn.textContent = "View More";
+    btn.addEventListener("click", function () {
+      var open = work.classList.toggle("show-all");
+      btn.textContent = open ? "View Less" : "View More";
+    });
+    var container = work.querySelector(".acc-panel") || work.querySelector(".experience") || work;
+    container.appendChild(btn);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initWorkView);
+  else initWorkView();
+})();
+</script>
+
+<script>
+(function () {
+  // Keep the scroll position steady when toggling any View More button
+  document.addEventListener("click", function (e) {
+    var t = e.target;
+    var btn = t && t.closest ? t.closest(".proj-viewmore") : null;
+    if (!btn) return;
+    var y = window.scrollY;
+    requestAnimationFrame(function () { window.scrollTo(0, y); });
+  }, true);
+  // Ensure the buttons never behave like form submits
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".proj-viewmore").forEach(function (b) { b.type = "button"; });
+  });
+})();
+</script>
+
+<script>
+(function () {
+  function addReadMoreCue() {
+    var work = document.querySelector(".one-page #page-work");
+    if (!work || work.querySelector(".read-more-cue")) return;
+    var cue = document.createElement("div");
+    cue.className = "read-more-cue";
+    cue.innerHTML =
+      "<span>Read More</span>" +
+      "<svg viewBox='0 0 120 46' fill='none' stroke='#1a1a1a' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'>" +
+      "<path d='M114 12 C 84 6, 66 30, 44 20 C 30 14, 40 34, 12 30'/>" +
+      "<path d='M27 20 L 9 30 L 24 41'/>" +
+      "</svg>";
+    return;
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", addReadMoreCue);
+  else addReadMoreCue();
+})();
 </script>
 </body>
 </html>
