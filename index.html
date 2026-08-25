@@ -3715,6 +3715,22 @@
     }
     .webring-logo:hover img { transform: scale(1.1); }
     @media (max-width: 700px) { .webring { right: 1rem; bottom: 1rem; } .webring-logo img { width: 40px; } }
+
+    /* Remove hover effects on the social icons */
+    .icon-btn:hover {
+      background: #ffffff !important;
+      border-color: #e6e6e6 !important;
+      transform: none !important;
+    }
+    .icon-btn:hover img { filter: none !important; }
+    .icon-btn:hover svg { stroke: #111 !important; color: #111 !important; fill: none !important; }
+
+    /* Remove hover highlight on work experience + education rows/icons */
+    .one-page .experience li:hover,
+    .one-page .education li:hover { background: none !important; }
+    .one-page .experience li > a:first-of-type:hover img,
+    .one-page .education li > a:first-of-type:hover img { filter: none !important; transform: none; }
+    .one-page img[src="BBlogo.jpg"]:hover { transform: scale(1.4) !important; }
 </style>
 </head>
 <body>
