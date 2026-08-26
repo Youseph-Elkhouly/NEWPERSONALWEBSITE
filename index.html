@@ -3769,6 +3769,38 @@
       .webring-logo img { width: 38px !important; }
       .webring-arrow { font-size: 20px !important; }
     }
+
+    /* Spacing tweaks (laptop view) */
+    .signature-deco-right { left: 4rem !important; }
+    .read-more-img { top: 33% !important; }
+
+    /* Move bottom social icons down more */
+    .icon-buttons { bottom: 0.5rem !important; }
+
+    /* Fade out the Read More arrow once you scroll */
+    .read-more-img { transition: opacity 0.3s ease !important; }
+    .read-more-img.scrolled-hidden { opacity: 0 !important; pointer-events: none !important; }
+
+    /* Mobile: left-align work experience + education logos/rows */
+    @media (max-width: 700px) {
+      .one-page .experience li,
+      .one-page .education li {
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+      }
+      .one-page .experience li > a:first-of-type,
+      .one-page .education li > a:first-of-type { margin-right: 0 !important; }
+      .one-page .experience li > div,
+      .one-page .education li > div { text-align: left !important; }
+    }
+
+    /* Smaller social icons */
+    .icon-btn { width: 34px !important; height: 34px !important; padding: 6px !important; }
+    .icon-buttons { gap: 9px !important; }
+
+    /* Nudge Read More arrow right */
+    .read-more-img { right: -2rem !important; }
 </style>
 </head>
 <body>
@@ -3831,7 +3863,7 @@
               <div style="display: flex; align-items: center; margin-bottom: 4px;">
                 <strong>Backboard.io</strong>
               </div>
-              Software Engineer Intern (Summer 26')<br />
+              Member of Technical Staff (Summer 26')<br />
               <span class="date">Ottawa, Ontario (Hybrid)</span><br />
               <span class="date">May 2026 - Present</span>
             </div>
@@ -5512,7 +5544,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 (function () {
   var descs = {
-    "Backboard.io": "Incoming software engineer intern building AI systems — production LLM features and full-stack infrastructure. Shipping quickly on a small, high-velocity team.",
+    "Backboard.io": "Incoming member of technical staff building AI systems — production LLM features and full-stack infrastructure. Shipping quickly on a small, high-velocity team.",
     "PrepBusiness": "Built an AI customer-support chatbot with FastAPI and RAG that automates 65% of common inquiries. Added automated PII detection and redaction with ML confidence scoring for secure handoff to human agents.",
     "Stylus Marketing": "Engineered a serverless inventory and payment system adopted by 50+ clients, with event-driven Stripe retry logic for overdue charges. Built real-time WebSocket dashboards that cut resolution times by 75%."
   };
@@ -5595,6 +5627,23 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", addReadMoreCue);
   else addReadMoreCue();
+})();
+</script>
+
+<script>
+(function () {
+  function initReadMoreScroll() {
+    var el = document.querySelector(".read-more-img");
+    if (!el) return;
+    function onScroll() {
+      if (window.scrollY > 80) el.classList.add("scrolled-hidden");
+      else el.classList.remove("scrolled-hidden");
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initReadMoreScroll);
+  else initReadMoreScroll();
 })();
 </script>
 </body>
