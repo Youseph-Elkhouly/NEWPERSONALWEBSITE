@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio</title>
+  <title>Youseph Elkhouly</title>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -3801,6 +3801,83 @@
 
     /* Nudge Read More arrow right */
     .read-more-img { right: -2rem !important; }
+
+    /* Desktop: move social icons to the right of the Work Experience section */
+    @media (min-width: 701px) {
+      .icon-buttons {
+        position: fixed !important;
+        right: 3rem !important;
+        left: auto !important;
+        top: 170px !important;
+        bottom: auto !important;
+        transform: none !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+    }
+
+    /* Desktop: horizontal icons under the name/tagline */
+    @media (min-width: 701px) {
+      .icon-buttons {
+        position: static !important;
+        transform: none !important;
+        top: auto !important; right: auto !important; bottom: auto !important; left: auto !important;
+        margin: 14px 0 0 !important;
+        padding: 0 !important;
+        width: auto !important; max-width: none !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        gap: 9px !important;
+        opacity: 1 !important;
+        animation: none !important;
+      }
+    }
+
+    /* ===== FINAL desktop layout: centered column, tight header gap ===== */
+    @media (min-width: 701px) {
+      .site-header {
+        max-width: 620px !important;
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 46px 20px 0 !important;
+      }
+      .one-page {
+        max-width: 620px !important;
+        width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 18px 20px 90px !important;
+      }
+      .one-page > section:first-child { margin-top: 0 !important; }
+      .one-page > section:first-child .acc-header { margin-top: 0 !important; }
+    }
+
+    /* Center the icon row (its a sibling of the header) so it sits under the name */
+    @media (min-width: 701px) {
+      .icon-buttons {
+        position: static !important;
+        top: auto !important; right: auto !important; bottom: auto !important; left: auto !important;
+        transform: none !important;
+        max-width: 620px !important;
+        width: 100% !important;
+        margin: 12px auto 0 !important;
+        padding: 0 20px !important;
+        box-sizing: border-box !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        gap: 9px !important;
+        opacity: 1 !important;
+        animation: none !important;
+      }
+    }
+
+    /* Unbold all text except the section headers */
+    .one-page *, .site-tagline { font-weight: 400 !important; }
+    .one-page .acc-header,
+    .one-page .experience h3.acc-header,
+    .one-page #projects h2.acc-header,
+    .one-page #hackathons h2.acc-header { font-weight: 600 !important; }
 </style>
 </head>
 <body>
@@ -3810,7 +3887,6 @@
     <a class="webring-arrow" href="https://pasanishere.github.io/" target="_blank" rel="noreferrer" aria-label="Next site">&#8594;</a>
   </div>
   <img src="signature2.png" class="signature-deco-right" alt="Youseph signature" />
-  <a href="blog.html" class="read-more-link" aria-label="Read the blog"><img src="readmore.png" class="read-more-img" alt="Read more" /></a>
   <!-- Custom Cursor - Disabled -->
   
   <!-- Scroll Progress Indicator -->
@@ -3818,7 +3894,7 @@
 
   <div class="site-header">
     <div class="site-header-top">
-      <a href="#hero" class="site-brand">Youseph Elkhouly</a>
+      <span class="site-brand">Youseph Elkhouly</span>
       <span class="site-tagline">CS undergrad, software engineer</span>
     </div>
   </div>
