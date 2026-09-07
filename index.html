@@ -1931,6 +1931,9 @@
   font-size: 0.8rem;
 }
 
+/* Short one-line project blurb — only shown in the compact one-page view */
+.project-tagline { display: none; }
+
 /* Projects section keeps original tech-tag style when not inside experience/education */
 .tech-tag {
   display: inline-flex;
@@ -2670,6 +2673,7 @@
     }
     .one-page .project-image,
     .one-page .tech-tags,
+    .one-page .project-description,
     .one-page .project-status { display: none !important; }
     .one-page .project-content { padding: 0 !important; }
     .one-page .project-content h3 { font-size: 12px !important; font-weight: 400 !important; margin: 0 !important; }
@@ -2703,9 +2707,18 @@
     .one-page .skill img { width: 20px !important; height: 20px !important; }
 
     /* ===== Compact inline links (Demo/Devpost/GitHub/Gallery) + polish ===== */
-    .one-page .project-content { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-    .one-page .project-content h3 { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .one-page .project-buttons { display: flex !important; flex-wrap: nowrap; gap: 9px; margin: 0 !important; justify-content: flex-end; flex: 0 0 auto; }
+    .one-page .project-content { display: block !important; }
+    .one-page .project-content h3 { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .one-page .project-tagline {
+      display: block !important;
+      font-size: 12.5px !important;
+      font-weight: 400 !important;
+      color: #666 !important;
+      line-height: 1.35 !important;
+      margin: 2px 0 4px !important;
+      white-space: normal;
+    }
+    .one-page .project-buttons { display: flex !important; flex-wrap: wrap; gap: 9px; margin: 0 !important; justify-content: flex-start; }
     .one-page .hackathon-info { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
     .one-page .hackathon-title { flex: 1 1 auto; }
     .one-page .hackathon-buttons { display: flex !important; flex-wrap: wrap; gap: 9px; margin: 0 !important; }
@@ -4045,6 +4058,33 @@
       <div class="project-section">
     <div class="projects-grid">
 
+          <!-- Notipply -->
+      <div class="project-card">
+            <div class="project-image">
+              <img src="favicon.png" alt="Notipply" loading="lazy" decoding="async" />
+              <div class="project-status completed">Live</div>
+            </div>
+        <div class="project-content">
+          <h3>Notipply</h3>
+              <p class="project-tagline">Instant SMS alerts the moment new job postings go live.</p>
+              <p class="project-description">Notipply sends instant SMS notifications the moment new job postings go live, so you can be among the first to apply.</p>
+          <div class="project-buttons">
+                <a href="https://www.notipply.com/" class="btn btn-primary" target="_blank">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                  </svg>
+                  Live Site
+                </a>
+                <a href="https://x.com/ElkhoulyYouseph/status/2097099294973046894" class="btn btn-secondary" target="_blank">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  Demo
+                </a>
+          </div>
+        </div>
+      </div>
+
           <!-- Promptimize - GDG Hacks 3 -->
       <div class="project-card">
             <div class="project-image">
@@ -4053,6 +4093,7 @@
             </div>
         <div class="project-content">
           <h3>Promptimize – GDG Hacks 3</h3>
+              <p class="project-tagline">LLM budgeting for developers — token counting, cost estimates, and prompt optimization.</p>
               <p class="project-description">An all-in-one LLM budgeting tool to help developers monitor and reduce AI-related expenses. Includes a VS Code/Cursor extension and web dashboard with real-time token counting, cost estimates, daily budget tracking, prompt optimization, live API call monitoring, historical cost analysis, and context-aware recommendations powered by stored project memory.</p>
           <div class="tech-tags">
                 <span>TypeScript</span><span>Python</span><span>FastAPI</span><span>React</span><span>Next.js</span><span>Tailwind CSS</span><span>Claude</span><span>Gemini</span><span>VS Code Language Model API</span>
@@ -4088,6 +4129,7 @@
             </div>
         <div class="project-content">
           <h3>Sentry - IBM Dev Day AI Demystified</h3>
+              <p class="project-tagline">IDE extension that catches security flaws like exposed API keys in real time and suggests fixes.</p>
               <p class="project-description">An IDE extension that monitors code in real time to detect and prevent security vulnerabilities, such as exposed API keys. When an issue is found, it locks the workflow, highlights the exact problem line, and recommends secure fixes. With "Fix with Sentry," the vulnerability context is sent to Bob, which automatically generates and applies a secure remediation.</p>
           <div class="tech-tags">
                 <span>TypeScript</span><span>Node.js</span><span>Fastify</span><span>VSCode</span><span>Webpack</span><span>Turbo</span><span>npm</span>
@@ -4117,6 +4159,7 @@
             </div>
         <div class="project-content">
           <h3>Frontline - DeltaHacks12</h3>
+              <p class="project-tagline">Real-time vitals, injury detection + voice guidance for emergencies.</p>
               <p class="project-description">Developed a platform that transforms camera feeds into real-time biometric data and vital signs using Presage. Engineered an ElevenLabs and Gemini-powered first aid voice operator. Built an ER-ready incident response dashboard that generates standardized SBAR reports, enabling ER workers to review incident video playback and receive patient reports in advance, reducing diagnosis and handoff time by 10%.</p>
           <div class="tech-tags">
                 <span>C++</span><span>React</span><span>Gemini API</span><span>ElevenLabs</span><span>Presage</span><span>Node.js</span>
@@ -4152,6 +4195,7 @@
             </div>
         <div class="project-content">
               <h3>Spark & Prepper GDGHACKS25</h3>
+              <p class="project-tagline">AI-powered study app.</p>
               <p class="project-description">AI-powered study tool that transforms course materials into smart study guides, flashcards, cheat sheets, and mock exams using Google Gemini.</p>
           <div class="tech-tags">
             <span>React</span><span>Tailwind CSS</span><span>Vite</span><span>React Router</span><span>Node.js</span><span>Express.js</span><span>Google Gemini API</span><span>Firebase</span>
@@ -4181,6 +4225,7 @@
             </div>
         <div class="project-content">
           <h3>Ru'ya - UmmahHacks</h3>
+              <p class="project-tagline">AI platform that transforms authentic Hadith into cinematic visual stories.</p>
               <p class="project-description">An AI-powered Islamic learning platform that transforms authentic Hadith into contextualized cinematic visual stories. Built to help younger generations connect more deeply with Islamic knowledge.</p>
           <div class="tech-tags">
                 <span>Next.js</span><span>React</span><span>Tailwind CSS</span><span>FastAPI</span><span>Google Gemini</span><span>Google Veo</span><span>ElevenLabs</span><span>FFmpeg</span>
@@ -4211,6 +4256,7 @@
             </div>
         <div class="project-content">
           <h3>GryphBook</h3>
+              <p class="project-tagline">Quicker room booking for the University of Guelph.</p>
               <p class="project-description">Middleware layer that processes room booking requests between the frontend and University of Guelph's LibCal system. Handles data transformation, filtering, time slot processing, and error handling to provide real-time room availability with capacity and building filters.</p>
           <div class="tech-tags">
                 <span>Next.js</span><span>React</span><span>TypeScript</span><span>Express.js</span><span>PostgreSQL</span><span>Supabase</span><span>Tailwind CSS</span><span>Heroku</span>
@@ -4241,6 +4287,7 @@
             </div>
         <div class="project-content">
           <h3>Merchant</h3>
+              <p class="project-tagline">Marketplace and Kijiji scraper.</p>
               <p class="project-description">Aggregates listings from Kijiji and Facebook Marketplace. Built with Flask, BeautifulSoup, PostgreSQL, and Twilio SMS alerts.</p>
           <div class="tech-tags">
                 <span>TypeScript</span><span>Python</span><span>React</span><span>Flask</span><span>Docker</span><span>PostgreSQL</span>
@@ -4270,6 +4317,7 @@
             </div>
         <div class="project-content">
               <h3>Typing Speed Test</h3>
+              <p class="project-tagline">Typing trainer with live WPM feedback, adjustable difficulty, and stats tracking.</p>
               <p class="project-description">React + TypeScript app to test and improve typing speed. Features live feedback, adjustable difficulty, and stats tracking.</p>
           <div class="tech-tags">
             <span>React</span><span>TypeScript</span><span>CSS</span>
@@ -4299,6 +4347,7 @@
             </div>
         <div class="project-content">
           <h3>Vehicle Management System</h3>
+              <p class="project-tagline">CRUD car database in C — add, search, sort, and manage records.</p>
               <p class="project-description">Car management system using C programming. Allows users to add, search, display, count, sort, and remove cars from the database with efficient data management.</p>
           <div class="tech-tags">
                 <span>C</span><span>Makefiles</span><span>Data Structures</span>
@@ -4328,6 +4377,7 @@
             </div>
         <div class="project-content">
           <h3>Contact Management System</h3>
+              <p class="project-tagline">File-backed contact manager in C with multi-criteria search.</p>
               <p class="project-description">C-based contact management system that allows users to manage, search, and update contacts from a database file using various search criteria.</p>
           <div class="tech-tags">
                 <span>C</span><span>Makefiles</span><span>File I/O</span>
@@ -4357,6 +4407,7 @@
             </div>
         <div class="project-content">
               <h3>Zoo Data ML Project</h3>
+              <p class="project-tagline">Animal classifier in C using a K-Nearest Neighbors algorithm.</p>
               <p class="project-description">Animal Classification System that analyzes features and performs operations like generating statistics, calculating distances, and classifying samples using K-Nearest Neighbors (KNN) algorithm.</p>
           <div class="tech-tags">
                 <span>C</span><span>Makefiles</span><span>Machine Learning</span>
@@ -5537,7 +5588,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function initProjView() {
     var proj = document.querySelector(".one-page #projects");
     if (!proj) return;
-    var keep = /frontline|spark\s*&?\s*prepper|gryphbook/i;
+    var keep = /notipply|frontline|gryphbook/i;
     var cards = proj.querySelectorAll(".project-card");
     var hidden = 0;
     cards.forEach(function (c) {
