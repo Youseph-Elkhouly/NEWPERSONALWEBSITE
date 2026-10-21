@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
   screen.append(header, icons, content);
 
   const sections = [...content.querySelectorAll(':scope > section')];
+  // A demo opened from View More must appear above the list it came from.
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('.btn[onclick]');
+    if (!trigger || !/open\w*Modal\(/.test(trigger.getAttribute('onclick'))) return;
+    const panel = trigger.closest('.acc-panel:popover-open');
+    panel?.querySelector('.proj-viewmore')?.click();
+  }, true);
   sections.forEach(section => {
     const panel = section.querySelector('.acc-panel');
     const button = section.querySelector('.proj-viewmore');

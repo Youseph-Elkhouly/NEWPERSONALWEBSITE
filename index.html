@@ -3949,6 +3949,38 @@
     @media (max-width: 700px) {
       body::before { background-position: 28% center; }
     }
+
+    /* Reveal the signature from the bottom in viewport space, despite its rotation. */
+    .signature-reveal {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 40;
+    }
+    @property --signature-reveal {
+      syntax: "<percentage>";
+      inherits: false;
+      initial-value: 112%;
+    }
+
+    /* Quiet motion: a one-time signature reveal and a slow skyline breath. */
+    @media (prefers-reduced-motion: no-preference) {
+      .signature-reveal {
+        mask-image: linear-gradient(to top, #000 calc(var(--signature-reveal) - 12%), transparent var(--signature-reveal));
+        animation: signature-reveal-up 6s cubic-bezier(0.4, 0, 0.2, 1) 0.15s backwards;
+      }
+      body::before {
+        animation: skyline-breathe 14s ease-in-out infinite;
+      }
+    }
+    @keyframes signature-reveal-up {
+      from { --signature-reveal: 0%; }
+      to { --signature-reveal: 112%; }
+    }
+    @keyframes skyline-breathe {
+      0%, 100% { opacity: 0.15; }
+      50% { opacity: 0.5; }
+    }
 </style>
   <script src="portfolio-layout.js" defer></script>
   <link rel="stylesheet" href="typography.css" />
@@ -3960,7 +3992,9 @@
     <a class="webring-logo" href="https://www.uguelph.network/" target="_blank" rel="noreferrer" aria-label="U of Guelph webring"><img src="gryphon.png" alt="U of Guelph webring" /></a>
     <a class="webring-arrow" href="https://pasanishere.github.io/" target="_blank" rel="noreferrer" aria-label="Next site">&#8594;</a>
   </div>
-  <img src="signature2.png" class="signature-deco-right" alt="Youseph signature" />
+  <div class="signature-reveal" aria-hidden="true">
+    <img src="signature2.png" class="signature-deco-right" alt="" />
+  </div>
   <!-- Custom Cursor - Disabled -->
 
   <!-- Scroll Progress Indicator -->
@@ -4005,6 +4039,19 @@
     <div class="experience">
         <h3>Work Experience</h3>
         <ul>
+          <li>
+            <a href="https://www.wealthsimple.com/en-ca" target="_blank" rel="noopener noreferrer" aria-label="Wealthsimple website">
+              <img src="WEALTHLOGO.jpeg" alt="Wealthsimple logo" width="50" height="50" />
+            </a>
+            <div>
+              <div style="display: flex; align-items: center; margin-bottom: 4px;">
+                <strong>Wealthsimple</strong>
+              </div>
+              Software Engineering Intern<br />
+              <span class="date">Toronto, Ontario (Hybrid)</span><br />
+              <span class="date">Winter '27</span>
+            </div>
+          </li>
           <li>
             <a href="https://backboard.io/" target="_blank" style="text-decoration: none;">
               <img src="BBlogo.jpg" alt="Backboard Logo" />
@@ -5741,7 +5788,7 @@ document.addEventListener('DOMContentLoaded', function() {
     items.forEach(function (li) {
       var strong = li.querySelector("strong");
       var org = strong ? strong.textContent.trim() : "";
-      if (!/backboard/i.test(org)) { li.classList.add("work-extra"); hidden++; }
+      if (!/wealthsimple/i.test(org)) { li.classList.add("work-extra"); hidden++; }
     });
     if (hidden === 0) return;
     var btn = document.createElement("button");
