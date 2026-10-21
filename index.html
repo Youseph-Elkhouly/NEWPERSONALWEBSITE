@@ -260,7 +260,7 @@
       animation-play-state: paused;
       pointer-events: none;
       z-index: 0;
-      opacity: 0.4;
+      opacity: 0.2;
       will-change: background-position;
     }
 
@@ -1157,7 +1157,7 @@
 
 #projects {
   padding: 100px 20px 40px;
-  background-color: var(--bg-color);
+  background-color: rgba(255, 255, 255, 0.35);
 }
 
 #projects .container {
@@ -3595,12 +3595,7 @@
     /* Elkhouly: slight right tilt from vertical */
     .signature-deco-right { transform: translateY(-50%) rotate(-82deg) !important; }
 
-    /* Scale up the Backboard logo icon a bit */
-    .one-page img[src="BBlogo.jpg"] { transform: scale(1.4) !important; }
-
-    /* Fix Backboard icon hover: no clipping, tooltip non-blocking */
-    .one-page #page-work .experience li > a:first-of-type { overflow: visible !important; }
-    .one-page img[src="BBlogo.jpg"] { transform: scale(1.4) !important; transform-origin: center center !important; }
+    /* Keep the work experience tooltip non-blocking. */
     .exp-tooltip { pointer-events: none !important; }
 
     /* Hand-drawn "Read More" cue to the right of Work Experience */
@@ -3729,21 +3724,30 @@
     .webring-logo:hover img { transform: scale(1.1); }
     @media (max-width: 700px) { .webring { right: 1rem; bottom: 1rem; } .webring-logo img { width: 40px; } }
 
-    /* Remove hover effects on the social icons */
-    .icon-btn:hover {
+    /* Keep social/action icons stationary, including their inner artwork. */
+    .icon-buttons .icon-btn,
+    .icon-buttons .icon-btn:hover {
       background: #ffffff !important;
       border-color: #e6e6e6 !important;
       transform: none !important;
+      box-shadow: none !important;
+      transition: none !important;
+      animation: none !important;
     }
-    .icon-btn:hover img { filter: none !important; }
-    .icon-btn:hover svg { stroke: #111 !important; color: #111 !important; fill: none !important; }
+    .icon-buttons .icon-btn::before { display: none !important; }
+    .icon-buttons .icon-btn img,
+    .icon-buttons .icon-btn svg {
+      transform: none !important;
+      transition: none !important;
+      filter: none !important;
+    }
+    .icon-buttons .icon-btn:hover svg { stroke: #111 !important; color: #111 !important; fill: none !important; }
 
     /* Remove hover highlight on work experience + education rows/icons */
     .one-page .experience li:hover,
     .one-page .education li:hover { background: none !important; }
     .one-page .experience li > a:first-of-type:hover img,
     .one-page .education li > a:first-of-type:hover img { filter: none !important; transform: none; }
-    .one-page img[src="BBlogo.jpg"]:hover { transform: scale(1.4) !important; }
 
     /* ===== Mobile layout ===== */
     @media (max-width: 700px) {
@@ -3891,7 +3895,63 @@
     .one-page .experience h3.acc-header,
     .one-page #projects h2.acc-header,
     .one-page #hackathons h2.acc-header { font-weight: 600 !important; }
+
+    /* Consistent logo frames; blend white image backgrounds into the skyline. */
+    .one-page .experience li > a:first-of-type,
+    .one-page .education li > a:first-of-type,
+    .one-page #hackathons .hackathon-header > a {
+      width: 50px !important;
+      height: 50px !important;
+      flex: 0 0 50px !important;
+      overflow: hidden !important;
+    }
+    .one-page .experience li > a:first-of-type img,
+    .one-page .education li > a:first-of-type img,
+    .one-page #hackathons .hackathon-logo-wrapper img {
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important;
+      object-position: center;
+      mix-blend-mode: multiply;
+    }
+
+    /* Blend the entire logo slot, including images with their own transforms. */
+    .one-page #page-work .experience li > a:first-of-type {
+      overflow: hidden !important;
+      mix-blend-mode: multiply;
+    }
+    .one-page #page-work .experience li > a:first-of-type img {
+      border-radius: 0 !important;
+      mix-blend-mode: normal;
+      transform: none !important;
+    }
+    .one-page #page-work .experience li > a:first-of-type img[src="BBlogo.jpg"] {
+      transform: scale(1.4) !important;
+      transform-origin: center;
+    }
+
+    /* Keep the skyline anchored to the viewport as the portfolio scrolls. */
+    html { background-color: #faf7f0; }
+    body {
+      background-color: transparent;
+      isolation: isolate;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: #faf7f0 url("skyline-background.png") left center / cover no-repeat;
+      opacity: 0.4;
+    }
+    @media (max-width: 700px) {
+      body::before { background-position: 28% center; }
+    }
 </style>
+  <script src="portfolio-layout.js" defer></script>
+  <link rel="stylesheet" href="typography.css" />
 </head>
 <body>
   <div class="webring">
@@ -3913,10 +3973,10 @@
   </div>
 
     <div class="icon-buttons">
-      <a href="https://x.com/ElkhoulyYouseph" target="_blank" class="icon-btn" title="X (Twitter)">
+      <a href="https://x.com/ElkhoulyYouseph" target="_blank" class="icon-btn" aria-label="X (Twitter)">
         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg" alt="X" />
       </a>
-      <a href="https://cal.com/youseph-el-khouly-4tskdw" target="_blank" class="icon-btn" title="Book a Meeting">
+      <a href="https://cal.com/youseph-el-khouly-4tskdw" target="_blank" class="icon-btn" aria-label="Book a Meeting">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
           <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
@@ -3924,13 +3984,13 @@
           <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
         </svg>
       </a>
-      <a href="https://github.com/Youseph-Elkhouly" target="_blank" class="icon-btn" title="GitHub">
+      <a href="https://github.com/Youseph-Elkhouly" target="_blank" class="icon-btn" aria-label="GitHub">
         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub" />
       </a>
-      <a href="https://www.linkedin.com/in/yousephe/" target="_blank" class="icon-btn" title="LinkedIn">
+      <a href="https://www.linkedin.com/in/yousephe/" target="_blank" class="icon-btn" aria-label="LinkedIn">
         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" />
       </a>
-       <button onclick="openResumeModal()" class="icon-btn" title="Resume">
+       <button onclick="openResumeModal()" class="icon-btn" aria-label="Resume">
         <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/readthedocs.svg" alt="Resume" />
        </button>
     </div>
@@ -5668,29 +5728,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
 
-<script>
-(function () {
-  var descs = {
-    "Backboard.io": "Incoming member of technical staff building AI systems — production LLM features and full-stack infrastructure. Shipping quickly on a small, high-velocity team.",
-    "PrepBusiness": "Built an AI customer-support chatbot with FastAPI and RAG that automates 65% of common inquiries. Added automated PII detection and redaction with ML confidence scoring for secure handoff to human agents.",
-    "Stylus Marketing": "Engineered a serverless inventory and payment system adopted by 50+ clients, with event-driven Stripe retry logic for overdue charges. Built real-time WebSocket dashboards that cut resolution times by 75%."
-  };
-  function initExpTooltips() {
-    document.querySelectorAll(".one-page #page-work .experience li").forEach(function (li) {
-      var strong = li.querySelector("strong");
-      var org = strong ? strong.textContent.trim() : "";
-      var d = descs[org];
-      if (!d) return;
-      var tip = document.createElement("div");
-      tip.className = "exp-tooltip";
-      tip.textContent = d;
-      li.appendChild(tip);
-    });
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initExpTooltips);
-  else initExpTooltips();
-})();
-</script>
+
 
 <script>
 (function () {

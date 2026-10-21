@@ -1,0 +1,125 @@
+@font-face {
+  font-family: "Newsreader";
+  src: url("newsreader.ttf") format("truetype");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* One serif family throughout, with optical sizing for headings and small text. */
+html, body, body *, .one-page, .one-page *, .site-header, .site-header *,
+.one-page .acc-header, .one-page h2.acc-header,
+.one-page .experience h3.acc-header {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif !important;
+  font-optical-sizing: auto;
+}
+
+.read-more-cue, .read-more-cue * {
+  font-family: "Caveat", cursive !important;
+}
+
+.site-header .site-brand {
+  font-size: 1.65rem !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.1;
+}
+.site-header .site-tagline {
+  font-size: 0.9rem !important;
+}
+.one-page .acc-header {
+  font-size: 14px !important;
+  letter-spacing: 0.12em !important;
+}
+.one-page .experience li, .one-page .education li {
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+}
+.one-page .experience li strong, .one-page .education li strong,
+.one-page #projects .project-content h3,
+.one-page #hackathons .hackathon-title {
+  font-size: 14px !important;
+}
+.one-page .experience li .date, .one-page .education li .date {
+  font-size: 11px !important;
+}
+.one-page #projects .btn, .one-page #hackathons .btn,
+.one-page .proj-viewmore {
+  font-size: 10px !important;
+}
+
+@media (max-width: 700px) {
+  .site-header .site-brand { font-size: 1.5rem !important; }
+}
+
+/* Expanded lists appear above the page while their original space is reserved. */
+html:has(.portfolio-screen), body:has(.portfolio-screen) {
+  height: 100dvh !important;
+  overflow: hidden !important;
+  scroll-snap-type: none;
+}
+.portfolio-screen {
+  display: flow-root;
+  width: min(620px, 100%);
+  margin: 0 auto;
+  transform: translateY(var(--portfolio-offset, 0px)) scale(var(--portfolio-scale, 1));
+  transform-origin: top center;
+}
+.portfolio-screen .site-header { padding: 22px 20px 0 !important; }
+.portfolio-screen .icon-buttons {
+  position: static !important;
+  transform: none !important;
+  margin: 8px auto 0 !important;
+  padding: 0 20px !important;
+  width: 100% !important;
+  justify-content: flex-start !important;
+}
+.portfolio-screen .one-page { padding: 14px 20px 20px !important; }
+.portfolio-screen .one-page > section {
+  margin-bottom: 16px !important;
+  content-visibility: visible !important;
+  contain-intrinsic-size: none !important;
+}
+.portfolio-screen .one-page > section:last-child { margin-bottom: 0 !important; }
+.portfolio-screen .one-page .acc-header {
+  font-size: 14px !important;
+  margin-bottom: 8px !important;
+  padding-bottom: 6px !important;
+}
+.portfolio-screen .one-page .acc-panel {
+  display: flow-root !important;
+}
+.portfolio-screen .one-page :is(#projects, #hackathons, #page-work, #page-education).show-all .acc-panel:popover-open {
+  position: fixed !important;
+  inset: auto !important;
+  left: var(--expanded-left) !important;
+  top: var(--expanded-top) !important;
+  width: var(--expanded-width) !important;
+  height: auto !important;
+  max-height: var(--expanded-max-height) !important;
+  margin: 0 !important;
+  padding: 16px !important;
+  background: rgba(250, 248, 244, 0.98);
+  color: #111;
+  border: 1px solid rgba(70, 70, 90, 0.16);
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgba(35, 40, 65, 0.18);
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+.portfolio-screen .acc-panel:popover-open > .proj-viewmore {
+  position: sticky;
+  bottom: -16px;
+  width: 100%;
+  padding: 12px 0 !important;
+  background: #faf8f4;
+  text-align: left;
+}
+@media (max-width: 700px) {
+  body:has(.portfolio-screen) .webring {
+    top: auto !important;
+    bottom: 10px !important;
+  }
+}
