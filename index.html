@@ -14,6 +14,8 @@
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
   <link rel="dns-prefetch" href="https://img.icons8.com" />
   <link rel="icon" type="image/svg+xml" href="favicon-star.svg" />
+  <!-- Fetch the skyline background early so it can fade in smoothly on first load -->
+  <link rel="preload" as="image" href="skyline-background.png" fetchpriority="high" />
   <script>
     // Prevent flash by marking page as loaded immediately
     (function() {
@@ -24,6 +26,18 @@
       } else {
         document.documentElement.classList.add('page-loaded');
       }
+    })();
+    // Reveal the skyline background only once the image has fully decoded,
+    // so the first visit fades in smoothly instead of popping in.
+    (function() {
+      function reveal() { document.documentElement.classList.add('skyline-ready'); }
+      var img = new Image();
+      img.onload = reveal;
+      img.onerror = reveal;
+      img.src = 'skyline-background.png';
+      if (img.complete) reveal();
+      // Safety net in case the load events never fire.
+      window.addEventListener('load', reveal);
     })();
   </script>
   <style>
@@ -3944,6 +3958,11 @@
       z-index: -1;
       pointer-events: none;
       background: #faf7f0 url("skyline-background.png") left center / cover no-repeat;
+      opacity: 0;
+      transition: opacity 1.4s ease-out;
+    }
+    /* Fade the skyline in only once the image has actually decoded. */
+    html.skyline-ready body::before {
       opacity: 0.4;
     }
     @media (max-width: 700px) {
@@ -3969,8 +3988,10 @@
         mask-image: linear-gradient(to top, #000 calc(var(--signature-reveal) - 12%), transparent var(--signature-reveal));
         animation: signature-reveal-up 6s cubic-bezier(0.4, 0, 0.2, 1) 0.15s backwards;
       }
-      body::before {
-        animation: skyline-breathe 14s ease-in-out infinite;
+      /* Land the fade-in on the breathe baseline, then start breathing. */
+      html.skyline-ready body::before {
+        opacity: 0.15;
+        animation: skyline-breathe 14s ease-in-out 1.4s infinite;
       }
     }
     @keyframes signature-reveal-up {
@@ -4653,6 +4674,84 @@
     <h2>Hackathons</h2>
     <div class="hackathons-grid">
 
+          <!-- LarpHacks - GTA: THE 6 -->
+      <div class="hackathon-card">
+        <div class="hackathon-header">
+            <a href="https://www.larphacks.ca/" target="_blank" style="text-decoration: none;">
+            <div class="hackathon-logo-wrapper">
+              <img src="larphacks.png" alt="LarpHacks Logo" />
+              </div>
+            </a>
+          <div class="hackathon-info">
+            <div class="hackathon-date">November 2026</div>
+            <h3 class="hackathon-title">LarpHacks – GTA: THE 6 <span class="win-tag">🏆 Winner</span></h3>
+            <span class="hackathon-winner-badge">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C18.08 12.63 20 10.55 20 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
+              </svg>
+              Winner
+            </span>
+            </div>
+          </div>
+        <p class="hackathon-description">
+          Built GTA: THE 6, a browser-based open-world game that lets you explore a geographically accurate 3D Toronto. Walk, cycle, drive, and fly past real streets, landmarks, transit, and the waterfront — rendered with Three.js and WebGPU.
+        </p>
+        <div class="hackathon-buttons">
+          <a href="https://gta-the-6.onrender.com/" class="btn" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            Play
+          </a>
+        </div>
+      </div>
+
+          <!-- DeltaHacks12 - Frontline (Winner) -->
+      <div class="hackathon-card">
+        <div class="hackathon-header">
+            <a href="https://www.deltahacks.com/" target="_blank" style="text-decoration: none;">
+            <div class="hackathon-logo-wrapper">
+              <img src="deltalogo.jpeg" alt="DeltaHacks Logo" />
+              </div>
+            </a>
+          <div class="hackathon-info">
+            <div class="hackathon-date">January 10, 2026</div>
+            <h3 class="hackathon-title">DeltaHacks12 – Frontline <span class="win-tag">🏆 Winner</span></h3>
+            <span class="hackathon-winner-badge">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C18.08 12.63 20 10.55 20 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
+              </svg>
+              Winner
+            </span>
+            <p class="hackathon-location">McMaster University, Ontario</p>
+            <p class="hackathon-participants">523 participants</p>
+            </div>
+          </div>
+        <p class="hackathon-description">
+          Developed a platform that transforms camera feeds into real-time biometric data and vital signs using Presage. Engineered an ElevenLabs and Gemini-powered first aid voice operator. Built an ER-ready incident response dashboard that generates standardized SBAR reports, enabling ER workers to review incident video playback and receive patient reports in advance, reducing diagnosis and handoff time by 10%.
+        </p>
+        <div class="hackathon-buttons">
+          <a href="#" onclick="event.preventDefault(); openFrontlineDemoModal(); return false;" class="btn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            Demo
+          </a>
+          <a href="https://devpost.com/software/frontline-noyxp0?ref_content=my-projects-tab&ref_feature=my_projects" class="btn" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+              Devpost
+            </a>
+          <a href="https://github.com/seifotefa/deltahacks-12" class="btn" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub
+            </a>
+            </div>
+          </div>
+
           <!-- GDG Hacks 3 - Promptimize -->
       <div class="hackathon-card">
         <div class="hackathon-header">
@@ -4798,52 +4897,6 @@
             </a>
         </div>
       </div>
-
-          <!-- DeltaHacks12 - Frontline (Winner) -->
-      <div class="hackathon-card">
-        <div class="hackathon-header">
-            <a href="https://www.deltahacks.com/" target="_blank" style="text-decoration: none;">
-            <div class="hackathon-logo-wrapper">
-              <img src="deltalogo.jpeg" alt="DeltaHacks Logo" />
-              </div>
-            </a>
-          <div class="hackathon-info">
-            <div class="hackathon-date">January 10, 2026</div>
-            <h3 class="hackathon-title">DeltaHacks12 – Frontline <span class="win-tag">🏆 Winner</span></h3>
-            <span class="hackathon-winner-badge">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C18.08 12.63 20 10.55 20 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
-              </svg>
-              Winner
-            </span>
-            <p class="hackathon-location">McMaster University, Ontario</p>
-            <p class="hackathon-participants">523 participants</p>
-            </div>
-          </div>
-        <p class="hackathon-description">
-          Developed a platform that transforms camera feeds into real-time biometric data and vital signs using Presage. Engineered an ElevenLabs and Gemini-powered first aid voice operator. Built an ER-ready incident response dashboard that generates standardized SBAR reports, enabling ER workers to review incident video playback and receive patient reports in advance, reducing diagnosis and handoff time by 10%.
-        </p>
-        <div class="hackathon-buttons">
-          <a href="#" onclick="event.preventDefault(); openFrontlineDemoModal(); return false;" class="btn">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-            Demo
-          </a>
-          <a href="https://devpost.com/software/frontline-noyxp0?ref_content=my-projects-tab&ref_feature=my_projects" class="btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-              </svg>
-              Devpost
-            </a>
-          <a href="https://github.com/seifotefa/deltahacks-12" class="btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              GitHub
-            </a>
-            </div>
-          </div>
 
           <!-- DeltaHacks Lite Hackathon -->
       <div class="hackathon-card">
