@@ -71,12 +71,6 @@
       opacity: 1;
       transition: opacity 0.2s ease-in;
     }
-    /* Custom Cursor - Disabled to prevent lag */
-    .custom-cursor,
-    .custom-cursor-dot {
-      display: none;
-    }
-
     /* Scroll Progress Indicator */
     .scroll-progress {
       position: fixed;
@@ -4016,7 +4010,6 @@
   <div class="signature-reveal" aria-hidden="true">
     <img src="signature2.png" class="signature-deco-right" alt="" />
   </div>
-  <!-- Custom Cursor - Disabled -->
 
   <!-- Scroll Progress Indicator -->
   <div class="scroll-progress"></div>
@@ -5608,67 +5601,6 @@ function initExperienceAnimations() {
   });
 }
 
-// Custom Cursor Follower
-function initCustomCursor() {
-  const cursor = document.querySelector('.custom-cursor');
-  const cursorDot = document.querySelector('.custom-cursor-dot');
-
-  if (!cursor || !cursorDot) return;
-
-  let mouseX = 0;
-  let mouseY = 0;
-  let cursorX = 0;
-  let cursorY = 0;
-  let dotX = 0;
-  let dotY = 0;
-
-  // Track mouse movement
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  // Smooth animation loop
-  function animateCursor() {
-    // Smooth cursor ring movement
-    cursorX += (mouseX - cursorX) * 0.1;
-    cursorY += (mouseY - cursorY) * 0.1;
-    cursor.style.left = cursorX + 'px';
-    cursor.style.top = cursorY + 'px';
-
-    // Faster dot movement
-    dotX += (mouseX - dotX) * 0.3;
-    dotY += (mouseY - dotY) * 0.3;
-    cursorDot.style.left = dotX + 'px';
-    cursorDot.style.top = dotY + 'px';
-
-    requestAnimationFrame(animateCursor);
-  }
-
-  animateCursor();
-
-  // Hover effects on interactive elements
-  const interactiveElements = document.querySelectorAll('a, button, .btn, .icon-btn, .project-card, .experience li, .education li, .skill, .tech-tag');
-
-  interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.classList.add('hover');
-    });
-
-    el.addEventListener('mouseleave', () => {
-      cursor.classList.remove('hover');
-    });
-
-    el.addEventListener('mousedown', () => {
-      cursor.classList.add('click');
-    });
-
-    el.addEventListener('mouseup', () => {
-      cursor.classList.remove('click');
-    });
-  });
-}
-
 // Initialize all features when page loads (single event listener to prevent double initialization)
 let isInitialized = false;
 
@@ -5931,6 +5863,206 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initReadMoreScroll);
   else initReadMoreScroll();
+})();
+</script>
+<script>
+(() => {
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const CORE = '#89CFF0', RIM = '#2B7BC0', BODY = '#5DB4E8', HILITE = '#E8F7FF';
+  const DEEP = '58,143,217', LIGHT = '137,207,240';
+  const TRAIL_MS = 170;
+  const HALF_W = 4.5;
+  const MAX_PARTS = 120;
+  const INTERACTIVE = 'a,button,[role="button"],summary,label,select,input[type="submit"],input[type="button"],[data-cursor]';
+  const TEXT = 'input:not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]),textarea,[contenteditable="true"]';
+
+  const style = document.createElement('style');
+  style.textContent =
+    'html.cc,html.cc *{cursor:none!important}' +
+    'html.cc input,html.cc textarea,html.cc [contenteditable="true"]{cursor:text!important}';
+  document.head.appendChild(style);
+
+  const cv = document.createElement('canvas');
+  cv.setAttribute('aria-hidden', 'true');
+  cv.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647';
+  document.body.appendChild(cv);
+  const ctx = cv.getContext('2d');
+
+  let W = 0, H = 0;
+  const resize = () => {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    kick();
+  };
+
+  let x = -100, y = -100, px = x, py = y, started = false;
+  let shown = false, onText = false, hovering = false, pressed = false;
+  let alpha = 0, hov = 0, prs = 0, rot = 0;
+  const hist = [];
+  const parts = [], waves = [];
+  let raf = 0, last = 0;
+
+  const kick = () => { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } };
+  const approach = (v, target, rate, dt) => v + (target - v) * (1 - Math.pow(1 - rate, dt));
+
+  const spark = (sx, sy, speed) => {
+    if (parts.length >= MAX_PARTS) return;
+    const a = Math.random() * Math.PI * 2, v = Math.random() * speed;
+    parts.push({ x: sx, y: sy, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 0.3,
+      life: 0, max: 30 + Math.random() * 30, s: 1.5 + Math.random() * 2.5, deep: Math.random() < 0.5 });
+  };
+
+  const star = (cx, cy, r) => {
+    ctx.beginPath();
+    for (let i = 0; i < 8; i++) {
+      const rr = i % 2 ? r * 0.35 : r, a = (i * Math.PI) / 4;
+      ctx.lineTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr);
+    }
+    ctx.closePath(); ctx.fill();
+  };
+
+  const smooth = (P) => {
+    if (P.length < 3) return P;
+    const out = [P[0]];
+    for (let i = 0; i < P.length - 1; i++) {
+      const a = P[i], b = P[i + 1];
+      out.push({ x: a.x * 0.75 + b.x * 0.25, y: a.y * 0.75 + b.y * 0.25, w: a.w * 0.75 + b.w * 0.25 });
+      out.push({ x: a.x * 0.25 + b.x * 0.75, y: a.y * 0.25 + b.y * 0.75, w: a.w * 0.25 + b.w * 0.75 });
+    }
+    out.push(P[P.length - 1]);
+    return out;
+  };
+
+  const ribbon = (P, scale, fill) => {
+    const n = P.length, L = [], R = [];
+    for (let i = 0; i < n; i++) {
+      const a = P[Math.max(i - 1, 0)], b = P[Math.min(i + 1, n - 1)];
+      const tx = b.x - a.x, ty = b.y - a.y, len = Math.hypot(tx, ty) || 1;
+      const nx = -ty / len, ny = tx / len, w = P[i].w * scale;
+      L.push(P[i].x + nx * w, P[i].y + ny * w);
+      R.push(P[i].x - nx * w, P[i].y - ny * w);
+    }
+    ctx.beginPath();
+    ctx.moveTo(L[0], L[1]);
+    for (let i = 2; i < L.length; i += 2) ctx.lineTo(L[i], L[i + 1]);
+    for (let i = R.length - 2; i >= 0; i -= 2) ctx.lineTo(R[i], R[i + 1]);
+    ctx.closePath();
+    ctx.fillStyle = fill; ctx.fill();
+    const h = P[n - 1];
+    ctx.beginPath(); ctx.arc(h.x, h.y, h.w * scale, 0, Math.PI * 2); ctx.fill();
+  };
+
+  function frame(t) {
+    const dt = Math.min((t - last) / 16.667, 3); last = t;
+    ctx.clearRect(0, 0, W, H);
+
+    alpha = approach(alpha, shown && !onText ? 1 : 0, 0.2, dt);
+    hov = approach(hov, hovering ? 1 : 0, 0.18, dt);
+    prs = approach(prs, pressed ? 1 : 0, 0.35, dt);
+    if (!reduce) rot += 0.045 * dt;
+
+    while (hist.length && t - hist[0].t > TRAIL_MS) hist.shift();
+
+    const speed = Math.hypot(x - px, y - py); px = x; py = y;
+    if (!reduce && alpha > 0.5 && speed > 6) {
+      const n = Math.min(3, speed / 18);
+      for (let i = 0; i < n; i++) spark(x, y, 1.2);
+    }
+
+    ctx.globalAlpha = alpha;
+
+    if (!reduce) {
+      const P = [];
+      for (const p of hist) {
+        const q = P[P.length - 1];
+        if (q && Math.abs(q.x - p.x) + Math.abs(q.y - p.y) < 1.5) continue;
+        const f = Math.max(0, 1 - (t - p.t) / TRAIL_MS);
+        P.push({ x: p.x, y: p.y, w: HALF_W * Math.pow(f, 1.4) });
+      }
+      P.push({ x, y, w: HALF_W });
+      if (P.length > 2) {
+        const S = smooth(smooth(P));
+        ribbon(S, 2.6, `rgba(${LIGHT},0.30)`);
+        ribbon(S, 1, BODY);
+        ribbon(S, 0.35, HILITE);
+      }
+
+      for (let i = parts.length - 1; i >= 0; i--) {
+        const p = parts[i];
+        p.life += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= 0.96; p.vy = p.vy * 0.96 + 0.02 * dt;
+        if (p.life >= p.max) { parts.splice(i, 1); continue; }
+        const lf = 1 - p.life / p.max;
+        ctx.globalAlpha = alpha * lf;
+        ctx.fillStyle = p.deep ? `rgb(${DEEP})` : CORE;
+        star(p.x, p.y, p.s * (0.5 + lf * 0.5));
+      }
+      ctx.globalAlpha = alpha;
+
+      for (let i = waves.length - 1; i >= 0; i--) {
+        const w = waves[i]; w.r += (48 - w.r) * 0.12 * dt; w.a -= 0.035 * dt;
+        if (w.a <= 0) { waves.splice(i, 1); continue; }
+        ctx.beginPath(); ctx.arc(w.x, w.y, w.r, 0, Math.PI * 2);
+        ctx.lineWidth = 2; ctx.strokeStyle = `rgba(${DEEP},${w.a})`; ctx.stroke();
+      }
+    }
+
+    const pScale = 1 - prs * 0.3;
+    ctx.beginPath(); ctx.arc(x, y, 13 * (1 + hov * 0.5) * pScale, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${LIGHT},0.28)`; ctx.fill();
+    ctx.beginPath(); ctx.arc(x, y, 4 * (1 - hov * 0.3) * pScale, 0, Math.PI * 2);
+    ctx.fillStyle = CORE; ctx.fill();
+    ctx.lineWidth = 1.5; ctx.strokeStyle = RIM; ctx.stroke();
+
+    if (hov > 0.01) {
+      const r = (8 + 14 * hov) * pScale;
+      ctx.lineWidth = 2; ctx.strokeStyle = `rgba(43,123,192,${0.85 * hov})`;
+      for (let s = 0; s < 4; s++) {
+        const a0 = rot + (s * Math.PI) / 2;
+        ctx.beginPath(); ctx.arc(x, y, r, a0, a0 + Math.PI / 3); ctx.stroke();
+      }
+    }
+    ctx.globalAlpha = 1;
+
+    const settled = !hist.length && !parts.length && !waves.length &&
+      Math.abs(alpha - (shown && !onText ? 1 : 0)) < 0.01 && Math.abs(hov - (hovering ? 1 : 0)) < 0.01 &&
+      Math.abs(prs - (pressed ? 1 : 0)) < 0.01 && !(hovering && !reduce);
+    raf = settled ? 0 : requestAnimationFrame(frame);
+  }
+
+  addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
+    const evs = (e.getCoalescedEvents && e.getCoalescedEvents()) || [];
+    for (const ev of evs.length ? evs : [e]) hist.push({ x: ev.clientX, y: ev.clientY, t: ev.timeStamp });
+    if (hist.length > 300) hist.splice(0, hist.length - 300);
+    x = e.clientX; y = e.clientY;
+    if (!started) { started = true; px = x; py = y; document.documentElement.classList.add('cc'); }
+    shown = true; kick();
+  }, { passive: true });
+
+  document.addEventListener('pointerover', e => {
+    const el = e.target instanceof Element ? e.target : null;
+    onText = !!(el && el.closest(TEXT));
+    hovering = !onText && !!(el && el.closest(INTERACTIVE));
+    kick();
+  }, { passive: true });
+
+  document.addEventListener('mouseout', e => { if (!e.relatedTarget) { shown = false; kick(); } });
+  addEventListener('blur', () => { shown = false; kick(); });
+
+  addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'mouse') return;
+    pressed = true;
+    if (!reduce) { waves.push({ x, y, r: 6, a: 0.9 }); for (let i = 0; i < 14; i++) spark(x, y, 3.5); }
+    kick();
+  });
+  addEventListener('pointerup', () => { pressed = false; kick(); });
+
+  addEventListener('resize', resize);
+  resize();
 })();
 </script>
 </body>
