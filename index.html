@@ -4377,32 +4377,35 @@
       </div>
 
 
-          <!-- GryphBook -->
+          <!-- RefynPrompts -->
       <div class="project-card">
             <div class="project-image">
-              <img src="gryphbook.png" alt="GryphBook" loading="lazy" decoding="async" />
-              <div class="project-status completed">Completed</div>
+              <img src="promptimize.jpg" alt="RefynPrompts" loading="lazy" decoding="async" />
+              <div class="project-status completed">Live</div>
             </div>
         <div class="project-content">
-          <h3>GryphBook</h3>
-              <p class="project-tagline">Quicker room booking for the University of Guelph.</p>
-              <p class="project-description">Middleware layer that processes room booking requests between the frontend and University of Guelph's LibCal system. Handles data transformation, filtering, time slot processing, and error handling to provide real-time room availability with capacity and building filters.</p>
+          <h3>RefynPrompts</h3>
+              <p class="project-tagline">Refine your prompts. Get more useful AI responses.</p>
+              <p class="project-description">RefynPrompts helps you improve prompts for clearer, more useful results from AI tools. Visit the live project or watch the demo on X.</p>
           <div class="tech-tags">
-                <span>Next.js</span><span>React</span><span>TypeScript</span><span>Express.js</span><span>PostgreSQL</span><span>Supabase</span><span>Tailwind CSS</span><span>Heroku</span>
+                <span>AI</span><span>Prompt Engineering</span>
           </div>
           <div class="project-buttons">
-                <a href="https://gryphbook.xyz" class="btn btn-primary" target="_blank">
+                <a href="https://refynprompts.com/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
                   </svg>
                   Live Site
                 </a>
-                <button class="btn btn-secondary" onclick="openGryphBookDemoModal()">
+                <a href="https://github.com/Youseph-Elkhouly/Refyn" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                  GitHub
+                </a>
+                <a href="https://x.com/ElkhoulyYouseph/status/2120616710566744410" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px;">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                   Demo
-                </button>
+                </a>
           </div>
         </div>
       </div>
@@ -5749,7 +5752,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function initProjView() {
     var proj = document.querySelector(".one-page #projects");
     if (!proj) return;
-    var keep = /notipply|frontline|gryphbook/i;
+    var keep = /notipply|frontline|refynprompts/i;
     var cards = proj.querySelectorAll(".project-card");
     var hidden = 0;
     cards.forEach(function (c) {
@@ -5778,7 +5781,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function initHackView() {
     var hack = document.querySelector(".one-page #hackathons");
     if (!hack) return;
-    var keep = /deltahacks12/i;
+    var keep = /larphacks|deltahacks12/i;
     var cards = hack.querySelectorAll(".hackathon-card");
     var hidden = 0;
     cards.forEach(function (c) {

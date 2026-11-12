@@ -1,0 +1,581 @@
+{
+  "name": "Youseph El-Khouly",
+  "role": "Software Engineer",
+  "location": "Guelph / Toronto, ON",
+  "availability": "Open to Summer 2026",
+  "heroHeadline": "Software engineer & relentless builder.",
+  "heroSub": "CS at the University of Guelph, currently building AI systems at Backboard.io. I ship fast, and I ship a lot.",
+  "stats": [
+    {
+      "value": "14",
+      "label": "Projects"
+    },
+    {
+      "value": "8",
+      "label": "Hackathons"
+    },
+    {
+      "value": "4",
+      "label": "Internships"
+    }
+  ],
+  "socials": [
+    {
+      "label": "X",
+      "href": "https://x.com/ElkhoulyYouseph"
+    },
+    {
+      "label": "GitHub",
+      "href": "https://github.com/Youseph-Elkhouly"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/yousephe/"
+    },
+    {
+      "label": "Book a call",
+      "href": "https://cal.com/youseph-el-khouly-4tskdw"
+    },
+    {
+      "label": "Resume",
+      "href": "Youseph_El_Khouly_Resume.pdf"
+    }
+  ],
+  "about": [
+    "I'm a CS student who'd rather build than talk about building \u2014 happiest with something shipping in production.",
+    "Over four internships I've shipped AI chatbots with RAG, mobile learning apps, and serverless payment systems used by 50+ clients. On weekends I build at hackathons \u2014 fourteen projects and counting, including a DeltaHacks win.",
+    "Right now I'm studying Computing at the University of Guelph and building AI systems at Backboard.io."
+  ],
+  "featuredProjects": [
+    {
+      "name": "Frontline",
+      "subtitle": "Real-time triage from a camera feed \u00b7 2026",
+      "description": "Turns camera feeds into real-time biometric data and vital signs via Presage, with an ElevenLabs + Gemini first-aid voice operator and an ER-ready dashboard generating standardized SBAR reports \u2014 cutting diagnosis and handoff time by 10%.",
+      "tags": [
+        "C++",
+        "React",
+        "Gemini",
+        "ElevenLabs",
+        "Presage",
+        "Node.js"
+      ],
+      "image": "Deltawinner.jpg",
+      "badge": "Winner",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "deltafrontline.mp4"
+        },
+        {
+          "label": "Devpost",
+          "href": "https://devpost.com/software/frontline-noyxp0?ref_content=my-projects-tab&ref_feature=my_projects"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/seifotefa/deltahacks-12"
+        }
+      ]
+    },
+    {
+      "name": "Promptimize",
+      "subtitle": "An LLM budgeting tool for developers \u00b7 2026",
+      "description": "All-in-one LLM budgeting \u2014 a VS Code / Cursor extension plus web dashboard with real-time token counting, cost estimates, daily budgets, live API monitoring, historical analysis, and context-aware prompt optimization powered by project memory.",
+      "tags": [
+        "TypeScript",
+        "Python",
+        "FastAPI",
+        "React",
+        "Next.js",
+        "Claude",
+        "Gemini"
+      ],
+      "image": "promptimize.jpg",
+      "badge": "",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "https://www.youtube.com/watch?v=DjFq1AgMANI"
+        },
+        {
+          "label": "Devpost",
+          "href": "https://devpost.com/software/promptimize"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/Promptimize"
+        }
+      ]
+    },
+    {
+      "name": "Ru'ya",
+      "subtitle": "Hadith as cinematic visual stories \u00b7 2026",
+      "description": "An AI-powered Islamic learning platform that transforms authentic Hadith into contextualized, cinematic visual stories \u2014 built to help younger generations connect more deeply with Islamic knowledge.",
+      "tags": [
+        "Next.js",
+        "FastAPI",
+        "Gemini",
+        "Veo",
+        "ElevenLabs",
+        "FFmpeg"
+      ],
+      "image": "ruyaproject.png",
+      "badge": "Top 3",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "ruyalowqdemo.mp4"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/Ru-yaUmmahHacks"
+        }
+      ]
+    },
+    {
+      "name": "Sentry",
+      "subtitle": "Catch security holes as you type \u00b7 2026",
+      "description": "An IDE extension that watches code in real time to catch vulnerabilities like exposed API keys \u2014 it locks the workflow, highlights the exact line, and recommends secure fixes. \"Fix with Sentry\" sends the context to Bob to auto-generate a remediation.",
+      "tags": [
+        "TypeScript",
+        "Node.js",
+        "Fastify",
+        "VSCode",
+        "Webpack",
+        "Turbo"
+      ],
+      "image": "IBM.png",
+      "badge": "",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "IBMSENTRYDEMO.mp4"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/Sentry-IBM-"
+        }
+      ]
+    },
+    {
+      "name": "GryphBook",
+      "subtitle": "Real-time campus room booking \u00b7 2025",
+      "description": "Middleware that processes room-booking requests between the frontend and Guelph's LibCal system \u2014 data transformation, filtering, time-slot processing, and error handling for real-time room availability with capacity and building filters.",
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "Express",
+        "PostgreSQL",
+        "Supabase",
+        "Heroku"
+      ],
+      "image": "gryphbook.png",
+      "badge": "Live",
+      "links": [
+        {
+          "label": "Live",
+          "href": "https://gryphbook.xyz"
+        },
+        {
+          "label": "Demo",
+          "href": "Untitled video - Made with Clipchamp.mp4"
+        }
+      ]
+    },
+    {
+      "name": "EduPro",
+      "subtitle": "An intelligent tutoring system \u00b7 2025",
+      "description": "A tutoring system for grades 1\u20134 with personalized math practice, AI-generated hints, adaptive difficulty, and progress tracking for students, teachers, and parents. Built in two weeks by a team of six.",
+      "tags": [
+        "TypeScript",
+        "Python",
+        "Next.js",
+        "Flask",
+        "scikit-learn",
+        "ML"
+      ],
+      "image": "EDUPRO.png",
+      "badge": "",
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/EduPro3750"
+        }
+      ]
+    }
+  ],
+  "moreProjects": [
+    {
+      "name": "RefynPrompts",
+      "tech": "Prompt engineering tool",
+      "description": "A simple way to refine prompts and get better results from AI tools.",
+      "links": [
+        {
+          "label": "Live",
+          "href": "https://refynprompts.com/"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/Refyn"
+        },
+        {
+          "label": "Demo",
+          "href": "https://x.com/ElkhoulyYouseph/status/2120616710566744410"
+        }
+      ]
+    },
+    {
+      "name": "Spark & Prepper",
+      "tech": "AI study tool \u00b7 React, Gemini, Firebase",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "sparkandpepperGDSC25 - Seif (1080p, h264).mp4"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/seifotefa/sparkandprepper"
+        }
+      ]
+    },
+    {
+      "name": "ResuMock",
+      "tech": "Behavioral interview sim \u00b7 React, Node, Gemini",
+      "links": [
+        {
+          "label": "Devpost",
+          "href": "https://devpost.com/software/resumock?ref_content=user-portfolio&ref_feature=in_progress"
+        },
+        {
+          "label": "Demo",
+          "href": "deltahackslite.mp4"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/seifotefa/deltahackslite"
+        }
+      ]
+    },
+    {
+      "name": "Merchant",
+      "tech": "Marketplace aggregator \u00b7 Flask, PostgreSQL, Twilio",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "MerchantDemoFInal.mp4"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/Merchant"
+        }
+      ]
+    },
+    {
+      "name": "Typing Speed Test",
+      "tech": "Live WPM trainer \u00b7 React, TypeScript",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "Typing Test.mp4"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/TypingTest"
+        }
+      ]
+    },
+    {
+      "name": "Vehicle Management System",
+      "tech": "CRUD in C \u00b7 Data structures, Makefiles",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "VMSYSTEM.mp4"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/Car-Managment-System"
+        }
+      ]
+    },
+    {
+      "name": "Contact Management System",
+      "tech": "File-backed store in C \u00b7 File I/O",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "ContactManagementSystem.mp4"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/Contact-Managment-System"
+        }
+      ]
+    },
+    {
+      "name": "Zoo Data ML",
+      "tech": "KNN classifier in C \u00b7 Machine learning",
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/Zoo-Data-Machine-Learning-Project"
+        }
+      ]
+    },
+    {
+      "name": "Exercise Tracker API",
+      "tech": "RESTful API \u00b7 Node, Express, MongoDB",
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/Exercise-TrackerAPI"
+        }
+      ]
+    }
+  ],
+  "hackathons": [
+    {
+      "name": "GDG Hacks 3",
+      "date": "May 10, 2026",
+      "badge": "",
+      "meta": "University of Guelph, ON \u00b7 134 participants \u00b7 built Promptimize",
+      "description": "An all-in-one LLM budgeting tool with a VS Code / Cursor extension and web dashboard \u2014 real-time token counting, cost estimates, daily budgets, live API monitoring, and context-aware prompt optimization powered by project memory.",
+      "logo": "GDSCNOBG.png",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "https://www.youtube.com/watch?v=DjFq1AgMANI"
+        },
+        {
+          "label": "Devpost",
+          "href": "https://devpost.com/software/promptimize"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/Promptimize"
+        }
+      ]
+    },
+    {
+      "name": "IBM Dev Day: AI Demystified",
+      "date": "Jan 30 \u2013 Feb 1, 2026",
+      "badge": "",
+      "meta": "Virtual \u00b7 built Sentry",
+      "description": "Sentry is an IDE extension that catches vulnerabilities like exposed API keys in real time \u2014 locking the workflow, highlighting the exact line, and recommending secure fixes, with \"Fix with Sentry\" auto-generating a remediation aligned to team policy.",
+      "logo": "IBMLOGO.png",
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/Sentry-IBM-"
+        },
+        {
+          "label": "Demo",
+          "href": "IBMSENTRYDEMO.mp4"
+        }
+      ]
+    },
+    {
+      "name": "UmmahHacks",
+      "date": "Jan 24\u201325, 2026",
+      "badge": "Top 3",
+      "meta": "Waterloo, ON \u00b7 200 participants \u00b7 built Ru'ya",
+      "description": "Ru'ya (\u0631\u0624\u064a\u0627) transforms authentic Hadith into contextualized, cinematic visual stories \u2014 helping younger generations connect more deeply with Islamic knowledge through engaging multimedia.",
+      "logo": "logoummah.jpg",
+      "links": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/Ru-yaUmmahHacks"
+        },
+        {
+          "label": "Demo",
+          "href": "ruyalowqdemo.mp4"
+        }
+      ]
+    },
+    {
+      "name": "UofT Hacks 2026",
+      "date": "Jan 17, 2026",
+      "badge": "Mentor",
+      "meta": "University of Toronto, ON",
+      "description": "Mentored at one of Canada's largest hackathons, helping 10+ hackers ship \u2014 technical guidance on full-stack development, API integration, backend architecture, and frontend frameworks, plus debugging and best practices.",
+      "logo": "uofthackslogo.jpeg",
+      "links": [
+        {
+          "label": "Gallery",
+          "href": "uofthacks-blog.html"
+        }
+      ]
+    },
+    {
+      "name": "DeltaHacks12",
+      "date": "Jan 10, 2026",
+      "badge": "Winner",
+      "meta": "McMaster University, ON \u00b7 523 participants \u00b7 built Frontline",
+      "description": "Transformed camera feeds into real-time biometric data via Presage, built an ElevenLabs + Gemini first-aid voice operator, and shipped an ER-ready incident dashboard generating standardized SBAR reports \u2014 cutting handoff time by 10%.",
+      "logo": "deltalogo.jpeg",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "deltafrontline.mp4"
+        },
+        {
+          "label": "Devpost",
+          "href": "https://devpost.com/software/frontline-noyxp0?ref_content=my-projects-tab&ref_feature=my_projects"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/seifotefa/deltahacks-12"
+        }
+      ]
+    },
+    {
+      "name": "DeltaHacks Lite 2025",
+      "date": "Nov 6, 2025",
+      "badge": "",
+      "meta": "McMaster University, ON \u00b7 27 participants \u00b7 built ResuMock",
+      "description": "ResuMock is an AI-powered mock interview coach that generates tailored behavioral questions from a user's resume and gives instant feedback via Gemini \u2014 built in under two hours.",
+      "logo": "deltalogo.jpeg",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "deltahackslite.mp4"
+        },
+        {
+          "label": "Devpost",
+          "href": "https://devpost.com/software/resumock?ref_content=user-portfolio&ref_feature=in_progress"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/seifotefa/deltahackslite"
+        }
+      ]
+    },
+    {
+      "name": "SpurHacks 2025",
+      "date": "Jun 22, 2025",
+      "badge": "",
+      "meta": "Waterloo, ON \u00b7 906 participants \u00b7 built Jinsa",
+      "description": "SpurHacks opened my eyes to the startup world and sparked an interest in blockchain \u2014 leading to Jinsa, my blockchain-based product authentication startup.",
+      "logo": "Youseph _ Portfolio_files/spur.svg",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "https://www.youtube.com/watch?v=tceQzYWGibQ"
+        },
+        {
+          "label": "Devpost",
+          "href": "https://devpost.com/software/jinsa?ref_content=my-projects-tab&ref_feature=my_projects"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/Youseph-Elkhouly/jinsa"
+        },
+        {
+          "label": "Gallery",
+          "href": "jinsa-blog.html"
+        }
+      ]
+    },
+    {
+      "name": "GDSC Hacks 2025",
+      "date": "May 2, 2025",
+      "badge": "",
+      "meta": "University of Guelph, ON \u00b7 216 participants \u00b7 built Spark & Prepper",
+      "description": "Spark & Prepper is an AI-powered study assistant that transforms uploaded course materials into smart study guides, flashcards, cheat sheets, and mock exams using the Gemini API.",
+      "logo": "GDSCNOBG.png",
+      "links": [
+        {
+          "label": "Demo",
+          "href": "https://www.youtube.com/watch?v=VIt9yvOC6_4&t=63s"
+        },
+        {
+          "label": "Devpost",
+          "href": "https://devpost.com/software/sparkandprepper"
+        },
+        {
+          "label": "GitHub",
+          "href": "https://github.com/seifotefa/sparkandprepper"
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "org": "Backboard.io",
+      "role": "Software Engineer Intern \u00b7 Ottawa, ON (Hybrid)",
+      "date": "May 2026 \u2014 Present",
+      "description": ""
+    },
+    {
+      "org": "PrepBusiness",
+      "role": "Software Engineer \u00b7 Hamilton, ON (Hybrid)",
+      "date": "Sep \u2014 Dec 2025",
+      "description": "Engineered an AI customer-support chatbot with FastAPI and RAG (vector embeddings, async processing, prompt engineering) that automates 65% of common inquiries, with real-time WebSocket messaging and conversation persistence. Built a data-protection system with automated PII detection and redaction plus ML confidence scoring for handoff to human agents \u2014 100% secure handling via a modular AI inference layer on Azure OpenAI. Stack: Python, TypeScript, React, SQLite, Azure."
+    },
+    {
+      "org": "Aiducare",
+      "role": "Mobile App Developer \u00b7 Montreal, QC (Remote)",
+      "date": "Jun \u2014 Aug 2025",
+      "description": "Built an interactive audio playback feature \u2014 click-to-hear pronunciation for 30+ learners with ML-generated feedback, improving learning accuracy by 40%. Reorganized components into shared, reusable React Native modules \u2014 cutting code duplication by 30% and improving cross-platform maintainability. Stack: React, React Native, JavaScript, CSS."
+    },
+    {
+      "org": "Stylus Marketing",
+      "role": "Software Engineer \u00b7 Toronto, ON (Onsite)",
+      "date": "May \u2014 Aug 2024",
+      "description": "Engineered a serverless inventory tracking and management system adopted by 50+ clients, with event-driven Stripe integration for overdue charge recovery \u2014 dynamic retry logic and real-time alerts accelerated resolution times by 75%. Built payment and inventory dashboards using WebSockets for instant data sync, and worked directly with clients to gather requirements and keep teams aligned. Stack: Python, TypeScript, PostgreSQL, AWS, React."
+    }
+  ],
+  "education": [
+    {
+      "org": "University of Guelph",
+      "detail": "Bachelor of Computing Honours (BCOMP), Software Engineering",
+      "date": "2023 \u2014 2027"
+    },
+    {
+      "org": "Loyola Catholic Secondary",
+      "detail": "Ontario Secondary School Diploma",
+      "date": "2019 \u2014 2023"
+    }
+  ],
+  "skills": {
+    "Languages & Data": [
+      "Python",
+      "Java",
+      "JavaScript",
+      "TypeScript",
+      "PostgreSQL",
+      "MongoDB",
+      "SQL",
+      "Firebase"
+    ],
+    "Frameworks & Tools": [
+      "React",
+      "Redux",
+      "Express",
+      "Spring",
+      "Flask",
+      "AWS",
+      "Docker",
+      "Jest",
+      "Git",
+      "CI/CD",
+      "n8n"
+    ],
+    "APIs": [
+      "Google",
+      "Notion",
+      "Gmail",
+      "Twilio",
+      "Gemini",
+      "OpenAI"
+    ]
+  },
+  "contact": {
+    "heading": "Let's build something.",
+    "text": "",
+    "email": "work.youseph@gmail.com",
+    "cta": {
+      "label": "Book a call",
+      "href": "https://cal.com/youseph-el-khouly-4tskdw"
+    }
+  }
+}
