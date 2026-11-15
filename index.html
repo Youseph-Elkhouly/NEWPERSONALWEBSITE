@@ -4179,7 +4179,6 @@
       <!-- Completed Projects -->
       <div class="project-section">
     <div class="projects-grid">
-
           <!-- Notipply -->
       <div class="project-card">
             <div class="project-image">
@@ -4687,6 +4686,31 @@
   <section id="hackathons">
     <h2>Hackathons</h2>
     <div class="hackathons-grid">
+
+          <!-- Highline Beta – Bountic (Winner) -->
+      <div class="hackathon-card">
+        <div class="hackathon-header">
+          <a href="https://www.highlinebeta.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+            <div class="hackathon-logo-wrapper">
+              <img src="highlinebeta.avif" alt="Highline Beta logo" />
+            </div>
+          </a>
+          <div class="hackathon-info">
+            <div class="hackathon-date">November 2026</div>
+            <h3 class="hackathon-title">Bountic – Highline Beta <span class="win-tag">🏆 Winner</span></h3>
+            <span class="hackathon-winner-badge">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C18.08 12.55 20 10.55 20 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+              Winner
+            </span>
+          </div>
+        </div>
+        <p class="hackathon-description">Built Bountic, a hackathon-winning project. The project isn’t live yet; watch the demo or explore the source code.</p>
+        <div class="hackathon-buttons">
+          <a href="https://www.youtube.com/watch?v=LH2NHfu4Zt8" class="btn" target="_blank" rel="noopener noreferrer">Demo</a>
+          <a href="https://github.com/Youseph-Elkhouly/Bountic" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://luma.com/0dy3tnev?tk=3eMsEi" class="btn" target="_blank" rel="noopener noreferrer">Luma event</a>
+        </div>
+      </div>
 
           <!-- LarpHacks - GTA: THE 6 -->
       <div class="hackathon-card">
@@ -5737,7 +5761,8 @@ document.addEventListener('DOMContentLoaded', function() {
     cards.forEach(function (c) {
       var el = c.querySelector(".hackathon-title");
       var t = el ? el.textContent : "";
-      if (!keep.test(t)) { c.classList.add("hack-extra"); hidden++; }
+      var winner = /winner/i.test(t) || Array.from(c.querySelectorAll(".hackathon-winner-badge, .win-tag")).some(function (badge) { return /winner/i.test(badge.textContent); });
+      if (!keep.test(t) && !winner) { c.classList.add("hack-extra"); hidden++; }
     });
     if (hidden === 0) return;
     var btn = document.createElement("button");
