@@ -117,6 +117,12 @@ html:has(.portfolio-screen), body:has(.portfolio-screen) {
   background: #faf8f4;
   text-align: left;
 }
+html.portfolio-popover-open.cc,
+html.portfolio-popover-open.cc * { cursor: auto !important; }
+html.portfolio-popover-open.cc a,
+html.portfolio-popover-open.cc button,
+html.portfolio-popover-open.cc [role="button"] { cursor: pointer !important; }
+html.portfolio-popover-open .custom-cursor-canvas { opacity: 0 !important; }
 @media (max-width: 700px) {
   body:has(.portfolio-screen) .webring {
     top: auto !important;

@@ -5911,6 +5911,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const cv = document.createElement('canvas');
   cv.setAttribute('aria-hidden', 'true');
+  cv.className = 'custom-cursor-canvas';
   cv.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:2147483647';
   document.body.appendChild(cv);
   const ctx = cv.getContext('2d');

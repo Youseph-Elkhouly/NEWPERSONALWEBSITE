@@ -9,6 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
   screen.className = 'portfolio-screen';
   header.before(screen);
   screen.append(header, icons, content);
+  const setExpandedCursor = expanded => {
+    const root = document.documentElement;
+    root.classList.toggle('portfolio-popover-open', expanded);
+    // The animated cursor canvas sits below the browser's popover top layer.
+    // Restore the normal CSS cursor while a View More panel is open.
+    if (expanded) root.classList.remove('cc');
+    else if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) root.classList.add('cc');
+  };
 
   const sections = [...content.querySelectorAll(':scope > section')];
   // A demo opened from View More must appear above the list it came from.
@@ -44,11 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
         panel.setAttribute('popover', 'manual');
         panel.append(button);
         panel.showPopover();
+        setExpandedCursor(true);
       } else {
         panel.hidePopover();
         panel.removeAttribute('popover');
         slot.append(button);
         slot.style.height = '';
+        setExpandedCursor(false);
       }
       panel.scrollTop = 0;
     });
